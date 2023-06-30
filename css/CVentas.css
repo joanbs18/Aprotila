@@ -249,7 +249,7 @@ body {
 }
 
 .formuAlimentacion,
-.formuMortabilidad {
+.formuMortabilidad,.formuinveConcentrado {
   max-height: 460px;
 }
 .fAlimentacion,
@@ -266,10 +266,12 @@ body {
   animation: slide-up 1000ms forwards;
 }
 
-.alevines {
+.alevines,.inveconcentrado {
   display: none;
   animation: slide-up 1000ms forwards;
 }
+
+
 
 .alimentacion {
   display: none;
