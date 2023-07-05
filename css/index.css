@@ -1,0 +1,85 @@
+body{
+    color: black;
+}
+
+nav {
+    color: black;
+    background-color: #0083e0;
+    text-align: right;
+}
+  
+ul {
+    
+    list-style-type: none;
+    margin: 0;
+    padding: 10px;
+}
+  
+li {
+    color: black;
+    display: inline;
+}
+  
+a {
+    display: inline-flex;
+    color: black;
+    text-decoration: none;
+    padding: 10px 20px;
+}
+  
+a:hover {
+    color: white;
+    background-color: #331ef150;
+}
+
+.container1 {
+    background-color: #2023ee6e;
+    padding:100px;
+
+}
+
+.container2 {
+   /*  background-color: rgba(128, 128, 128, 0.295); */
+    margin-top: 10px;
+    border: 1px solid rgb(255, 255, 255);
+    display: flex;
+}
+
+.quienes-somos {
+    background-color: rgba(128, 128, 128, 0.295);
+   /*  border: 1px solid white; */
+    margin: 2px;
+}
+.quienes-somos, .txtContent{
+    width: 100%;
+    text-align: justify;
+    margin-left: 1px;
+    margin-right: 1px;
+}
+
+.vision {
+    background-color: rgba(128, 128, 128, 0.295);
+    border: 1px solid white;
+    margin: 2px;
+}
+
+.Mision {
+    background-color: rgba(128, 128, 128, 0.295);
+    margin: 2px;
+    width: 150%;
+    justify-content: center;
+    border: 1px solid white;
+}
+
+.Mision p{
+    margin-left: 3px;
+    text-align: justify;
+}
+
+footer {
+    margin-top: 10px;
+    background-color: #2024ee;
+    padding: 15px;
+    color: black;
+}
+
