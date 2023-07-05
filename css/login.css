@@ -1,0 +1,53 @@
+body{
+    font-family:Arial, sans-serif;
+}
+
+div{
+    border: 1px solid black;
+    width: 50%;
+    margin: 0% auto;
+    margin-top: 150px;
+    background-color: #7edaf7ce;
+}
+
+form{
+    margin: 0;
+    padding: 20px;
+    
+}
+h1 {
+    text-align: center;
+}
+form {
+    max-width: 300px;
+    margin: 0 auto;
+}
+label, input {
+    display: block;
+    margin-bottom: 10px;
+}
+input[type="submit"] {
+    padding: 10px 15px;
+    background-color: #0083e0;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+a{
+    width: 30px;
+}
+
+.back-button {
+    display: inline-block;
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+  
+.back-button svg {
+    width: 24px;
+    height: 24px;
+}
+  
