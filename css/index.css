@@ -3,9 +3,11 @@ body{
 }
 
 nav {
+    position: fixed;
     color: black;
     background-color: #0083e0;
     text-align: right;
+    width: 100%;
 }
   
 ul {
@@ -13,6 +15,7 @@ ul {
     list-style-type: none;
     margin: 0;
     padding: 10px;
+    color: black;
 }
   
 li {
@@ -20,7 +23,7 @@ li {
     display: inline;
 }
   
-a {
+li a {
     display: inline-flex;
     color: black;
     text-decoration: none;
@@ -81,5 +84,26 @@ footer {
     background-color: #2024ee;
     padding: 15px;
     color: black;
+}
+
+.red {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.red p {
+    line-height: 2;
+    text-align: center;
+}
+
+.red .iconos {
+    height: 15rem;
+    width: 15rem;
+    background-color: var(--primario);
+    border-radius: 50%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
