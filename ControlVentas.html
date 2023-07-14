@@ -27,13 +27,27 @@
     </div>
     <ul class="nav-links" id="nav-links">
 
-        <li>
+        <!-- <li>
             <a href="#">
                 <i class='bx bx-grid-alt'></i>
                 <span class="link_name">Inventario</span>
             </a>
             <ul class="sub-menu blank">
                 <li><a class="link_name" href="#">Inventario</a></li>
+            </ul>
+        </li> -->
+        <li>
+            <div class="iocn-link">
+                <a href="#">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="link_name">Inventario</span>
+                </a>
+                <i class='bx bxs-chevron-down arrow'></i>
+            </div>
+            <ul class="sub-menu">
+                <li><a class="link_name" href="#">Inventario</a></li>
+                <li><a href="#" onclick="showDiv7()">Concentrado</a></li>
+
             </ul>
         </li>
         <li onclick="showDiv1()">
@@ -55,7 +69,7 @@
             <ul class="sub-menu blank">
                 <li><a class="link_name" href="#">Pilas</a></li>
             </ul>
-        </li> 
+        </li>
         <li>
             <div class="iocn-link">
                 <a href="#">
@@ -118,8 +132,10 @@
     <div class="home-content">
 
 
+
+
         <div class="container ventas" id="divVentas">
-            <h1 id="title">Control Ventas</h1>
+            <h1 id="title">Modulo Ventas</h1>
             <div class="crud">
                 <button class="download-button" value="Export to Excel"
                     onclick="tableToExcel('table_venta', 'Datos Ventas')">
@@ -210,6 +226,7 @@
                         <th class="last">Fecha de Vencimiento</th>
                         <th>Proveedor</th>
                         <th>Precio</th>
+                        <th>Cantidad Sacos</th>
                         <th>Cantidad de Proteína</th>
                         <th>Acción</th>
                     </tr>
@@ -260,8 +277,9 @@
                     <tr>
                         <th>Encargado</th>
                         <th>Fecha</th>
+                        <th>Tipo Concentrado</th>
                         <th>Pila</th>
-                        <th>Total</th>
+                        <th>Total Kilos</th>
                         <th>Acción</th>
                     </tr>
                 </thead>
@@ -394,7 +412,7 @@
                     </div>
                 </button>
                 <div class="icons-BD">
-                    <i class="fa-solid fa-circle-plus" onclick="falevines()"></i>
+                    <i class="fa-solid fa-circle-plus" id="add_Alevines"></i>
 
                 </div>
             </div>
@@ -422,6 +440,53 @@
 
 
         </div>
+
+        <div class="container inveconcentrado" id="divinveConcentrado">
+            <h1 id="title">Inventario Concentrado</h1>
+            <div class="crud">
+                <button class="download-button" value="Export to Excel"
+                    onclick="tableToExcel('table_inveconcentrado', 'Inventario Concentrado')">
+                    <div class="docs"><svg class="css-i6dzq1" stroke-linejoin="round" stroke-linecap="round" fill="none"
+                            stroke-width="2" stroke="currentColor" height="20" width="20" viewBox="0 0 24 24">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line y2="13" x2="8" y1="13" x1="16"></line>
+                            <line y2="17" x2="8" y1="17" x1="16"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>Excel</div>
+                    <div class="download">
+                        <svg class="css-i6dzq1" stroke-linejoin="round" stroke-linecap="round" fill="none"
+                            stroke-width="2" stroke="currentColor" height="24" width="24" viewBox="0 0 24 24">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line y2="3" x2="12" y1="15" x1="12"></line>
+                        </svg>
+                    </div>
+                </button>
+                <div class="icons-BD">
+                    <i class="fa-solid fa-circle-plus" id="add_inveConcentrado"></i>
+                </div>
+
+            </div>
+            <table class="table" id="table_inveconcentrado">
+
+                <thead>
+                    <tr>
+                        <th>Tipo Concentrado</th>
+                        <th>Kilos Disponibles</th>
+                        <th>Ultimo Ingreso</th>
+                    </tr>
+                </thead>
+                <div id="cloud_load" class="cloud_load"><span class="loader"></span></div>
+                <tbody id="Rinveconcentrado">
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
 
     </div>
 
@@ -542,6 +607,10 @@
                 <label>Precio</label>
             </div>
             <div class="box">
+                <input id="sacos" type="number" name="uname" required>
+                <label>Cantidad de Sacos</label>
+            </div>
+            <div class="box">
                 <input id="proteina" type="text" name="uname" required>
                 <label>Proteína</label>
             </div>
@@ -562,6 +631,12 @@
             <div class="select pila">
 
                 <select id="menupila_alimentacion">
+
+                </select>
+            </div>
+            <div class="select tipo_concentrado">
+
+                <select id="select_tipConcentrado">
 
                 </select>
             </div>
@@ -613,8 +688,14 @@
             <div class="select pila">
 
                 <select id="Encargados_Alevines">
+                    <option disabled selected="">Provedor</option>
+                    <option>DosPinos</option>
 
                 </select>
+            </div>
+            <div class="box">
+                <input id="lote" type="text" name="uname" required>
+                <label>Lote Proveedor</label>
             </div>
 
             <div class="select pila">
@@ -623,15 +704,40 @@
 
                 </select>
             </div>
+
             <div class="box">
-                <input id="cantidad" type="number" name="uname" required>
-                <label>Cantidad</label>
+                <input id="Especie" type="text" name="uname" required>
+                <label>Especie</label>
             </div>
             <div class="box">
-                <input id="observaciones_mortabilidad" type="text" name="uname" required>
-                <label>Observaciones</label>
+                <input id="cantidad_alevine" type="number" name="uname" required>
+                <label>Cantidad Alevines</label>
             </div>
-            <button class="btnForm" onclick="addAlevines()">AÑADIR</button>
+            <button id="btnAlevineAdd" type="button" class="btnForm" onclick=" addAlevine()">AÑADIR</button>
+            <button id="btnAlevineUpdate" style="display: none;" type="button" class="btnForm"
+                onclick=" UpdateAlevine2()">Actualizar</button>
+        </form>
+
+    </div>
+</section>
+
+<section class="formu-modal finveConcentrado" id="finveConcentrado" style="display: none;">
+    <div class="form formuinveConcentrado">
+        <div class="closeForm">
+            <i class="fas fa-times" id="closeModal_inveConcentrado"></i>
+        </div>
+
+        <h4>Añadir Inventario</h4>
+        <form class="formulario" action="">
+            <div class="box">
+                <input id="Tipo_Concentrado" type="text" name="uname" required>
+                <label>Tipo_Concentrado</label>
+            </div>
+            <div class="box">
+                <input id="CantidadConcentrados" type="number" name="uname" required>
+                <label>Cantidad Sacos</label>
+            </div>
+            <button type="button" class="btnForm" onclick="addInveConcentrado()">AÑADIR</button>
         </form>
 
     </div>

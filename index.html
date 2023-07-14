@@ -1,36 +1,472 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/index.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  <script src="https://kit.fontawesome.com/bf208e9523.js" crossorigin="anonymous"></script>
+
   <title>pagina principal</title>
 </head>
 
-
-
-
 <body>
+  <header>
+    <!-- <img class="logo" src="" alt="Logo"> -->
+    <h1 class="logo">APROTILA</h1>
+    <button id="abrir" class="abrir-menu"><i class="bi bi-list"></i></button>
 
-  <nav>
-    <ul>
-      <li><a href="index.html">Inicio</a></li>
-      <li><a href="#">Acerca de</a></li>
-      <li><a href="#">Servicios</a></li>
-      <li><a href="#">Contacto</a></li>
-      <li><a href="login.html">login</a></li>
-    </ul>
-  </nav>
 
-  <div id="container1" class="container1">
-    <video src="vid/WhatsApp Video 2023-07-08 at 10.09.26 AM.mp4" controls></video>
-    
-  </div>   
+    <nav class="nav" id="nav">
+      <div class="nav2">
+        <button class="cerrar-menu" id="cerrar"><i class="bi bi-x"></i></button>
+        <ul class="nav-list">
+          <li class="li_menu"><a href="#">Inicio</a></li>
+          <li class="li_menu"><a href="#">Quiénes somos</a></li>
+          <li class="li_menu"><a href="#">Servicios</a></li>
+          <li class="li_menu"><a href="#">Qué hacemos</a></li>
+          <li class="li_menu"><a href="#">Contacto</a></li>
+        </ul>
+      </div>
+    </nav>
 
+  </header>
+  <video muted autoplay loop>
+    <source src="video/pexels-kindel-media-8354423 (2160p).mp4" type="video/mp4">
+  </video>
+  <div class="container">
+    <div class="informacion">
+      <div class="titulo">
+        <h1>APROTILA</h1>
+      </div>
+      <div class="encabezado">
+        <p>En Aprotila, la calidad es nuestra máxima prioridad.
+          Desde la selección de los alevines hasta el proceso de alimentación y cuidado diario</p>
+      </div>
+      <div class="uiverse">
+        <span class="tooltip">Ver más</span>
+        <span>
+          PRODUCTOS
+        </span>
+      </div>
+      <div class="share">
+        <button class="btn1">
+          <svg fill-rule="nonzero" height="30px" width="30px" viewBox="0,0,256,256"
+            xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" class="instagram">
+            <g style="mix-blend-mode: normal" text-anchor="none" font-size="none" font-weight="none" font-family="none"
+              stroke-dashoffset="0" stroke-dasharray="" stroke-miterlimit="10" stroke-linejoin="miter"
+              stroke-linecap="butt" stroke-width="1" stroke="none" fill-rule="nonzero">
+              <g transform="scale(8,8)">
+                <path
+                  d="M11.46875,5c-3.55078,0 -6.46875,2.91406 -6.46875,6.46875v9.0625c0,3.55078 2.91406,6.46875 6.46875,6.46875h9.0625c3.55078,0 6.46875,-2.91406 6.46875,-6.46875v-9.0625c0,-3.55078 -2.91406,-6.46875 -6.46875,-6.46875zM11.46875,7h9.0625c2.47266,0 4.46875,1.99609 4.46875,4.46875v9.0625c0,2.47266 -1.99609,4.46875 -4.46875,4.46875h-9.0625c-2.47266,0 -4.46875,-1.99609 -4.46875,-4.46875v-9.0625c0,-2.47266 1.99609,-4.46875 4.46875,-4.46875zM21.90625,9.1875c-0.50391,0 -0.90625,0.40234 -0.90625,0.90625c0,0.50391 0.40234,0.90625 0.90625,0.90625c0.50391,0 0.90625,-0.40234 0.90625,-0.90625c0,-0.50391 -0.40234,-0.90625 -0.90625,-0.90625zM16,10c-3.30078,0 -6,2.69922 -6,6c0,3.30078 2.69922,6 6,6c3.30078,0 6,-2.69922 6,-6c0,-3.30078 -2.69922,-6 -6,-6zM16,12c2.22266,0 4,1.77734 4,4c0,2.22266 -1.77734,4 -4,4c-2.22266,0 -4,-1.77734 -4,-4c0,-2.22266 1.77734,-4 4,-4z">
+                </path>
+              </g>
+            </g>
+          </svg>
+          <span class="tooltiptext1">
+            <div class="card">
+              <svg fill="#000000" width="24px" viewBox="0 0 24 24" height="24px" xmlns="http://www.w3.org/2000/svg"
+                class="account">
+                <path fill="none" d="M0 0h24v24H0V0z"></path>
+                <path
+                  d="M12 5.9c1.16 0 2.1.94 2.1 2.1s-.94 2.1-2.1 2.1S9.9 9.16 9.9 8s.94-2.1 2.1-2.1m0 9c2.97 0 6.1 1.46 6.1 2.1v1.1H5.9V17c0-.64 3.13-2.1 6.1-2.1M12 4C9.79 4 8 5.79 8 8s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 9c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4z">
+                </path>
+              </svg>
+            </div>
+            <div class="username">@APROTILA</div>
+          </span>
+        </button>
+        <button class="btn2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-whatsapp" width="24"
+            height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2bd46a" fill="none" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" />
+            <path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" />
+          </svg>
+          <span class="tooltiptext2">
+            <div class="card">
+              <svg fill="#000000" width="24px" viewBox="0 0 24 24" height="24px" xmlns="http://www.w3.org/2000/svg"
+                class="account">
+                <path fill="none" d="M0 0h24v24H0V0z"></path>
+                <path
+                  d="M12 5.9c1.16 0 2.1.94 2.1 2.1s-.94 2.1-2.1 2.1S9.9 9.16 9.9 8s.94-2.1 2.1-2.1m0 9c2.97 0 6.1 1.46 6.1 2.1v1.1H5.9V17c0-.64 3.13-2.1 6.1-2.1M12 4C9.79 4 8 5.79 8 8s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 9c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4z">
+                </path>
+              </svg>
+            </div>
+            <div class="username">+506 8728-4070</div>
+          </span>
+        </button>
+        <button class="btn3">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-facebook" width="24"
+            height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#009988" fill="none" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />
+          </svg>
+          <span class="tooltiptext3">
+            <div class="card">
+              <svg fill="#000000" width="24px" viewBox="0 0 24 24" height="24px" xmlns="http://www.w3.org/2000/svg"
+                class="account">
+                <path fill="none" d="M0 0h24v24H0V0z"></path>
+                <path
+                  d="M12 5.9c1.16 0 2.1.94 2.1 2.1s-.94 2.1-2.1 2.1S9.9 9.16 9.9 8s.94-2.1 2.1-2.1m0 9c2.97 0 6.1 1.46 6.1 2.1v1.1H5.9V17c0-.64 3.13-2.1 6.1-2.1M12 4C9.79 4 8 5.79 8 8s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 9c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4z">
+                </path>
+              </svg>
+            </div>
+            <div class="username">@APROTILA</div>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <main>
+    <div class="container_productos" id="productos">
+      <div class="titulo_productos">
+        <h1>MÁS BUSCADOS</h1>
+      </div>
+      <div class="productos">
+
+
+
+        <div class="container_cards">
+          <div class="card_producto">
+            <article><img src="img/Pancitasdetilapia_900x.png" alt="" srcset="">
+              <img src="img/venta1.webp" alt="" srcset="">
+            </article>
+
+            <div class="informacion_producto">
+              <div class="nombre_producto">
+                <h1>Filet de Tilapia Premium <br>(Bolsa 650g)</h1>
+              </div>
+              <div class="precio_producto">
+                <h3>$3 c/u</h3>
+              </div>
+              <div data-tooltip="Price:-$3" class="button">
+                <div class="button-wrapper">
+                  <div class="text">Buy Now</div>
+                  <span class="iconn">
+                    <svg viewBox="0 0 16 16" class="bi bi-cart2" fill="currentColor" height="16" width="16"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z">
+                      </path>
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container_cards">
+          <div class="card_producto">
+            <article><img src="img/venta3.webp" alt="" srcset="">
+              <img src="img/venta2.webp" alt="" srcset="">
+            </article>
+
+            <div class="informacion_producto">
+              <div class="nombre_producto">
+                <h1>Tilapia Premium <br>(Bolsa 1000g)</h1>
+              </div>
+              <div class="precio_producto">
+                <h3>$3 c/u</h3>
+              </div>
+              <div data-tooltip="Price:-$3" class="button">
+                <div class="button-wrapper">
+                  <div class="text">Buy Now</div>
+                  <span class="iconn">
+                    <svg viewBox="0 0 16 16" class="bi bi-cart2" fill="currentColor" height="16" width="16"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z">
+                      </path>
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container_cards">
+          <div class="card_producto">
+            <article><img src="img/venta4.jpg" alt="" srcset="">
+              <img src="img/venta5.png" alt="" srcset="">
+            </article>
+
+            <div class="informacion_producto">
+              <div class="nombre_producto">
+                <h1>Cabezas de Tilapia Premium <br>(Bolsa 500g)</h1>
+              </div>
+              <div class="precio_producto">
+                <h3>$3 c/u</h3>
+              </div>
+              <div data-tooltip="Price:-$3" class="button">
+                <div class="button-wrapper">
+                  <div class="text">Buy Now</div>
+                  <span class="iconn">
+                    <svg viewBox="0 0 16 16" class="bi bi-cart2" fill="currentColor" height="16" width="16"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z">
+                      </path>
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container_cards">
+          <div class="card_producto">
+            <article><img src="img/Pancitasdetilapia_900x.png" alt="" srcset="">
+              <img src="img/venta1.webp" alt="" srcset="">
+            </article>
+
+            <div class="informacion_producto">
+              <div class="nombre_producto">
+                <h1>Filet de Tilapia Premium <br>(Bolsa 650g)</h1>
+              </div>
+              <div class="precio_producto">
+                <h3>$3 c/u</h3>
+              </div>
+              <div data-tooltip="Price:-$3" class="button">
+                <div class="button-wrapper">
+                  <div class="text">Buy Now</div>
+                  <span class="iconn">
+                    <svg viewBox="0 0 16 16" class="bi bi-cart2" fill="currentColor" height="16" width="16"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z">
+                      </path>
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container_cards">
+          <div class="card_producto">
+            <article><img src="img/Pancitasdetilapia_900x.png" alt="" srcset="">
+              <img src="img/venta1.webp" alt="" srcset="">
+            </article>
+
+            <div class="informacion_producto">
+              <div class="nombre_producto">
+                <h1>Filet de Tilapia Premium <br>(Bolsa 650g)</h1>
+              </div>
+              <div class="precio_producto">
+                <h3>$3 c/u</h3>
+              </div>
+              <div data-tooltip="Price:-$3" class="button">
+                <div class="button-wrapper">
+                  <div class="text">Buy Now</div>
+                  <span class="iconn">
+                    <svg viewBox="0 0 16 16" class="bi bi-cart2" fill="currentColor" height="16" width="16"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z">
+                      </path>
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="c-button c-button--gooey"> VER MÁS
+        <div class="c-button__blobs">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </button>
+      <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display: block; height: 0; width: 0;">
+        <defs>
+          <filter id="goo">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"></feGaussianBlur>
+            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo">
+            </feColorMatrix>
+            <feBlend in="SourceGraphic" in2="goo"></feBlend>
+          </filter>
+        </defs>
+      </svg>
+    </div>
+
+    <div class="container_restaurante">
+      <div class="titulo_restaurante">
+        <h1>RESTAURANTE</h1>
+        <h3>Nuestro Menú</h3>
+      </div>
+
+      <div class="comidas">
+        <div class="cards_comidas">
+          <div class="book">
+            <img class="logo_comida" src="img/logo_white_sombra.png" alt="" srcset="">
+            <div class="menu_comida">
+              <h1>Ingredientes</h1>
+              <p>- Arroz</p>
+              <p>- Frijoles</p>
+              <p>- Ensalada</p>
+              <p>- Pollo</p>
+              <p>- Incluye un resfreco</p>
+              <p class="precio">PRECIO</p>
+              <h2 class="precio_comida">$10</h2>
+              <button class="Btn">
+                Pay
+                <svg class="svgIcon" viewBox="0 0 576 512">
+                  <path
+                    d="M512 80c8.8 0 16 7.2 16 16v32H48V96c0-8.8 7.2-16 16-16H512zm16 144V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V224H528zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm56 304c-13.3 0-24 10.7-24 24s10.7 24 24 24h48c13.3 0 24-10.7 24-24s-10.7-24-24-24H120zm128 0c-13.3 0-24 10.7-24 24s10.7 24 24 24H360c13.3 0 24-10.7 24-24s-10.7-24-24-24H248z">
+                  </path>
+                </svg>
+              </button>
+            </div>
+
+
+            <div class="cover">
+              <div class="informacion_comida">
+                <img src="img/casado-con-pechuga-de.jpg" alt="" srcset="">
+                <h1 class="nombre_comida">Casado de Pollo</h1>
+                <div class="starts"><i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                </div>
+                <p>(5)</p>
+
+                <i class="fa-regular fa-eye"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cards_comidas">
+          <div class="book">
+            <div class="menu_comida">
+              <h1>Ingredientes</h1>
+              <p>- Arroz</p>
+              <p>- Frijoles</p>
+              <p>- Ensalada</p>
+              <p>- Pollo</p>
+              <p>- Incluye un resfreco</p>
+              <p class="precio">PRECIO</p>
+              <h2 class="precio_comida">$10</h2>
+              <button class="Btn">
+                Pay
+                <svg class="svgIcon" viewBox="0 0 576 512">
+                  <path
+                    d="M512 80c8.8 0 16 7.2 16 16v32H48V96c0-8.8 7.2-16 16-16H512zm16 144V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V224H528zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm56 304c-13.3 0-24 10.7-24 24s10.7 24 24 24h48c13.3 0 24-10.7 24-24s-10.7-24-24-24H120zm128 0c-13.3 0-24 10.7-24 24s10.7 24 24 24H360c13.3 0 24-10.7 24-24s-10.7-24-24-24H248z">
+                  </path>
+                </svg>
+              </button>
+            </div>
+
+
+            <div class="cover">
+              <div class="informacion_comida">
+                <img src="img/casado-con-pechuga-de.jpg" alt="" srcset="">
+                <h1 class="nombre_comida">Casado de Pollo</h1>
+                <div class="starts"><i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                </div>
+                <p>(5)</p>
+
+                <i class="fa-regular fa-eye"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cards_comidas">
+          <div class="book">
+
+            <div class="menu_comida">
+              <h1>Ingredientes</h1>
+              <p>- Arroz</p>
+              <p>- Frijoles</p>
+              <p>- Ensalada</p>
+              <p>- Pollo</p>
+              <p>- Incluye un resfreco</p>
+              <p class="precio">PRECIO</p>
+              <h2 class="precio_comida">$10</h2>
+              <button class="Btn">
+                Pay
+                <svg class="svgIcon" viewBox="0 0 576 512">
+                  <path
+                    d="M512 80c8.8 0 16 7.2 16 16v32H48V96c0-8.8 7.2-16 16-16H512zm16 144V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V224H528zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm56 304c-13.3 0-24 10.7-24 24s10.7 24 24 24h48c13.3 0 24-10.7 24-24s-10.7-24-24-24H120zm128 0c-13.3 0-24 10.7-24 24s10.7 24 24 24H360c13.3 0 24-10.7 24-24s-10.7-24-24-24H248z">
+                  </path>
+                </svg>
+              </button>
+            </div>
+
+
+            <div class="cover">
+              <div class="informacion_comida">
+                <img src="img/casado-con-pechuga-de.jpg" alt="" srcset="">
+                <h1 class="nombre_comida">Casado de Pollo</h1>
+                <div class="starts"><i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                </div>
+                <p>(5)</p>
+
+                <i class="fa-regular fa-eye"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cards_comidas">
+          <div class="book">
+            <div class="menu_comida">
+              <h1>Ingredientes</h1>
+              <p>- Arroz</p>
+              <p>- Frijoles</p>
+              <p>- Ensalada</p>
+              <p>- Pollo</p>
+              <p>- Incluye un resfreco</p>
+              <p class="precio">PRECIO</p>
+              <h2 class="precio_comida">$10</h2>
+              <button class="Btn">
+                Pay
+                <svg class="svgIcon" viewBox="0 0 576 512">
+                  <path
+                    d="M512 80c8.8 0 16 7.2 16 16v32H48V96c0-8.8 7.2-16 16-16H512zm16 144V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V224H528zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm56 304c-13.3 0-24 10.7-24 24s10.7 24 24 24h48c13.3 0 24-10.7 24-24s-10.7-24-24-24H120zm128 0c-13.3 0-24 10.7-24 24s10.7 24 24 24H360c13.3 0 24-10.7 24-24s-10.7-24-24-24H248z">
+                  </path>
+                </svg>
+              </button>
+            </div>
+
+
+            <div class="cover">
+              <div class="informacion_comida">
+                <img src="img/casado-con-pechuga-de.jpg" alt="" srcset="">
+                <h1 class="nombre_comida">Casado de Pollo</h1>
+                <div class="starts"><i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                </div>
+                <p>(5)</p>
+
+                <i class="fa-regular fa-eye"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+
+
+  <!--
 
   <div class="container2" id="container2">
 
@@ -73,58 +509,31 @@
   </div>
   
 
-    
+    -->
 
-  
-
-
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script> 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
+<script src="index.html"></script>
 
-<footer>
-  <p>© 2023 Aprotila. Todos los derechos reservados.</p>
-
-  <div class="redes" id="redes">
-
-    <section class="red">
-      <div class="iconos">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-instagram" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-          <path d="M4 4m0 4a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4z" />
-          <path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
-          <path d="M16.5 7.5l0 .01" />
-        </svg>
-      </div>
-      <p>Instagram</p>
-
-    </section>
-
-    <section class="red">
-      <div class="iconos">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-facebook" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-          <path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />
-        </svg>
-      </div>
-      <p>Facebook</p>
-
-    </section>
-
-    <section class="red">
-      <div class="iconos">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-whatsapp" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-          <path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" />
-          <path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" />
-        </svg>
-      </div>
-      <p>WhatsApp</p>
-
-    </section>
-
-  </div>
-</footer>
 
 </html>
+
+
+<script>
+  window.addEventListener("scroll", function () {
+    var header = document.querySelector("header");
+    header.classList.toggle("abajo", window.scrollY > 0);
+  });
+
+
+  const nav = document.querySelector("#nav");
+  const abrir = document.querySelector("#abrir");
+  const cerrar = document.querySelector("#cerrar");
+
+  abrir.addEventListener("click", () => {
+    nav.classList.add("visible");
+  });
+
+  cerrar.addEventListener("click", () => {
+    nav.classList.remove("visible");
+  });
+</script>

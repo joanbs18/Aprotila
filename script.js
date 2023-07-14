@@ -135,6 +135,10 @@ var closeModal = document.getElementById("closeModal");
 closeModal.addEventListener("click", function () {
   document.getElementById("formu-modal").style.display = "none";
 });
+var closeModal = document.getElementById("closeModal_inveConcentrado");
+closeModal.addEventListener("click", function () {
+  document.getElementById("formuinveConcentrado").style.display = "none";
+});
 
 var closeModal_alimento = document.getElementById("closeModal_alimento");
 closeModal_alimento.addEventListener("click", function () {
@@ -146,11 +150,25 @@ add_concetrado.addEventListener("click", function () {
   document.getElementById("formuconcentrado").style.display = "flex";
 });
 
+var add_inveConcentrado = document.getElementById("add_inveConcentrado");
+add_inveConcentrado.addEventListener("click", function () {
+  document.getElementById("finveConcentrado").style.display = "flex";
+});
+
 var closeModal_mortabilidad = document.getElementById(
   "closeModal_mortabilidad"
 );
 closeModal_mortabilidad.addEventListener("click", function () {
   document.getElementById("formumortabilidad").style.display = "none";
+});
+
+var add_Alevines = document.getElementById("add_Alevines");
+add_Alevines.addEventListener("click", function () {
+  document.getElementById("formualevines").style.display = "flex";
+});
+var closeModal_alevines = document.getElementById("closeModal_alevines");
+closeModal_alevines.addEventListener("click", function () {
+  document.getElementById("formualevines").style.display = "none";
 });
 
 //EVENTO DE BORRAR VENTA------------------------------
@@ -193,6 +211,7 @@ const mostrarPilas = (data) => {
   document.getElementById("menupila").innerHTML = tab;
   document.getElementById("menupila_alimentacion").innerHTML = tab;
   document.getElementById("menupila_mortabilidad").innerHTML = tab;
+  document.getElementById("menupila_alevines").innerHTML = tab;
 };
 
 alimentacion();
@@ -218,8 +237,9 @@ const mostrarAlimetacion = (data) => {
     tab += `<tr>
       <td data-label="Encargado">${data[i].Encargado}</td>
       <td class="last" data-label="Fecha">${fechaa}</td>
+      <td class="last" data-label="Tipo Concentrado">${data[i].Tipo_Concentrado}</td>
       <td data-label="Pila">${data[i].Pila}</td>
-      <td data-label="Total Semanal">${data[i].Total}</td>
+      <td data-label="Cantidad Kilos">${data[i].Kilos}</td>
       <td>
       <button class="btnUpdate" id="btnUpdate_Alimentacion"><i class="fa-solid fa-pen-to-square"></i></button>   
       <button class="btnTrash" id="btnTrash_Alimentacion" ><i class="fa-solid fa-trash-can"></i></button>
@@ -363,6 +383,13 @@ optionPila3.addEventListener("change", function () {
   validarPila = true;
 });
 
+var pilaSeleccionada5;
+var optionPila5 = document.getElementById("menupila_alevines");
+optionPila5.addEventListener("change", function () {
+  pilaSeleccionada5 = optionPila5.options[optionPila5.selectedIndex].text;
+  validarPila = true;
+});
+
 //SELECT DE FORMA DE PAGO CON EVENTO DE CAMBIO
 
 var validarMetodoPago = false;
@@ -375,7 +402,6 @@ optionPago.addEventListener("change", function () {
 });
 
 //---------------------------------------------------------------------------
-concentrados();
 function concentrados() {
   fetch("http://localhost:3000/concentrados", {
     method: "get",
@@ -403,6 +429,7 @@ const mostrarData2 = (data) => {
       <td data-label="Vencimiento">${fecha2}</td>
       <td data-label="Proveedor">${data[i].Proveedor}</td>
       <td data-label="Precio">${data[i].Precio}</td>
+      <td data-label="Cantidad Kilos">${data[i].Cantidad_Kilos}</td>
       <td data-label="Proteína">${data[i].Proteina}</td>
       <td>
       <button class="btnUpdate" id="btnUpdate_Concentrado"><i class="fa-solid fa-pen-to-square"></i></button>   
@@ -428,6 +455,7 @@ function addConcentrado() {
   proveedor = document.getElementById("proveedor").value;
   proteina = document.getElementById("proteina").value;
   precio = document.getElementById("Cprecio").value;
+  sacos = document.getElementById("sacos").value;
   var fechaConFormato3 = moment(compra);
   var fechaConFormato4 = moment(vencimiento);
   fecha3 = fechaConFormato3.format("YYYY-MM-DD");
@@ -440,7 +468,7 @@ function addConcentrado() {
   ) {
     alert("Error campos incompletos");
   }
-  url = `http://localhost:3000/crearconcentrado?tipo=${tipo}&marca=${marca}&compra=${fecha3}&vencimiento=${fecha4}&proveedor=${1}&precio=${precio}&proteina=${proteina}`;
+  url = `http://localhost:3000/crearconcentrado?tipo=${tipo}&marca=${marca}&compra=${fecha3}&vencimiento=${fecha4}&proveedor=${1}&precio=${precio}&cantidadkilos=${sacos}&proteina=${proteina}`;
 
   fetch(url, {
     method: "get",
@@ -656,26 +684,43 @@ const mostrarAlevines = (data) => {
   for (let i = 0; i < eles.length; i++) {
     eles[i].addEventListener("click", function () {
       deleteAlevine(VAlevines[i].IdAlevines);
+      tableAlevines();
+    });
+  }
+  eles2 = document.querySelectorAll("#btnUpdate_Alevines");
+  console.log(eles2);
+  for (let i = 0; i < eles.length; i++) {
+    eles2[i].addEventListener("click", function () {
+      UpdateAlevine(VAlevines, i);
     });
   }
 };
 
-function addAlevine() {
-  tipo = document.getElementById("tipo").value;
-  marca = document.getElementById("marca").value;
-  compra = document.getElementById("compra").value;
-  vencimiento = document.getElementById("vencimiento").value;
-  proveedor = document.getElementById("proveedor").value;
+var IdAlevines;
 
-  if (
-    tipo.toString == 0 ||
-    marca.toString == 0 ||
-    proteina.toString == 0 ||
-    proveedor.toString == 0
-  ) {
-    alert("Error campos incompletos");
-  }
-  url = `http://localhost:3000/crearconcentrado?tipo=${tipo}&marca=${marca}&compra=${fecha3}&vencimiento=${fecha4}&proveedor=${proveedor}&precio=${precio}&proteina=${proteina}`;
+function UpdateAlevine(VAlevines, pos) {
+  Lote = document.getElementById("lote");
+  Especie = document.getElementById("Especie");
+  cantidad_alevine = document.getElementById("cantidad_alevine");
+  provedorr = document.getElementById("Encargados_Alevines");
+  idpla = document.getElementById("menupila_alevines");
+  IdAlevines = VAlevines[pos].IdAlevines;
+  Lote.value = VAlevines[pos].Lote_Provedor;
+  Especie.value = VAlevines[pos].EspeciePescado;
+  cantidad_alevine.value = VAlevines[pos].Cantidad;
+  provedorr.value = VAlevines[pos].NombreProveedor;
+  idpla.value = VAlevines[pos].Pila;
+  document.getElementById("btnAlevineAdd").style.display = "none";
+  document.getElementById("btnAlevineUpdate").style.display = "inline";
+  document.getElementById("formualevines").style.display = "flex";
+}
+
+function UpdateAlevine2() {
+  Lote = document.getElementById("lote").value;
+  Especie = document.getElementById("Especie").value;
+  Cantidad_alevine = document.getElementById("cantidad_alevine").value;
+
+  url = `http://localhost:3000/updateAlevine?Id=${IdAlevines}&IdProvedor=${1}&Lote=${Lote}&IdEncargado=${1}&pila=${1}&Especie=${Especie}&Cantidad=${Cantidad_alevine}`;
 
   fetch(url, {
     method: "get",
@@ -686,7 +731,36 @@ function addAlevine() {
     .then((resp) => resp.json())
     .then((datos) => console.log(datos))
     .catch((err) => console.log(err));
-  concentrados();
+  tableAlevines();
+  document.getElementById("formumortabilidad").style.display = "none";
+}
+
+function addAlevine() {
+  Lote = document.getElementById("lote").value;
+  Especie = document.getElementById("Especie").value;
+  Cantidad_alevine = document.getElementById("cantidad_alevine").value;
+
+  if (
+    Lote.toString == 0 ||
+    Especie.toString == 0 ||
+    Cantidad_alevine.toString == 0
+  ) {
+    alert("Error campos incompletos");
+  }
+  url = `http://localhost:3000/insertAlevines?IdProvedor=${1}&Lote=${Lote}&IdEncargado=${1}&IdPila=${pilaSeleccionada5}&Especie=${Especie}&Cantidad=${Cantidad_alevine}`;
+
+  fetch(url, {
+    method: "get",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((resp) => resp.json())
+    .then((datos) => console.log(datos))
+    .catch((err) => console.log(err));
+  tableAlevines();
+
+  document.getElementById("formualevines").style.display = "none";
 }
 
 function deleteAlevine(id) {
@@ -704,7 +778,58 @@ function deleteAlevine(id) {
   } catch (error) {
     alert("Error Inesperado");
   }
-  tableMortabilidad();
+  tableAlevines();
+}
+
+function tableInveConcentrado() {
+  fetch("http://localhost:3000/inveConcentrado", {
+    method: "get",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((resp) => resp.json())
+    .then((datos) => mostrarInveConcentrado(datos.results))
+    .catch((err) => seeLoad());
+}
+var VAlevines = [];
+const mostrarInveConcentrado = (data) => {
+  let tab = "";
+  for (var i = 0; i < data.length; i++) {
+    var f = moment(data[i].Fecha);
+    nueva = f.format("DD/MM/YYYY");
+    tab += `<tr>
+      <td data-label="Tipo Concentrado">${data[i].TipoConcentrado}</td>
+      <td data-label="Kilos Disponibles">${data[i].Cantidad_Kilos}</td>
+      <td data-label="Ultimo Ingreso">${nueva}</td>
+  
+  </td>
+
+      </tr>`;
+  }
+  document.getElementById("Rinveconcentrado").innerHTML = tab;
+};
+
+function addInveConcentrado() {
+  tipo_Concentrado = document.getElementById("Tipo_Concentrado").value;
+  Cantidad_Concentrado = document.getElementById("CantidadConcentrados").value;
+
+  if (tipo_Concentrado.toString == 0 || Cantidad_Concentrado.toString == 0) {
+    alert("Error campos incompletos");
+  }
+  url = `http://localhost:3000/insertInveConcentrado?Tipo=${tipo_Concentrado}&Cantidad=${Cantidad_Concentrado}`;
+
+  fetch(url, {
+    method: "get",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((resp) => resp.json())
+    .then((datos) => console.log(datos))
+    .catch((err) => console.log(err));
+  document.getElementById("formuinveConcentrado").style.display = "none";
+  tableInveConcentrado();
 }
 
 function showDiv1() {
@@ -714,6 +839,7 @@ function showDiv1() {
   document.getElementById("divPila").style.display = "none";
   document.getElementById("divMortabilidad").style.display = "none";
   document.getElementById("divAlevines").style.display = "none";
+  document.getElementById("divinveConcentrado").style.display = "none";
 }
 function showDiv2() {
   document.getElementById("divConcentrado").style.display = "inline";
@@ -722,6 +848,8 @@ function showDiv2() {
   document.getElementById("divPila").style.display = "none";
   document.getElementById("divMortabilidad").style.display = "none";
   document.getElementById("divAlevines").style.display = "none";
+  document.getElementById("divinveConcentrado").style.display = "none";
+  concentrados();
 }
 
 function showDiv3() {
@@ -731,6 +859,7 @@ function showDiv3() {
   document.getElementById("divPila").style.display = "none";
   document.getElementById("divMortabilidad").style.display = "none";
   document.getElementById("divAlevines").style.display = "none";
+  document.getElementById("divinveConcentrado").style.display = "none";
 }
 
 function showDiv4() {
@@ -741,6 +870,7 @@ function showDiv4() {
   document.getElementById("divPila").style.display = "inline";
   document.getElementById("divMortabilidad").style.display = "none";
   document.getElementById("divAlevines").style.display = "none";
+  document.getElementById("divinveConcentrado").style.display = "none";
 }
 
 function showDiv5() {
@@ -751,6 +881,7 @@ function showDiv5() {
   document.getElementById("divPila").style.display = "none";
   document.getElementById("divMortabilidad").style.display = "inline";
   document.getElementById("divAlevines").style.display = "none";
+  document.getElementById("divinveConcentrado").style.display = "none";
 }
 
 function showDiv6() {
@@ -761,5 +892,18 @@ function showDiv6() {
   document.getElementById("divPila").style.display = "none";
   document.getElementById("divMortabilidad").style.display = "none";
   document.getElementById("divAlevines").style.display = "inline";
+  document.getElementById("divinveConcentrado").style.display = "none";
   tableAlevines();
+  pilas();
+}
+
+function showDiv7() {
+  document.getElementById("divConcentrado").style.display = "none";
+  document.getElementById("divVentas").style.display = "none";
+  document.getElementById("divAlimentacion").style.display = "none";
+  document.getElementById("divPila").style.display = "none";
+  document.getElementById("divMortabilidad").style.display = "none";
+  document.getElementById("divAlevines").style.display = "none";
+  document.getElementById("divinveConcentrado").style.display = "inline";
+  tableInveConcentrado();
 }

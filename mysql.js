@@ -83,7 +83,7 @@ app.listen(port, () => {
 app.get("/concentrados", (req, res) => {
   try {
     let sql =
-      "SELECT IdConcentrado,Tipo,Marca,Fecha_Compra,Fecha_Vencimiento,tbP.NombreProveedor as 'Proveedor', Precio,Proteina FROM `tbconcentrado` as tbC INNER JOIN tbproveedores as tbP WHERE tbC.IdProveedor_fk=tbP.IdProveedores";
+      "SELECT IdConcentrado,Tipo,Marca,Fecha_Compra,Fecha_Vencimiento,tbP.NombreProveedor as 'Proveedor', Precio,Cantidad_Kilos,Proteina FROM `tbconcentrado` as tbC INNER JOIN tbproveedores as tbP WHERE tbC.IdProveedor_fk=tbP.IdProveedores";
     connection.query(sql, function (error, results, fields) {
       if (error) {
         connection.end();
@@ -109,9 +109,10 @@ app.get("/crearconcentrado", (req, res) => {
     campos.push(req.query.vencimiento);
     campos.push(req.query.proveedor);
     campos.push(req.query.precio);
+    campos.push(req.query.cantidadkilos);
     campos.push(req.query.proteina);
 
-    const insertar = `INSERT INTO tbconcentrado (Tipo, Marca, Fecha_Compra, Fecha_Vencimiento, IdProveedor_fk, Precio, Proteina) VALUES ('${campos[0]}', '${campos[1]}', '${campos[2]}', '${campos[3]}', '${campos[4]}', ${campos[5]}, '${campos[6]}')`;
+    const insertar = `INSERT INTO tbconcentrado (Tipo, Marca, Fecha_Compra, Fecha_Vencimiento, IdProveedor_fk, Precio,Cantidad_Kilos, Proteina) VALUES ('${campos[0]}', '${campos[1]}', '${campos[2]}', '${campos[3]}', ${campos[4]}, ${campos[5]}, ${campos[6]},'${campos[7]}')`;
 
     connection.query(insertar, (err, fields) => {
       if (err) throw err;
@@ -151,7 +152,7 @@ app.get("/pilas", (req, res) => {
 app.get("/alimentacion", (req, res) => {
   try {
     let sql =
-      "SELECT tbA.idAlimentacion,tbE.Nombre_Encargado as 'Encargado', tbA.Fecha, tbA.IdPila_fk as 'Pila',tbA.Total_Semanal as 'Total' FROM `tbalimentacion` as tbA INNER JOIN tbencargado as tbE WHERE tbA.IdEncargado_fk=tbE.IdEncargado";
+      "SELECT tbA.idAlimentacion,tbE.Nombre_Encargado as 'Encargado', tbA.Fecha,tbA.Tipo_Concentrado, tbA.IdPila_fk as 'Pila',tbA.Total_Kilos as 'Kilos' FROM `tbalimentacion` as tbA INNER JOIN tbencargado as tbE WHERE tbA.IdEncargado_fk=tbE.IdEncargado";
     connection.query(sql, function (error, results, fields) {
       if (error) {
         connection.end();
@@ -173,10 +174,11 @@ app.get("/insertAlimentacion", (req, res) => {
   campos.push(req.query.IdAlimentacion);
   campos.push(req.query.IdEncargado);
   campos.push(req.query.Fecha);
+  campos.push(req.query.Tipo);
   campos.push(req.query.IdPila);
-  campos.push(req.query.TotalSemanal);
+  campos.push(req.query.TotalKilos);
 
-  const insertar = `INSERT INTO tbalimentacion (IdEncargado_fk, Fecha, IdPila_fk,Total_Semanal) VALUES (${campos[1]}, '${campos[2]}', ${campos[3]}, ${campos[4]})`;
+  const insertar = `INSERT INTO tbalimentacion (IdEncargado_fk, Fecha,Tipo_Concentrado, IdPila_fk,Total_Kilos) VALUES (${campos[1]}, '${campos[2]}', '${campos[3]}', ${campos[4]},${campos[5]})`;
 
   connection.query(insertar, (err, fields) => {
     if (err) throw err;
@@ -239,7 +241,7 @@ app.get("/deleteMortabilidad", (req, res) => {
 app.get("/alevines", (req, res) => {
   try {
     let sql =
-      "SELECT idAlevines, tbP.NombreProveedor,tbA.Lote_Provedor,tbE.Nombre_Encargado, tbPi.Nombre as 'Pila',tbA.EspeciePescado,TbA.Cantidad from tbingreso_alevines as tbA INNER JOIN tbproveedores as tbP on tbA.IdProvedor_fk= tbP.IdProveedores INNER JOIN tbencargado as tbE on tbA.IdEncargado_fk=tbE.IdEncargado INNER JOIN tbpila as tbPi ON tbA.IdPila_fk=tbPi.IdPila;";
+      "SELECT IdAlevines, tbP.NombreProveedor,tbA.Lote_Provedor,tbE.Nombre_Encargado, tbPi.Nombre as 'Pila',tbA.EspeciePescado,TbA.Cantidad from tbingreso_alevines as tbA INNER JOIN tbproveedores as tbP on tbA.IdProvedor_fk= tbP.IdProveedores INNER JOIN tbencargado as tbE on tbA.IdEncargado_fk=tbE.IdEncargado INNER JOIN tbpila as tbPi ON tbA.IdPila_fk=tbPi.IdPila;";
     connection.query(sql, function (error, results, fields) {
       if (error) {
         connection.end();
@@ -258,7 +260,6 @@ app.get("/alevines", (req, res) => {
 
 app.get("/insertAlevines", (req, res) => {
   campos = [];
-  campos.push(req.query.Id);
   campos.push(req.query.IdProvedor);
   campos.push(req.query.Lote);
   campos.push(req.query.IdEncargado);
@@ -266,9 +267,27 @@ app.get("/insertAlevines", (req, res) => {
   campos.push(req.query.Especie);
   campos.push(req.query.Cantidad);
 
-  const insertar = `INSERT INTO tbingreso_alevines (IdProvedor_fk, Lote_Provedor, IdEncargado_fk, IdPila_fk,EspeciePescado,Cantidad) VALUES (${campos[1]}, ${campos[2]}, '${campos[3]}', ${campos[4]},${campos[5]},'${campos[6]}',${campos[7]})`;
+  const insertar = `INSERT INTO tbingreso_alevines (IdProvedor_fk, Lote_Provedor, IdEncargado_fk, IdPila_fk,EspeciePescado,Cantidad) VALUES (${campos[0]},'${campos[1]}', ${campos[2]}, ${campos[3]},'${campos[4]}',${campos[5]})`;
 
   connection.query(insertar, (err, fields) => {
+    if (err) throw err;
+  });
+  res.send("Consulta exitosa");
+});
+
+app.get("/updateAlevine", (req, res) => {
+  campos = [];
+  campos.push(req.query.Id);
+  campos.push(req.query.IdProvedor);
+  campos.push(req.query.Lote);
+  campos.push(req.query.IdEncargado);
+  campos.push(req.query.pila);
+  campos.push(req.query.Especie);
+  campos.push(req.query.Cantidad);
+
+  const update = `UPDATE tbingreso_alevines SET IdProvedor_fk = ${campos[1]}, Lote_Provedor = '${campos[2]}',IdEncargado_fk=${campos[3]}, IdPila_fk = ${campos[4]}, EspeciePescado = '${campos[5]}', Cantidad = ${campos[6]} WHERE tbingreso_alevines IdAlevines = ${campos[0]}`;
+
+  connection.query(update, (err, fields) => {
     if (err) throw err;
   });
   res.send("Consulta exitosa");
@@ -280,6 +299,38 @@ app.get("/deleteAlevines", (req, res) => {
     if (error) throw error;
   });
   console.log("Borrado");
+});
+
+app.get("/inveConcentrado", (req, res) => {
+  try {
+    let sql = "SELECT * from tbinventaconcentrado";
+    connection.query(sql, function (error, results, fields) {
+      if (error) {
+        connection.end();
+        throw error;
+      }
+      res.status(200).json({
+        msg: "Mensaje desde el metodo GET",
+        results,
+      });
+    });
+  } catch (err) {
+    console.log(err);
+    throw new Error("Error en el metodo GET");
+  }
+});
+
+app.get("/insertInveConcentrado", (req, res) => {
+  campos = [];
+  campos.push(req.query.Tipo);
+  campos.push(req.query.Cantidad);
+
+  const insertar = `INSERT INTO tbinventaconcentrado (TipoConcentrado,Cantidad,Fecha) VALUES ('${campos[0]}', ${campos[1]}, CURDATE())`;
+
+  connection.query(insertar, (err, fields) => {
+    if (err) throw err;
+  });
+  res.send("Consulta exitosa");
 });
 
 /*
