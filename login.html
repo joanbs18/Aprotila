@@ -25,7 +25,7 @@
         </div>
         <form action="#">
           <div class="field">
-            <input required="" type="text" class="input">
+            <input id="username" required="" type="number" class="input">
             <span class="span"><svg class="" xml:space="preserve" style="enable-background:new 0 0 512 512"
                 viewBox="0 0 512 512" y="0" x="0" height="20" width="50" xmlns:xlink="http://www.w3.org/1999/xlink"
                 version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -38,7 +38,7 @@
             <label class="label">Cédula</label>
           </div>
           <div class="field">
-            <input required="" type="password" class="input">
+            <input required="" type="password" class="input" id="password">
             <span class="span"><svg class="" xml:space="preserve" style="enable-background:new 0 0 512 512"
                 viewBox="0 0 512 512" y="0" x="0" height="20" width="50" xmlns:xlink="http://www.w3.org/1999/xlink"
                 version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -53,7 +53,7 @@
           <div class="forgot-pass">
             <a href="#">Forgot Password?</a>
           </div>
-          <button class="button">Sign in</button>
+          <button type="button" class="button" onclick="validar()">Sign in</button>
           <div class="sign-up">
             Not a member?
             <a href="#">signup now</a>
@@ -61,7 +61,20 @@
         </form>
       </div>
     </div>
+    <script>
+      function validar() {
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
 
+        if (username.length < 9) {
+          alert("La cedula debe ser mayor a 9 digitos");
+        }
+
+        if (password.length < 8) {
+          alert("La contraseña debe ser mayor a 8 digitos");
+        }
+      }
+    </script>
 </body>
 
 </html>
