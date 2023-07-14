@@ -897,6 +897,89 @@ article:hover img:last-child {
   transform: rotatey(-80deg);
 }
 
+.hero-section {
+  display: flex;
+  min-height: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+}
+
+.carda-container {
+  display: flex;
+  gap: 30px;
+  width: 100%;
+  justify-content: center;
+  border: 1px solid red;
+}
+
+.carda {
+  position: relative;
+  list-style: none;
+  width: 400px;
+  height: 350px;
+  transition: 0.3s ease;
+}
+.carda::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.carda-background {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 0;
+  border-radius: 20px;
+  background-position: center;
+  filter: brightness(0.9) saturate(1) contrast(1);
+  transform-origin: bottom;
+  transform: scale(1) translateZ(0);
+  transition: 0.3s ease;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.carda:hover .carda-background {
+  transform: scale(1.15) translateZ(0);
+  background-size: cover;
+}
+
+.carda-container:hover .carda:not(:hover) {
+  transform: scale(0.9);
+}
+
+.carda-container:hover > .carda:not(:hover) .carda-background,
+.carda-container:hover > .carda:not(:hover) .carda-category {
+  filter: brightness(0.5) saturate(0) contrast(1.2) blur(10px);
+}
+
+.content {
+  top: 50%;
+  left: 0;
+  padding: 25px;
+  position: absolute;
+}
+
+.carda-category {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 5px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.carda-heading {
+  color: #fff;
+  font-size: 25px;
+  line-height: 1;
+  text-shadow: 2px 2px 20px rgb(0, 0, 0, 0.2);
+}
+
 @media screen and (max-width: 600px) {
   .abrir-menu,
   .cerrar-menu {
@@ -977,7 +1060,6 @@ article:hover img:last-child {
   .titulo {
     font-size: 10px;
   }
-
 
   .encabezado {
     font-size: 10px;
@@ -1152,4 +1234,3 @@ article:hover img:last-child {
   margin-top: 4%;
 } */
 }
-
