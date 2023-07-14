@@ -176,7 +176,7 @@ app.get("/insertAlimentacion", (req, res) => {
   campos.push(req.query.Fecha);
   campos.push(req.query.Tipo);
   campos.push(req.query.IdPila);
-  campos.push(req.query.TotalKilos);
+  campos.push(req.query.TotalDiario);
 
   const insertar = `INSERT INTO tbalimentacion (IdEncargado_fk, Fecha,Tipo_Concentrado, IdPila_fk,Total_Kilos) VALUES (${campos[1]}, '${campos[2]}', '${campos[3]}', ${campos[4]},${campos[5]})`;
 
