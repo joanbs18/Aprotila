@@ -144,8 +144,6 @@ body {
   border-bottom: 6px solid #ccc;
 }
 
-
-
 .table tr {
   background-color: #f8f8f8;
   border: 1px solid #ddd;
@@ -156,6 +154,7 @@ body {
   font-size: 16px;
   padding: 10px;
   text-align: center;
+  width: 60px;
 }
 
 .table thead th {
@@ -191,6 +190,7 @@ body {
   display: none;
   justify-content: center;
   animation: slide-up 1000ms forwards;
+  filter: drop-shadow(0 0 10px #7e7e7e);
 }
 .loader {
   width: 175px;
@@ -249,7 +249,8 @@ body {
 }
 
 .formuAlimentacion,
-.formuMortabilidad {
+.formuMortabilidad,
+.formuinveConcentrado {
   max-height: 460px;
 }
 .fAlimentacion,
@@ -266,7 +267,8 @@ body {
   animation: slide-up 1000ms forwards;
 }
 
-.alevines {
+.alevines,
+.inveconcentrado {
   display: none;
   animation: slide-up 1000ms forwards;
 }
@@ -736,15 +738,18 @@ span:hover {
 
   .table thead {
     display: none;
+    
   }
   .table tr {
     margin-bottom: 8px;
     border-bottom: 4px solid #ddd;
     display: block;
+    
   }
   .table th,
   .table td {
     font-size: 17px;
+    width: 300px;
   }
   .table td {
     display: block;
