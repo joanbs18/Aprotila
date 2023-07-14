@@ -237,8 +237,9 @@ const mostrarAlimetacion = (data) => {
     tab += `<tr>
       <td data-label="Encargado">${data[i].Encargado}</td>
       <td class="last" data-label="Fecha">${fechaa}</td>
+      <td class="last" data-label="Tipo Concentrado">${data[i].Tipo_Concentrado}</td>
       <td data-label="Pila">${data[i].Pila}</td>
-      <td data-label="Total Semanal">${data[i].Total}</td>
+      <td data-label="Cantidad Kilos">${data[i].Kilos}</td>
       <td>
       <button class="btnUpdate" id="btnUpdate_Alimentacion"><i class="fa-solid fa-pen-to-square"></i></button>   
       <button class="btnTrash" id="btnTrash_Alimentacion" ><i class="fa-solid fa-trash-can"></i></button>
@@ -401,7 +402,6 @@ optionPago.addEventListener("change", function () {
 });
 
 //---------------------------------------------------------------------------
-concentrados();
 function concentrados() {
   fetch("http://localhost:3000/concentrados", {
     method: "get",
@@ -429,7 +429,7 @@ const mostrarData2 = (data) => {
       <td data-label="Vencimiento">${fecha2}</td>
       <td data-label="Proveedor">${data[i].Proveedor}</td>
       <td data-label="Precio">${data[i].Precio}</td>
-      <td data-label="Cantidad Sacos">${data[i].Cantidad_Sacos}</td>
+      <td data-label="Cantidad Kilos">${data[i].Cantidad_Kilos}</td>
       <td data-label="Proteína">${data[i].Proteina}</td>
       <td>
       <button class="btnUpdate" id="btnUpdate_Concentrado"><i class="fa-solid fa-pen-to-square"></i></button>   
@@ -468,7 +468,7 @@ function addConcentrado() {
   ) {
     alert("Error campos incompletos");
   }
-  url = `http://localhost:3000/crearconcentrado?tipo=${tipo}&marca=${marca}&compra=${fecha3}&vencimiento=${fecha4}&proveedor=${1}&precio=${precio}&cantidadsacos=${sacos}&proteina=${proteina}`;
+  url = `http://localhost:3000/crearconcentrado?tipo=${tipo}&marca=${marca}&compra=${fecha3}&vencimiento=${fecha4}&proveedor=${1}&precio=${precio}&cantidadkilos=${sacos}&proteina=${proteina}`;
 
   fetch(url, {
     method: "get",
@@ -800,7 +800,7 @@ const mostrarInveConcentrado = (data) => {
     nueva = f.format("DD/MM/YYYY");
     tab += `<tr>
       <td data-label="Tipo Concentrado">${data[i].TipoConcentrado}</td>
-      <td data-label="Sacos Disponibles">${data[i].Cantidad}</td>
+      <td data-label="Kilos Disponibles">${data[i].Cantidad_Kilos}</td>
       <td data-label="Ultimo Ingreso">${nueva}</td>
   
   </td>
@@ -849,6 +849,7 @@ function showDiv2() {
   document.getElementById("divMortabilidad").style.display = "none";
   document.getElementById("divAlevines").style.display = "none";
   document.getElementById("divinveConcentrado").style.display = "none";
+  concentrados();
 }
 
 function showDiv3() {

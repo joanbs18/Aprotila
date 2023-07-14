@@ -83,7 +83,7 @@ app.listen(port, () => {
 app.get("/concentrados", (req, res) => {
   try {
     let sql =
-      "SELECT IdConcentrado,Tipo,Marca,Fecha_Compra,Fecha_Vencimiento,tbP.NombreProveedor as 'Proveedor', Precio,Cantidad_Sacos,Proteina FROM `tbconcentrado` as tbC INNER JOIN tbproveedores as tbP WHERE tbC.IdProveedor_fk=tbP.IdProveedores";
+      "SELECT IdConcentrado,Tipo,Marca,Fecha_Compra,Fecha_Vencimiento,tbP.NombreProveedor as 'Proveedor', Precio,Cantidad_Kilos,Proteina FROM `tbconcentrado` as tbC INNER JOIN tbproveedores as tbP WHERE tbC.IdProveedor_fk=tbP.IdProveedores";
     connection.query(sql, function (error, results, fields) {
       if (error) {
         connection.end();
@@ -109,10 +109,10 @@ app.get("/crearconcentrado", (req, res) => {
     campos.push(req.query.vencimiento);
     campos.push(req.query.proveedor);
     campos.push(req.query.precio);
-    campos.push(req.query.cantidadsacos);
+    campos.push(req.query.cantidadkilos);
     campos.push(req.query.proteina);
 
-    const insertar = `INSERT INTO tbconcentrado (Tipo, Marca, Fecha_Compra, Fecha_Vencimiento, IdProveedor_fk, Precio,Cantidad_Sacos, Proteina) VALUES ('${campos[0]}', '${campos[1]}', '${campos[2]}', '${campos[3]}', ${campos[4]}, ${campos[5]}, ${campos[6]},'${campos[7]}')`;
+    const insertar = `INSERT INTO tbconcentrado (Tipo, Marca, Fecha_Compra, Fecha_Vencimiento, IdProveedor_fk, Precio,Cantidad_Kilos, Proteina) VALUES ('${campos[0]}', '${campos[1]}', '${campos[2]}', '${campos[3]}', ${campos[4]}, ${campos[5]}, ${campos[6]},'${campos[7]}')`;
 
     connection.query(insertar, (err, fields) => {
       if (err) throw err;
@@ -152,7 +152,7 @@ app.get("/pilas", (req, res) => {
 app.get("/alimentacion", (req, res) => {
   try {
     let sql =
-      "SELECT tbA.idAlimentacion,tbE.Nombre_Encargado as 'Encargado', tbA.Fecha, tbA.IdPila_fk as 'Pila',tbA.Total_Semanal as 'Total' FROM `tbalimentacion` as tbA INNER JOIN tbencargado as tbE WHERE tbA.IdEncargado_fk=tbE.IdEncargado";
+      "SELECT tbA.idAlimentacion,tbE.Nombre_Encargado as 'Encargado', tbA.Fecha,tbA.Tipo_Concentrado, tbA.IdPila_fk as 'Pila',tbA.Total_Kilos as 'Kilos' FROM `tbalimentacion` as tbA INNER JOIN tbencargado as tbE WHERE tbA.IdEncargado_fk=tbE.IdEncargado";
     connection.query(sql, function (error, results, fields) {
       if (error) {
         connection.end();
@@ -174,10 +174,11 @@ app.get("/insertAlimentacion", (req, res) => {
   campos.push(req.query.IdAlimentacion);
   campos.push(req.query.IdEncargado);
   campos.push(req.query.Fecha);
+  campos.push(req.query.Tipo);
   campos.push(req.query.IdPila);
-  campos.push(req.query.TotalSemanal);
+  campos.push(req.query.TotalKilos);
 
-  const insertar = `INSERT INTO tbalimentacion (IdEncargado_fk, Fecha, IdPila_fk,Total_Semanal) VALUES (${campos[1]}, '${campos[2]}', ${campos[3]}, ${campos[4]})`;
+  const insertar = `INSERT INTO tbalimentacion (IdEncargado_fk, Fecha,Tipo_Concentrado, IdPila_fk,Total_Kilos) VALUES (${campos[1]}, '${campos[2]}', '${campos[3]}', ${campos[4]},${campos[5]})`;
 
   connection.query(insertar, (err, fields) => {
     if (err) throw err;
