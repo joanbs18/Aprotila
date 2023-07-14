@@ -1,34 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>login</title>
+  <title>Login</title>
   <link rel="stylesheet" href="css/login.css">
 </head>
+
 <body>
-  <div>
-    
-    <a href="index.html" class="back-button">
-      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-back-up" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-        <path d="M9 14l-4 -4l4 -4" />
-        <path d="M5 10h11a4 4 0 1 1 0 8h-1" />
-      </svg>
-    </a>
 
-    <h1>Inicio de sesión</h1>
-    <form action="procesar_login.php" method="post">
-      <label for="username">Usuario:</label>
-      <input type="text" id="username" name="username" required>
-
-      <label for="password">Contraseña:</label>
-      <input type="password" id="password" name="password" required>
-
-      <input type="submit" value="Iniciar sesión">
-    </form>
+  <div id="container">
+    <video class="video1" muted autoplay loop style="min-width: 100%;height: 948px;">
+      <source src="video/pexels-kindel-media-8354399 (2160p).mp4" type="video/mp4">
+    </video>
   </div>
-  
+
+  <div class="contenedor">
+    <div class="content">
+      <div class="text">
+        Login
+      </div>
+      <form action="#">
+        <div class="field">
+          <input required="" type="text" class="input">
+          <span class="span"><svg class="" xml:space="preserve" style="enable-background:new 0 0 512 512"
+              viewBox="0 0 512 512" y="0" x="0" height="20" width="50" xmlns:xlink="http://www.w3.org/1999/xlink"
+              version="1.1" xmlns="http://www.w3.org/2000/svg">
+              <g>
+                <path class="" data-original="#000000" fill="#595959"
+                  d="M256 0c-74.439 0-135 60.561-135 135s60.561 135 135 135 135-60.561 135-135S330.439 0 256 0zM423.966 358.195C387.006 320.667 338.009 300 286 300h-60c-52.008 0-101.006 20.667-137.966 58.195C51.255 395.539 31 444.833 31 497c0 8.284 6.716 15 15 15h420c8.284 0 15-6.716 15-15 0-52.167-20.255-101.461-57.034-138.805z">
+                </path>
+              </g>
+            </svg></span>
+          <label class="label">Cédula</label>
+        </div>
+        <div class="field">
+          <input required="" type="password" class="input">
+          <span class="span"><svg class="" xml:space="preserve" style="enable-background:new 0 0 512 512"
+              viewBox="0 0 512 512" y="0" x="0" height="20" width="50" xmlns:xlink="http://www.w3.org/1999/xlink"
+              version="1.1" xmlns="http://www.w3.org/2000/svg">
+              <g>
+                <path class="" data-original="#000000" fill="#595959"
+                  d="M336 192h-16v-64C320 57.406 262.594 0 192 0S64 57.406 64 128v64H48c-26.453 0-48 21.523-48 48v224c0 26.477 21.547 48 48 48h288c26.453 0 48-21.523 48-48V240c0-26.477-21.547-48-48-48zm-229.332-64c0-47.063 38.27-85.332 85.332-85.332s85.332 38.27 85.332 85.332v64H106.668zm0 0">
+                </path>
+              </g>
+            </svg></span>
+          <label class="label">Password</label>
+        </div>
+        <div class="forgot-pass">
+          <a href="#">Forgot Password?</a>
+        </div>
+        <button class="button">Sign in</button>
+        <div class="sign-up">
+          Not a member?
+          <a href="#">signup now</a>
+        </div>
+      </form>
+    </div>
+  </div>
 
 </body>
+
 </html>
