@@ -281,6 +281,10 @@ body {
   display: none;
   animation: slide-up 1000ms forwards;
 }
+.trazabilidad{
+  display: none;
+  animation: slide-up 1000ms forwards;
+}
 
 .mortabilidad {
   display: none;

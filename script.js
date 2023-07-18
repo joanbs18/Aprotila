@@ -980,6 +980,18 @@ function showDiv7() {
   tableInveConcentrado();
 }
 
+function showDiv8() {
+  document.getElementById("divConcentrado").style.display = "none";
+  document.getElementById("divVentas").style.display = "none";
+  document.getElementById("divAlimentacion").style.display = "none";
+  document.getElementById("divPila").style.display = "none";
+  document.getElementById("divMortabilidad").style.display = "none";
+  document.getElementById("divAlevines").style.display = "none";
+  document.getElementById("divinveConcentrado").style.display = "none";
+  document.getElementById("divTrazabilidad").style.display = "inline";
+
+}
+
 const contenedorBotones = document.getElementById("contenedor-botones");
 const contenedorToast = document.getElementById("contenedor-toast");
 
