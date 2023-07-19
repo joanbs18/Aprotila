@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  text-decoration: none;
 }
 
 body {
@@ -281,7 +282,7 @@ body {
   display: none;
   animation: slide-up 1000ms forwards;
 }
-.trazabilidad{
+.trazabilidad {
   display: none;
   animation: slide-up 1000ms forwards;
 }
@@ -942,6 +943,29 @@ span:hover {
     font-size: 17px;
     width: 300px;
   }
+
+  .dataTables_info {
+    font-size: 12px;
+  }
+
+  .previous .page-link, .next .page-link{
+    border: 1px solid #ccc;
+    background-color: #cccc;
+    color: #696969;
+    padding: 10px;
+    border-radius: 10px;
+
+  }
+  .previous.active .page-link, .next.active .page-link{
+    border: 1px solid #ccc;
+    background-color: #0073c4;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+
+  }
+
+
   .table td {
     display: block;
     border-bottom: 1px solid #ddd;
