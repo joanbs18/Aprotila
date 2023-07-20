@@ -62,22 +62,25 @@
         </form>
       </div>
     </div>
+
+
     <script>
       function validar() {
         var username = document.getElementById("username").value;
         var password = document.getElementById("password").value;
 
         if (username.length < 9) {
-          alert("La cedula debe ser mayor a 9 digitos");
+            alert("La cedula debe ser mayor a 9 digitos");
         } else if (password.length < 8) {
-          alert("La contraseña debe ser mayor a 8 digitos");
+            alert("La contraseña debe ser mayor a 8 digitos");
         } else if (!/[A-Z]/.test(password) || !/[a-z]/.test(password)) {
             alert("La contraseña debe contener al menos una letra mayúscula y una letra minúscula");
         } else  {
-            window.location.href = "ControlVentas.html";
+            window.location.href = "login.html";
         }
       }
     </script>
+    
 </body>
 
 </html>
