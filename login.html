@@ -53,7 +53,7 @@
           <div class="forgot-pass">
             <a href="#">Forgot Password?</a>
           </div>
-          <a href="ControlVentas.html"><button type="button" id="login" class="button" onclick="validar()">Sign
+          <a href=""><button type="button" id="login" class="button" onclick="validar()">Sign
               in</button></a>
           <div class="sign-up">
             Not a member?
@@ -62,17 +62,40 @@
         </form>
       </div>
     </div>
+    
     <script>
-      function validar() {
+
+      function validar(password) {
         var username = document.getElementById("username").value;
         var password = document.getElementById("password").value;
-
+      
         if (username.length < 9) {
           alert("La cedula debe ser mayor a 9 digitos");
         } else if (password.length < 8) {
           alert("La contraseña debe ser mayor a 8 digitos");
         }
       }
+      
+      function tieneMayusculas(password) {
+        // Expresión regular para buscar al menos una mayúscula
+        var mayusculaRegex = /[A-Z]/;
+
+        // Comprobamos si la contraseña cumple con el patrón de la expresión regular
+        return mayusculaRegex.test(password);
+        if (mayusculaRegex.test(password)) {
+          alert('tiene mayusculas'); // Devuelve true
+        } else {
+          alert('insega'); // Devuelve true
+        }
+      }
+
+       /*  // Ejemplo de uso:
+        var password1 = "tiene mayusculas";
+        var password2 = "faltan mayusculas";
+
+        alert(tieneMayusculas(password1)); // Devuelve true
+        arlert(tieneMayusculas(password2)); // Devuelve false */
+
     </script>
 </body>
 
