@@ -63,6 +63,7 @@
     </div>
   </div>
 
+<<<<<<< Updated upstream
   <script src="login.js"></script>
 
   <!-- <script>
@@ -74,6 +75,17 @@
       if (!/^[0-9]+$/.test(username)) {
         alert("El usuario debe contener solo números.");
         return false;
+=======
+        if (username.length < 9) {
+            alert("La cedula debe ser mayor a 9 digitos");
+        } else if (password.length < 8) {
+            alert("La contraseña debe ser mayor a 8 digitos");
+        } else if (!/[A-Z]/.test(password) || !/[a-z]/.test(password)) {
+            alert("La contraseña debe contener al menos una letra mayúscula y una letra minúscula");
+        } else  {
+            window.location.href = "ControlVentas.html";
+        }
+>>>>>>> Stashed changes
       }
 
       // Validar que la contraseña tenga al menos 8 caracteres
