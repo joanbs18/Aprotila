@@ -72,6 +72,7 @@
         if (username.length < 9) {
           alert("La cedula debe ser mayor a 9 digitos");
         } else if (password.length < 8) {
+<<<<<<< Updated upstream
           alert("La contraseña debe ser mayor a 8 digitos");
         }
       }
@@ -97,6 +98,107 @@
         arlert(tieneMayusculas(password2)); // Devuelve false */
 
     </script>
+=======
+            alert("La contraseña debe ser mayor a 8 digitos");
+        } else if (!/[A-Z]/.test(password) || !/[a-z]/.test(password)) {
+            alert("La contraseña debe contener al menos una letra mayúscula y una letra minúscula");
+        } else  {
+            window.location.href = "login.html";
+            //--------------
+        }
+      }
+
+
+      /*
+      document.getElementById("loginForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const usuario = document.getElementById("usuario").value;
+        const contraseña = document.getElementById("contraseña").value;
+
+        // Envía los datos del formulario al servidor utilizando AJAX o Fetch API
+        fetch("procesar_login.html", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ usuario, contraseña })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.id_cargo === 1) {
+                window.location.href = "ControlVentas.html"; // Redirige a la página del administrador
+            } else if (data.id_cargo === 2) {
+                window.location.href = "ModuloConcentrado.html"; // Redirige a la página del trabajador
+            } else {
+                document.getElementById("mensajeError").style.display = "block";
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
+      });
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      //validacion de login en la base de datos
+      /*
+      function login(username, password) {
+        // se supone que este es el comando con el que se inicia el servidor
+        // no encuentro cual es
+        //var url = 'http://localhost/tu_proyecto';
+        var url = 'http://127.0.0.1:5501/ControlVentas.html';
+        var data = {
+          usuario: username,
+          contraseña: password
+        };
+
+        // usa Fetch API to send an AJAX request
+        fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(result => {
+          // Assuming the server returns a JSON object with a 'success' property
+          // Suponiendo que el servidor devuelve un objeto JSON con una propiedad de 'éxito'
+          if (result.success) {
+            // Redirect based on user type (id_cargo)
+            // Redirección basada en el tipo de usuario (id_cargo)
+            if (result.id_cargo === 1) {
+              //entre comillas se debe poner lo que a ver el admin
+              window.location.href = "ControlVentas.html"; 
+            } else if (result.id_cargo === 2) {
+              //entre comillas se debe poner lo que a ver el trabajador
+              window.location.href = "ModuloConcentrado.html";
+            } else {
+              alert("Usuario invalido o no existe.");
+            }
+          } else {
+            alert("ERROR EN LA AUTENTICACIÓN");
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+      } 
+      */
+
+    </script>
+    <script src="login.js"></script>
+    <script href=""></script>
+    
+>>>>>>> Stashed changes
 </body>
 
 </html>
