@@ -83,7 +83,7 @@ app.listen(port, () => {
 app.get("/concentrados", (req, res) => {
   try {
     let sql =
-      "SELECT IdConcentrado,Tipo,Marca,Fecha_Compra,Fecha_Vencimiento,tbP.NombreProveedor as 'Proveedor', Precio,Cantidad_Kilos,Proteina FROM `tbconcentrado` as tbC INNER JOIN tbproveedores as tbP WHERE tbC.IdProveedor_fk=tbP.IdProveedores";
+      "SELECT IdConcentrado,tbTi.Nombre as 'Tipo',Marca,Fecha_Compra,Fecha_Vencimiento,tbP.NombreProveedor as 'Proveedor', Precio,Cantidad_Kilos,Proteina FROM `tbconcentrado` as tbC INNER JOIN tbproveedores as tbP on tbC.IdProveedor_fk=tbP.IdProveedores INNER JOIN tbtipoalimento as tbTi on tbC.IdTipo_fk= tbTi.IdTipo";
     connection.query(sql, function (error, results, fields) {
       if (error) {
         connection.end();
@@ -332,6 +332,117 @@ app.get("/insertInveConcentrado", (req, res) => {
   });
   res.send("Consulta exitosa");
 });
+
+app.get("/trazabilidad", (req, res) => {
+  try {
+    let sql =
+      "SELECT tbT.IdTrazabilidad,tbT.Lote,tbT.IdPila_fk_Inicial,tbT.IdPila_fk_Final,tbT.Peso,tbT.Fecha,tbT.Cantidad,tbM.Aprobacion FROM tbtrazabilidad as tbT INNER JOIN tbmuestreo as tbM WHERE tbT.IdMuestreo_fk=tbM.IdMuestreo;";
+    connection.query(sql, function (error, results, fields) {
+      if (error) {
+        connection.end();
+        throw error;
+      }
+      res.status(200).json({
+        msg: "Mensaje desde el metodo GET",
+        results,
+      });
+    });
+  } catch (err) {
+    console.log(err);
+    throw new Error("Error en el metodo GET");
+  }
+});
+
+app.get("/insertTrazabilidad", (req, res) => {
+  campos = [];
+  campos.push(req.query.Lote);
+  campos.push(req.query.IdPila_fk_Inicial);
+  campos.push(req.query.IdPila_fk_Final);
+  campos.push(req.query.Peso);
+  campos.push(req.query.Cantidad);
+
+  const insertar = `CALL InsertTrazabilidad(${campos[0]},${campos[1]},${campos[2]},${campos[3]},${campos[4]})`;
+
+  connection.query(insertar, (err, fields) => {
+    if (err) throw err;
+  });
+  res.send("Consulta exitosa");
+});
+
+app.get("/deleteTrazabilidad", (req, res) => {
+  let sql = `DELETE FROM tbtrazabilidad WHERE IdTrazabilidad = ${req.query.Id}`;
+  connection.query(sql, function (error, results, fields) {
+    if (error) throw error;
+  });
+  console.log("Borrado");
+});
+
+
+app.get("/muestreo", (req, res) => {
+  try {
+    let sql =
+      "SELECT IdMuestreo, IdPila_fk,Cantidad,Fecha,Peso,tbe.Nombre_Encargado as 'Nombre', Aprobacion FROM `tbmuestreo` as tbM INNER Join tbencargado as tbE WHERE tbM.IdEncargado_fk=tbE.IdEncargado";
+    connection.query(sql, function (error, results, fields) {
+      if (error) {
+        connection.end();
+        throw error;
+      }
+      res.status(200).json({
+        msg: "Mensaje desde el metodo GET",
+        results,
+      });
+    });
+  } catch (err) {
+    console.log(err);
+    throw new Error("Error en el metodo GET");
+  }
+});
+
+app.get("/insertMuestreo", (req, res) => {
+  campos = [];
+  campos.push(req.query.Pila);
+  campos.push(req.query.Cantidad);
+  campos.push(req.query.Peso);
+  campos.push(req.query.Encargado);
+  campos.push(req.query.Aprobado);
+
+  const insertar = `INSERT INTO tbmuestreo (IdPila_fk, Cantidad, Fecha, Peso, IdEncargado_fk, Aprobacion) VALUES (${campos[0]},${campos[1]}, CURDATE(), ${campos[2]}, ${campos[3]}, ${campos[4]});`;
+
+  connection.query(insertar, (err, fields) => {
+    if (err) throw err;
+  });
+  res.send("Consulta exitosa");
+});
+
+app.get("/deleteMuestreo", (req, res) => {
+  let sql = `DELETE FROM tbmuestreo WHERE IdMuestreo = ${req.query.Id}`;
+  connection.query(sql, function (error, results, fields) {
+    if (error) throw error;
+  });
+  console.log("Borrado");
+});
+
+app.get("/mostrarTrazabilidad", (req, res) => {
+  var numero= req.query.Lote;
+  try {
+    let sql =
+      `SELECT tbt.IdPila_fk_Inicial as 'Inicial', tbt.IdPila_fk_Final as 'Final' from tbtrazabilidad as tbt where tbt.Lote=${numero}`;
+    connection.query(sql, function (error, results, fields) {
+      if (error) {
+        connection.end();
+        throw error;
+      }
+      res.status(200).json({
+        msg: "Mensaje desde el metodo GET",
+        results,
+      });
+    });
+  } catch (err) {
+    console.log(err);
+    throw new Error("Error en el metodo GET");
+  }
+});
+
 
 /*
 app.get("/actualizarconcentrado", (req, res) => {
