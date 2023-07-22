@@ -615,7 +615,7 @@
                     <option value="transferencia">Transferencia</option>
                 </select>
             </div>
-            <button class="btnForm" type="button" id="btnAdd">AÑADIR</button>
+            <button class="btnForm" type="button" id="btnAdd" onclick="clearFormData()">AÑADIR</button>
         </form>
 
     </div>
@@ -663,7 +663,7 @@
                 <label>Proteína</label>
             </div>
 
-            <button type="button" class="btnForm" onclick="addConcentrado()">AÑADIR</button>
+            <button type="button" class="btnForm" onclick="addConcentrado(),,clearFormData()>AÑADIR</button>
         </form>
 
     </div>
@@ -692,7 +692,7 @@
                 <input id="totalDiario" type="number" name="uname" required>
                 <label>Total Diario</label>
             </div>
-            <button type="button" class="btnForm" onclick="addAlimentacion()" style="cursor: pointer;">AÑADIR</button>
+            <button type="button" class="btnForm" onclick="addAlimentacion(),clearFormData()" style="cursor: pointer;">AÑADIR</button>
         </form>
 
     </div>
@@ -719,7 +719,7 @@
                 <input id="observaciones_mortabilidad" type="text" name="uname" required>
                 <label>Observaciones</label>
             </div>
-            <button type="button" class="btnForm" onclick="addMortabilidad()">AÑADIR</button>
+            <button type="button" class="btnForm" onclick="addMortabilidad(),clearFormData()">AÑADIR</button>
         </form>
 
     </div>
@@ -761,7 +761,7 @@
                 <input id="cantidad_alevine" type="number" name="uname" required>
                 <label>Cantidad Alevines</label>
             </div>
-            <button id="btnAlevineAdd" type="button" class="btnForm" onclick=" addAlevine()">AÑADIR</button>
+            <button id="btnAlevineAdd" type="button" class="btnForm" onclick=" addAlevine(),clearFormData()">AÑADIR</button>
             <button id="btnAlevineUpdate" style="display: none;" type="button" class="btnForm"
                 onclick=" UpdateAlevine2()">Actualizar</button>
         </form>
@@ -785,7 +785,7 @@
                 <input id="CantidadConcentrados" type="number" name="uname" required>
                 <label>Cantidad Sacos</label>
             </div>
-            <button type="button" class="btnForm" onclick="addInveConcentrado()">AÑADIR</button>
+            <button type="button" class="btnForm" onclick="addInveConcentrado(),clearFormData()">AÑADIR</button>
         </form>
 
     </div>

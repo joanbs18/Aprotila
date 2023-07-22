@@ -1123,3 +1123,23 @@ const agregarToast = ({ tipo, titulo, descripcion, autoCierre }) => {
   // Agregamos event listener para detectar cuando termine la animación
   nuevoToast.addEventListener("animationend", handleAnimacionCierre);
 };
+
+
+
+/* ------------------------------------------limpiar--formulario---------------------------------------------- */
+
+function clearFormData() {
+  // llama todos elementos del 
+  const inputElements = document.querySelectorAll('form input, form select, form textarea');
+
+  // Loop through each input element and reset its value
+  inputElements.forEach(element => {
+      if (element.tagName === 'INPUT' && (element.type === 'text' || element.type === 'number' || element.type === 'date')) {
+          element.value = '';
+      } else if (element.tagName === 'SELECT') {
+          element.selectedIndex = 0; // Reset the selected option to the first one
+      } else if (element.tagName === 'TEXTAREA') {
+          element.value = '';
+      }
+  });
+}
