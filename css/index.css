@@ -418,13 +418,17 @@ svg:hover .tooltip {
   place-items: center;
 }
 .titulo_productos,
-.titulo_restaurante {
+.titulo_restaurante,.titulo_quehacemos {
   font-size: 30px;
   color: #000000;
   padding: 10px 100px;
   border-bottom: 1px solid #ccc;
   margin-bottom: 5%;
+  text-align: center;
+  
 }
+
+
 
 .card_producto {
   width: 300px;
@@ -766,6 +770,8 @@ article:hover img:last-child {
   grid-gap: 30px;
   display: grid;
   place-items: center;
+  animation: slide-up 1000ms forwards;
+  
 }
 
 .precio {
@@ -897,6 +903,14 @@ article:hover img:last-child {
   transform: rotatey(-80deg);
 }
 
+
+.quehacemos{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5%;
+}
+
 .hero-section {
   display: flex;
   min-height: 100%;
@@ -910,8 +924,10 @@ article:hover img:last-child {
   gap: 30px;
   width: 100%;
   justify-content: center;
-  border: 1px solid red;
 }
+
+
+
 
 .carda {
   position: relative;
@@ -979,6 +995,157 @@ article:hover img:last-child {
   line-height: 1;
   text-shadow: 2px 2px 20px rgb(0, 0, 0, 0.2);
 }
+
+@keyframes slide-up {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+.container_valores{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 9%;
+}
+.titulo_valores{
+  font-size: 30px;
+  color: #000000;
+  padding: 10px 100px;
+  margin-bottom: 5%;
+  text-align: center;
+}
+.titulo_valores h1{
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 3%;
+}
+
+
+.informacion_valores{
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 30px;
+  display: grid;
+  place-items: center;
+  animation: slide-up 1000ms forwards;
+  text-align: center;
+}
+
+.box_valores i{
+font-size: 80px;
+color: #808080;
+}
+
+.box_valores h3{
+  font-size: 30px;
+  margin-top: 5%;
+}
+
+.box_valores p{
+  font-size: 20px;
+  margin-top: 3%;
+}
+
+footer{
+  position: relative;
+  width: 100%;
+  background: #3586ff;
+  min-height: 100px;
+  padding: 20px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10%;
+
+}
+
+footer .social_icon{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+  flex-wrap: wrap;
+}
+
+footer .social_icon li{
+  list-style: none;
+}
+
+footer .social_icon li a{
+ font-size: 2em;
+ color: #fff;
+ margin: 0 10px;
+ display: inline-block;
+ transition: 0.5s;
+}
+footer .social_icon li a:hover{
+  transform: translateY(-10px);
+}
+
+footer .wave{
+  position: absolute;
+  top: -100px;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: url(/img/wave.png);
+  background-size: 1000px 100px;
+}
+
+footer .wave#wave1{
+  z-index: 1000;
+  opacity: 1;
+  bottom: 0;
+  animation: animateWave 4s linear infinite;
+
+}
+
+footer .wave#wave2{
+  z-index: 999;
+  opacity: 0.5;
+  bottom: 10px;
+  animation: animateWave_2 4s linear infinite;
+
+}
+footer .wave#wave3{
+  z-index: 1000;
+  opacity: 0.2;
+  bottom: 15px;
+  animation: animateWave 3s linear infinite;
+
+}
+footer .wave#wave4{
+  z-index: 999;
+  opacity: 0.7;
+  bottom: 20px;
+  animation: animateWave_2 3s linear infinite;
+
+}
+
+@keyframes animateWave{
+  0%{
+    background-position-x: 1000px;
+  }
+  100%{
+    background-position-x: 0px;
+  }
+
+}
+
+@keyframes animateWave_2{
+  0%{
+    background-position-x: 0px;
+  }
+  100%{
+    background-position-x: 1000px;
+  }
+
+}
+
 
 @media screen and (max-width: 600px) {
   .abrir-menu,

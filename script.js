@@ -1152,7 +1152,7 @@ function deleteMuestreo(id) {
 }
 
 function mostrarTras() {
-  var Lote = prompt("Ingresa tu nombre:", "");
+  var Lote = prompt("Ingrese el Lote:", "");
   fetch(`http://localhost:3000/mostrarTrazabilidad?Lote=${Lote}`, {
     method: "get",
     headers: {
