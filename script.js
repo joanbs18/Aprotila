@@ -122,6 +122,17 @@ add_alimento.addEventListener("click", function () {
   pilas();
   document.getElementById("formualimentacion").style.display = "flex";
 });
+var add_muestreo = document.getElementById("add_muestreo");
+add_muestreo.addEventListener("click", function () {
+  pilas();
+  document.getElementById("fmuestreo").style.display = "flex";
+});
+
+var add_trazabilidad = document.getElementById("add_trazabilidad");
+add_trazabilidad.addEventListener("click", function () {
+  pilas();
+  document.getElementById("ftrazabilidad").style.display = "flex";
+});
 
 var add_Mortabilidad = document.getElementById("add_Mortabilidad");
 add_Mortabilidad.addEventListener("click", function () {
@@ -134,6 +145,17 @@ add_Mortabilidad.addEventListener("click", function () {
 var closeModal = document.getElementById("closeModal");
 closeModal.addEventListener("click", function () {
   document.getElementById("formu-modal").style.display = "none";
+});
+var closeModal_muestreo = document.getElementById("closeModal_muestreo");
+closeModal_muestreo.addEventListener("click", function () {
+  document.getElementById("fmuestreo").style.display = "none";
+});
+
+var closeModal_trazabilidad = document.getElementById(
+  "closeModal_trazabilidad"
+);
+closeModal_trazabilidad.addEventListener("click", function () {
+  document.getElementById("ftrazabilidad").style.display = "none";
 });
 var closeModal = document.getElementById("closeModal_inveConcentrado");
 closeModal.addEventListener("click", function () {
@@ -220,6 +242,9 @@ const mostrarPilas = (data) => {
   document.getElementById("menupila_alimentacion").innerHTML = tab;
   document.getElementById("menupila_mortabilidad").innerHTML = tab;
   document.getElementById("menupila_alevines").innerHTML = tab;
+  document.getElementById("menupila_trazabilidadInicial").innerHTML = tab;
+  document.getElementById("menupila_trazabilidadFinal").innerHTML = tab;
+  document.getElementById("menupila_muestreo").innerHTML = tab;
 };
 
 function alimentacion() {
@@ -415,6 +440,30 @@ var optionPila5 = document.getElementById("menupila_alevines");
 optionPila5.addEventListener("change", function () {
   pilaSeleccionada5 = optionPila5.options[optionPila5.selectedIndex].text;
   validarPila = true;
+});
+
+var pilaSeleccionada6;
+var optionPila6 = document.getElementById("menupila_trazabilidadInicial");
+optionPila6.addEventListener("change", function () {
+  pilaSeleccionada6 = optionPila6.options[optionPila6.selectedIndex].text;
+});
+
+var pilaSeleccionada7;
+var optionPila7 = document.getElementById("menupila_trazabilidadFinal");
+optionPila7.addEventListener("change", function () {
+  pilaSeleccionada7 = optionPila7.options[optionPila7.selectedIndex].text;
+});
+var pilaSeleccionada8;
+var optionPila8 = document.getElementById("menupila_muestreo");
+optionPila8.addEventListener("change", function () {
+  pilaSeleccionada8 = optionPila8.options[optionPila8.selectedIndex].text;
+});
+
+var aprobacionSeleccionado;
+var optionAprobado = document.getElementById("aprobacion_muestreo");
+optionAprobado.addEventListener("change", function () {
+  aprobacionSeleccionado =
+    optionAprobado.options[optionAprobado.selectedIndex].text;
 });
 
 //SELECT DE FORMA DE PAGO CON EVENTO DE CAMBIO
@@ -896,6 +945,238 @@ function addInveConcentrado() {
   tableInveConcentrado();
 }
 
+function tableTrazabilidad() {
+  fetch("http://localhost:3000/trazabilidad", {
+    method: "get",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((resp) => resp.json())
+    .then((datos) => mostrarTrazabilidad(datos.results))
+    .catch((err) => seeLoad());
+}
+var VTrazabilidad = [];
+const mostrarTrazabilidad = (data) => {
+  let tab = "";
+  let Aprobacion = "";
+  VTrazabilidad = data;
+  for (var i = 0; i < data.length; i++) {
+    var fechaConFormatoT = moment(data[i].Fecha);
+    fechaT = fechaConFormatoT.format("YYYY-MM-DD");
+    if (data[i].Aprobacion == 1) {
+      Aprobacion = "Aprobada";
+    } else {
+      Aprobacion = "Cancelada";
+    }
+    tab += `<tr>
+      <td data-label="Lote">${data[i].Lote}</td>
+      <td data-label="Pila Inicial">${data[i].IdPila_fk_Inicial}</td>
+      <td data-label="Pila Final">${data[i].IdPila_fk_Final}</td>
+      <td data-label="Peso">${data[i].Peso}</td>
+      <td data-label="Fecha">${fechaT}</td>
+      <td data-label="Cantidad">${data[i].Cantidad}</td>
+      <td data-label="Aprobación">${Aprobacion}</td>
+      <td>
+      <button class="btnUpdate" id="btnUpdate_Trazabilidad"><i class="fa-solid fa-pen-to-square"></i></button>   
+      <button class="btnTrash" id="btnTrash_Trazabilidad" ><i class="fa-solid fa-trash-can"></i></button>
+  </td>
+
+      </tr>`;
+  }
+  document.getElementById("Rtrazabilidad").innerHTML = tab;
+  eles = document.querySelectorAll("#btnTrash_Trazabilidad");
+  console.log(eles);
+  for (let i = 0; i < eles.length; i++) {
+    eles[i].addEventListener("click", function () {
+      deleteTrazabilidad(VTrazabilidad[i].IdTrazabilidad);
+      tableTrazabilidad();
+    });
+  }
+  // eles2 = document.querySelectorAll("#btnUpdate_Alevines");
+  // console.log(eles2);
+  // for (let i = 0; i < eles.length; i++) {
+  //   eles2[i].addEventListener("click", function () {
+  //     UpdateAlevine(VAlevines, i);
+  //   });
+  // }
+};
+
+function addTrazabilidad() {
+  lote_trazabilidad = document.getElementById("lote_trazabilidad").value;
+  Peso_trazabilidad = document.getElementById("Peso_trazabilidad").value;
+  Cantidad_trazabilidad = document.getElementById(
+    "Cantidad_trazabilidad"
+  ).value;
+
+  if (
+    lote_trazabilidad.toString == 0 ||
+    Peso_trazabilidad.toString == 0 ||
+    Cantidad_trazabilidad.toString == 0
+  ) {
+    alert("Error campos incompletos");
+  }
+  url = `http://localhost:3000/insertTrazabilidad?Lote=${lote_trazabilidad}&IdPila_fk_Inicial=${pilaSeleccionada6}&IdPila_fk_Final=${pilaSeleccionada7}&Peso=${Peso_trazabilidad}&Cantidad=${Cantidad_trazabilidad}`;
+
+  fetch(url, {
+    method: "get",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((resp) => resp.json())
+    .then((datos) => console.log(datos))
+    .catch((err) => console.log(err));
+  document.getElementById("ftrazabilidad").style.display = "none";
+  tableTrazabilidad();
+}
+
+function deleteTrazabilidad(id) {
+  try {
+    url = `http://localhost:3000/deleteTrazabilidad?Id=${id}`;
+    fetch(url, {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((resp) => resp.json())
+      .then((datos) => console.log(datos))
+      .catch((err) => console.log(err));
+  } catch (error) {
+    alert("Error Inesperado");
+  }
+  tableTrazabilidad();
+}
+
+function tableMuestreo() {
+  fetch("http://localhost:3000/muestreo", {
+    method: "get",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((resp) => resp.json())
+    .then((datos) => mostrarMuestreo(datos.results))
+    .catch((err) => seeLoad());
+}
+var VMuestreo = [];
+const mostrarMuestreo = (data) => {
+  let tab = "";
+  let Aprobacion = "";
+  VMuestreo = data;
+  for (var i = 0; i < data.length; i++) {
+    var fechaConFormatoM = moment(data[i].Fecha);
+    fechaM = fechaConFormatoM.format("YYYY-MM-DD");
+    if (data[i].Aprobacion == 1) {
+      Aprobacion = "Aprobada";
+    } else {
+      Aprobacion = "Cancelada";
+    }
+    tab += `<tr>
+      <td data-label="Lote">${data[i].IdPila_fk}</td>
+      <td data-label="Pila Inicial">${data[i].Cantidad}</td>
+      <td data-label="Fecha">${fechaM}</td>
+      <td data-label="Peso">${data[i].Peso}</td>
+      <td data-label="Encargado">${data[i].Nombre}</td>
+      <td data-label="Aprobación">${Aprobacion}</td>
+      <td>
+      <button class="btnUpdate" id="btnUpdate_Muestreo"><i class="fa-solid fa-pen-to-square"></i></button>   
+      <button class="btnTrash" id="btnTrash_Muestreo" ><i class="fa-solid fa-trash-can"></i></button>
+  </td>
+
+      </tr>`;
+  }
+  document.getElementById("Rmuestreo").innerHTML = tab;
+  eles = document.querySelectorAll("#btnTrash_Muestreo");
+  console.log(eles);
+  for (let i = 0; i < eles.length; i++) {
+    eles[i].addEventListener("click", function () {
+      deleteMuestreo(VMuestreo[i].IdMuestreo);
+      tableMuestreo();
+    });
+  }
+  // eles2 = document.querySelectorAll("#btnUpdate_Alevines");
+  // console.log(eles2);
+  // for (let i = 0; i < eles.length; i++) {
+  //   eles2[i].addEventListener("click", function () {
+  //     UpdateAlevine(VAlevines, i);
+  //   });
+  // }
+};
+
+function addMuestreo() {
+  cantidad_muestreo = document.getElementById("cantidad_muestreo").value;
+  peso_muestreo = document.getElementById("peso_muestreo").value;
+  let aprobado;
+  if (aprobacionSeleccionado == "Si") {
+    aprobado = 1;
+  } else {
+    aprobado = 0;
+  }
+
+  if (cantidad_muestreo.toString == 0 || peso_muestreo.toString == 0) {
+    alert("Error campos incompletos");
+  }
+  url = `http://localhost:3000/insertMuestreo?Pila=${pilaSeleccionada8}&Cantidad=${cantidad_muestreo}&Peso=${peso_muestreo}&Encargado=${1}&Aprobado=${aprobado}`;
+
+  fetch(url, {
+    method: "get",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((resp) => resp.json())
+    .then((datos) => console.log(datos))
+    .catch((err) => console.log(err));
+  document.getElementById("fmuestreo").style.display = "none";
+  tableMuestreo();
+}
+
+function deleteMuestreo(id) {
+  try {
+    url = `http://localhost:3000/deleteMuestreo?Id=${id}`;
+    fetch(url, {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((resp) => resp.json())
+      .then((datos) => console.log(datos))
+      .catch((err) => console.log(err));
+  } catch (error) {
+    alert("Error Inesperado");
+  }
+  tableMuestreo();
+}
+
+function mostrarTras() {
+  var Lote = prompt("Ingrese el Lote:", "");
+  fetch(`http://localhost:3000/mostrarTrazabilidad?Lote=${Lote}`, {
+    method: "get",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((resp) => resp.json())
+    .then((datos) => mostrarTrza(datos.results, Lote))
+    .catch((err) => seeLoad());
+}
+
+const mostrarTrza = (data, Lote) => {
+  let tab = "";
+  tab = `<h2> Lote: ${Lote}</h2>`;
+  for (var i = 0; i < data.length; i++) {
+    if (i == 0) {
+      tab += `<p>Pila Inicial: ${data[i].Inicial} => ${data[i].Final}`;
+    } else {
+      tab += `=> ${data[i].Final} </p>`;
+    }
+  }
+  document.getElementById("modalTrazabilidad").innerHTML = tab;
+};
+
 function showDiv1() {
   document.getElementById("divConcentrado").style.display = "none";
   document.getElementById("divVentas").style.display = "inline";
@@ -905,6 +1186,8 @@ function showDiv1() {
   document.getElementById("divAlevines").style.display = "none";
   document.getElementById("divinveConcentrado").style.display = "none";
   document.getElementById("contenedor-toast").style.display = "none";
+  document.getElementById("divTrazabilidad").style.display = "none";
+  document.getElementById("divMuestreo").style.display = "none";
 }
 function showDiv2() {
   document.getElementById("divConcentrado").style.display = "inline";
@@ -916,6 +1199,8 @@ function showDiv2() {
   document.getElementById("divinveConcentrado").style.display = "none";
   concentrados();
   document.getElementById("contenedor-toast").style.display = "none";
+  document.getElementById("divTrazabilidad").style.display = "none";
+  document.getElementById("divMuestreo").style.display = "none";
 }
 
 function showDiv3() {
@@ -929,6 +1214,8 @@ function showDiv3() {
   alimentacion();
   selectInveConcentrado();
   document.getElementById("contenedor-toast").style.display = "none";
+  document.getElementById("divTrazabilidad").style.display = "none";
+  document.getElementById("divMuestreo").style.display = "none";
 }
 
 function showDiv4() {
@@ -941,6 +1228,8 @@ function showDiv4() {
   document.getElementById("divAlevines").style.display = "none";
   document.getElementById("divinveConcentrado").style.display = "none";
   document.getElementById("contenedor-toast").style.display = "none";
+  document.getElementById("divTrazabilidad").style.display = "none";
+  document.getElementById("divMuestreo").style.display = "none";
 }
 
 function showDiv5() {
@@ -953,6 +1242,8 @@ function showDiv5() {
   document.getElementById("divAlevines").style.display = "none";
   document.getElementById("divinveConcentrado").style.display = "none";
   document.getElementById("contenedor-toast").style.display = "none";
+  document.getElementById("divTrazabilidad").style.display = "none";
+  document.getElementById("divMuestreo").style.display = "none";
 }
 
 function showDiv6() {
@@ -967,6 +1258,8 @@ function showDiv6() {
   tableAlevines();
   pilas();
   document.getElementById("contenedor-toast").style.display = "none";
+  document.getElementById("divTrazabilidad").style.display = "none";
+  document.getElementById("divMuestreo").style.display = "none";
 }
 
 function showDiv7() {
@@ -977,6 +1270,8 @@ function showDiv7() {
   document.getElementById("divMortabilidad").style.display = "none";
   document.getElementById("divAlevines").style.display = "none";
   document.getElementById("divinveConcentrado").style.display = "inline";
+  document.getElementById("divTrazabilidad").style.display = "none";
+  document.getElementById("divMuestreo").style.display = "none";
   tableInveConcentrado();
 }
 
@@ -989,7 +1284,21 @@ function showDiv8() {
   document.getElementById("divAlevines").style.display = "none";
   document.getElementById("divinveConcentrado").style.display = "none";
   document.getElementById("divTrazabilidad").style.display = "inline";
+  document.getElementById("divMuestreo").style.display = "none";
+  tableTrazabilidad();
+}
 
+function showDiv9() {
+  document.getElementById("divConcentrado").style.display = "none";
+  document.getElementById("divVentas").style.display = "none";
+  document.getElementById("divAlimentacion").style.display = "none";
+  document.getElementById("divPila").style.display = "none";
+  document.getElementById("divMortabilidad").style.display = "none";
+  document.getElementById("divAlevines").style.display = "none";
+  document.getElementById("divinveConcentrado").style.display = "none";
+  document.getElementById("divTrazabilidad").style.display = "none";
+  document.getElementById("divMuestreo").style.display = "Inline";
+  tableMuestreo();
 }
 
 const contenedorBotones = document.getElementById("contenedor-botones");
