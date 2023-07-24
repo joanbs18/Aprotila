@@ -571,6 +571,30 @@ refresh.addEventListener("click", (_) => {
   location.reload();
 });
 
+//Xavier
+function validarUsuario(){
+  cedula = document.getElementById("cedula").value;
+  contraseña = document.getElementById("contraseña").value;
+  url = `http://localhost:3000/usuarios?Cedula=${cedula}&Contraseña=${contraseña}`;
+
+  fetch(url, {
+    method: "get",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((resp) => resp.json())
+    .then((datos) => {
+      console.log(datos)
+      if (datos[0].mensaje === "Ingresado correctamente"){
+        window.location.href="/ControlVentas.html"
+      }else{
+        alert("Cedula o Contraseña invalida")
+      }
+    })
+    .catch((err) => console.log(err));
+}
+
 function deleteConcentrado(IdConcentrado) {
   try {
     url = `http://localhost:3000/borrarconcentrado?IdConcentrado=${IdConcentrado}`;

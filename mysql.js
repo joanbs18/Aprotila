@@ -122,6 +122,27 @@ app.get("/crearconcentrado", (req, res) => {
   }
 });
 
+//Xavier
+app.get("/usuarios", (req, res)=> {
+  try {
+    campos = [];
+    campos.push(req.query.Cedula);
+    campos.push(req.query.Contraseña);
+    console.log(campos[0])
+    const queryusuario = `SELECT * FROM tbusuarios where Cedula = ${campos[0]} and Contraseña = ${campos[1]}`
+    connection.query(queryusuario, (err, resultado) =>{
+      if (resultado.length !== 0){
+        console.log(resultado)
+        res.json({mensaje: "Ingresado correctamente"})
+      }else{
+        res.json({mensaje: "Datos incorrectos"})
+      }
+    });
+  }catch (error) {
+    console.log("Error");
+  }
+});
+
 app.get("/borrarconcentrado", (req, res) => {
   let sql = `DELETE FROM tbconcentrado WHERE IdConcentrado = ${req.query.IdConcentrado}`;
   connection.query(sql, function (error, results, fields) {
