@@ -443,6 +443,27 @@ app.get("/mostrarTrazabilidad", (req, res) => {
   }
 });
 
+//LOGIN
+app.get("/usuarios", (req, res)=> {
+  try {
+    campos = [];
+    campos.push(req.query.Cedula);
+    campos.push(req.query.Contraseña);
+    console.log(campos[0])
+    const queryusuario = `SELECT * FROM tbusuarios where Cedula = ${campos[0]} and Contraseña = ${campos[1]}`
+    connection.query(queryusuario, (err, resultado) =>{
+      if (resultado.length !== 0){
+        console.log(resultado)
+        res.json({mensaje: "Ingresado correctamente"})
+      }else{
+        res.json({mensaje: "Datos incorrectos"})
+      }
+    });
+  }catch (error) {
+    console.log("Error");
+  }
+});
+
 
 /*
 app.get("/actualizarconcentrado", (req, res) => {
