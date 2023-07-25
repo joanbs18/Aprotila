@@ -28,6 +28,7 @@ header {
 header.abajo {
   background: #fff;
   padding: 15px 20px;
+  box-shadow: 0px 0px 30px -5px #cccc;
 }
 
 header.abajo .logo,
@@ -1164,7 +1165,7 @@ footer .wave#wave4 {
   }
   header.abajo {
     background: #fff;
-    box-shadow: 0px 0px 30px -5px #cccc;
+   
   }
 
   header.abajo .abrir-menu {
