@@ -39,10 +39,13 @@ video {
   width: 100%;
 }
 
+header.abajo .logo{
+  width: 100px;
+  transition: 0.5s ease-out;
+}
+
 .logo {
-  max-width: 5rem;
-  color: #e6e6e6;
-  font-size: 50px;
+  width: 200px;
 }
 
 .nav-list {
@@ -74,6 +77,7 @@ video {
   margin: 0 5px;
   background: transparent;
   text-transform: uppercase;
+ 
 }
 
 .li_menu:before {
@@ -418,17 +422,15 @@ svg:hover .tooltip {
   place-items: center;
 }
 .titulo_productos,
-.titulo_restaurante,.titulo_quehacemos {
+.titulo_restaurante,
+.titulo_quehacemos {
   font-size: 30px;
   color: #000000;
   padding: 10px 100px;
   border-bottom: 1px solid #ccc;
   margin-bottom: 5%;
   text-align: center;
-  
 }
-
-
 
 .card_producto {
   width: 300px;
@@ -771,7 +773,6 @@ article:hover img:last-child {
   display: grid;
   place-items: center;
   animation: slide-up 1000ms forwards;
-  
 }
 
 .precio {
@@ -903,8 +904,7 @@ article:hover img:last-child {
   transform: rotatey(-80deg);
 }
 
-
-.quehacemos{
+.quehacemos {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -925,9 +925,6 @@ article:hover img:last-child {
   width: 100%;
   justify-content: center;
 }
-
-
-
 
 .carda {
   position: relative;
@@ -1005,27 +1002,26 @@ article:hover img:last-child {
   }
 }
 
-.container_valores{
+.container_valores {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   margin-top: 9%;
 }
-.titulo_valores{
+.titulo_valores {
   font-size: 30px;
   color: #000000;
-  padding: 10px 100px;
+  padding: 10px 50px;
   margin-bottom: 5%;
   text-align: center;
 }
-.titulo_valores h1{
+.titulo_valores h1 {
   border-bottom: 1px solid #ccc;
   margin-bottom: 3%;
 }
 
-
-.informacion_valores{
+.informacion_valores {
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 30px;
   display: grid;
@@ -1034,22 +1030,22 @@ article:hover img:last-child {
   text-align: center;
 }
 
-.box_valores i{
-font-size: 80px;
-color: #808080;
+.box_valores i {
+  font-size: 80px;
+  color: #3586ff;
 }
 
-.box_valores h3{
+.box_valores h3 {
   font-size: 30px;
   margin-top: 5%;
 }
 
-.box_valores p{
+.box_valores p {
   font-size: 20px;
   margin-top: 3%;
 }
 
-footer{
+footer {
   position: relative;
   width: 100%;
   background: #3586ff;
@@ -1059,10 +1055,9 @@ footer{
   justify-content: center;
   align-items: center;
   margin-top: 10%;
-
 }
 
-footer .social_icon{
+footer .social_icon {
   position: relative;
   display: flex;
   justify-content: center;
@@ -1071,22 +1066,22 @@ footer .social_icon{
   flex-wrap: wrap;
 }
 
-footer .social_icon li{
+footer .social_icon li {
   list-style: none;
 }
 
-footer .social_icon li a{
- font-size: 2em;
- color: #fff;
- margin: 0 10px;
- display: inline-block;
- transition: 0.5s;
+footer .social_icon li a {
+  font-size: 2em;
+  color: #fff;
+  margin: 0 10px;
+  display: inline-block;
+  transition: 0.5s;
 }
-footer .social_icon li a:hover{
+footer .social_icon li a:hover {
   transform: translateY(-10px);
 }
 
-footer .wave{
+footer .wave {
   position: absolute;
   top: -100px;
   left: 0;
@@ -1096,56 +1091,49 @@ footer .wave{
   background-size: 1000px 100px;
 }
 
-footer .wave#wave1{
+footer .wave#wave1 {
   z-index: 1000;
   opacity: 1;
   bottom: 0;
   animation: animateWave 4s linear infinite;
-
 }
 
-footer .wave#wave2{
+footer .wave#wave2 {
   z-index: 999;
   opacity: 0.5;
   bottom: 10px;
   animation: animateWave_2 4s linear infinite;
-
 }
-footer .wave#wave3{
+footer .wave#wave3 {
   z-index: 1000;
   opacity: 0.2;
   bottom: 15px;
   animation: animateWave 3s linear infinite;
-
 }
-footer .wave#wave4{
+footer .wave#wave4 {
   z-index: 999;
   opacity: 0.7;
   bottom: 20px;
   animation: animateWave_2 3s linear infinite;
-
 }
 
-@keyframes animateWave{
-  0%{
+@keyframes animateWave {
+  0% {
     background-position-x: 1000px;
   }
-  100%{
+  100% {
     background-position-x: 0px;
   }
-
 }
 
-@keyframes animateWave_2{
-  0%{
+@keyframes animateWave_2 {
+  0% {
     background-position-x: 0px;
   }
-  100%{
+  100% {
     background-position-x: 1000px;
   }
-
 }
-
 
 @media screen and (max-width: 600px) {
   .abrir-menu,
@@ -1159,7 +1147,7 @@ footer .wave#wave4{
 
   .abrir-menu {
     z-index: 1;
-    margin-right: 20px;
+    margin-right: 15px;
     font-size: 30px;
     color: #ffffff;
     text-shadow: 0px 0px 30px -5px #cccc;
@@ -1171,23 +1159,29 @@ footer .wave#wave4{
   }
 
   header {
-    padding: 10px 0px;
+    padding: 5px 0px;
+    
   }
   header.abajo {
     background: #fff;
+    box-shadow: 0px 0px 30px -5px #cccc;
   }
 
   header.abajo .abrir-menu {
     color: black;
-    margin-right: 25px;
+    margin-right: 30px;
   }
 
+  header.abajo .logo{
+    width: 60px;
+
+  }
+  
   .logo {
-    font-size: 17px;
-    margin-left: 2%;
+    width: 80px;
   }
-
   .nav {
+    border: 1px solid red;
     opacity: 0;
     visibility: hidden;
     display: flex;
@@ -1229,7 +1223,7 @@ footer .wave#wave4{
   }
 
   .encabezado {
-    font-size: 10px;
+    font-size: 13px;
     width: 250px;
   }
 
@@ -1247,7 +1241,7 @@ footer .wave#wave4{
   }
 
   .share {
-    margin-top: 6%;
+    margin-top: 2%;
   }
 
   .btn1 {
@@ -1355,7 +1349,7 @@ footer .wave#wave4{
   }
 
   .titulo_productos {
-    font-size: 10px;
+    font-size: 14px;
   }
 
   .productos {
@@ -1393,11 +1387,94 @@ footer .wave#wave4{
     height: 120px;
   }
 
-  /* .card_producto img {
-  width: 200px;
-  height: 200px;
-  border: 1px solid #cccccc86;
-  padding: 20px;
-  margin-top: 4%;
-} */
+  .c-button {
+    padding: 0.4em 0.9em;
+    margin-top: 10%;
+  }
+
+  .container_restaurante {
+    margin-top: 10%;
+  }
+
+  .titulo_restaurante {
+    font-size: 20px;
+  }
+
+  .book {
+    width: 300px;
+    height: 370px;
+  }
+
+  .book h1 {
+    font-size: 27px;
+  }
+
+  .comidas {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .quehacemos {
+    margin-top: 10%;
+  }
+  .titulo_quehacemos {
+    font-size: 14px;
+    white-space: nowrap;
+    width: 280px;
+  }
+
+  .titulo_productos,
+  .titulo_restaurante,
+  .titulo_quehacemos {
+    color: #000000;
+    padding: 10px 0px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 5%;
+    text-align: center;
+font-size: 14px;
+  }
+
+  .hero-section {
+    display: flex;
+    min-height: 100%;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+  }
+
+  .carda-container {
+    gap: 6px;
+    flex-direction: column;
+  }
+
+  .carda {
+    width: 300px;
+    height: 350px;
+  }
+
+  .container_valores {
+    margin-top: 10%;
+  }
+  .titulo_valores {
+    font-size: 15px;
+    margin-bottom: 5%;
+    text-align: center;
+
+  }
+
+ 
+
+  .informacion_valores {
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 60px;
+    margin: 3px;
+  }
+
+  footer {
+    min-height: 50px;
+    margin-top: 50%;
+  }
+
+  footer .social_icon li a {
+    font-size: 1.5em;
+  }
 }
