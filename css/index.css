@@ -14,6 +14,11 @@
   text-decoration: none;
   font-family: "Inconsolata";
 }
+
+html{
+  scroll-behavior: smooth;
+}
+
 header {
   display: flex;
   align-items: center;
@@ -40,7 +45,7 @@ video {
   width: 100%;
 }
 
-header.abajo .logo{
+header.abajo .logo {
   width: 100px;
   transition: 0.5s ease-out;
 }
@@ -63,6 +68,7 @@ header.abajo .logo{
 .nav-list li a {
   text-decoration: none;
   color: #ffffff;
+ 
 }
 
 .li_menu {
@@ -78,7 +84,7 @@ header.abajo .logo{
   margin: 0 5px;
   background: transparent;
   text-transform: uppercase;
- 
+
 }
 
 .li_menu:before {
@@ -92,6 +98,7 @@ header.abajo .logo{
   border-left: 4px solid transparent;
   box-sizing: border-box;
   transform: translateX(100%);
+  z-index: -1;
 }
 
 .li_menu:after {
@@ -105,6 +112,7 @@ header.abajo .logo{
   border-right: 4px solid transparent;
   box-sizing: border-box;
   transform: translateX(-100%);
+  z-index: -1;
 }
 
 .li_menu:hover:before {
@@ -123,7 +131,7 @@ header.abajo .logo{
 
 header.abajo .li_menu:hover:before,
 header.abajo .li_menu:hover:after {
-  border-color: #1a1a1a;
+  border-color: #3586ff;
 }
 
 .abrir-menu,
@@ -148,6 +156,7 @@ header.abajo .li_menu:hover:after {
   font-size: 20px;
   width: 800px;
   font-family: "Pattaya";
+  text-shadow: 15px 15px 15px #000000;
 }
 
 .uiverse {
@@ -721,8 +730,8 @@ article:hover img:last-child {
   width: 300px;
   height: 370px;
   background-color: #ffffff;
-  -webkit-box-shadow: 1px 1px 12px #000;
-  box-shadow: 1px 1px 12px #000;
+  -webkit-box-shadow: 1px 1px 12px #bebebe;
+  box-shadow: 15px 15px 30px #bebebe, -15px -15px 30px #bebebe;
   -webkit-transform: preserve-3d;
   -ms-transform: preserve-3d;
   transform: preserve-3d;
@@ -1161,11 +1170,9 @@ footer .wave#wave4 {
 
   header {
     padding: 5px 0px;
-    
   }
   header.abajo {
     background: #fff;
-   
   }
 
   header.abajo .abrir-menu {
@@ -1173,16 +1180,14 @@ footer .wave#wave4 {
     margin-right: 30px;
   }
 
-  header.abajo .logo{
+  header.abajo .logo {
     width: 60px;
-
   }
-  
+
   .logo {
     width: 80px;
   }
   .nav {
-    border: 1px solid red;
     opacity: 0;
     visibility: hidden;
     display: flex;
@@ -1208,7 +1213,6 @@ footer .wave#wave4 {
   .nav-list {
     flex-direction: column;
     align-items: end;
-    margin-right: -10px;
   }
 
   .nav-list li a {
@@ -1225,7 +1229,7 @@ footer .wave#wave4 {
 
   .encabezado {
     font-size: 13px;
-    width: 250px;
+    width: 100%;
   }
 
   .uiverse {
@@ -1242,7 +1246,9 @@ footer .wave#wave4 {
   }
 
   .share {
-    margin-top: 2%;
+    margin-top: -2%;
+    margin-right: 2%;
+    float: right;
   }
 
   .btn1 {
@@ -1431,7 +1437,7 @@ footer .wave#wave4 {
     border-bottom: 1px solid #ccc;
     margin-bottom: 5%;
     text-align: center;
-font-size: 14px;
+    font-size: 14px;
   }
 
   .hero-section {
@@ -1459,10 +1465,7 @@ font-size: 14px;
     font-size: 15px;
     margin-bottom: 5%;
     text-align: center;
-
   }
-
- 
 
   .informacion_valores {
     grid-template-columns: repeat(1, 1fr);

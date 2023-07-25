@@ -24,10 +24,11 @@
       <div class="nav2">
         <button class="cerrar-menu" id="cerrar"><i class="bi bi-x"></i></button>
         <ul class="nav-list">
-          <li class="li_menu"><a href="#">Inicio</a></li>
+          <li class="li_menu"><a href="index.html">Inicio</a></li>
           <li class="li_menu"><a href="#">Quiénes somos</a></li>
-          <li class="li_menu"><a href="#">Servicios</a></li>
-          <li class="li_menu"><a href="#">Qué hacemos</a></li>
+          <li class="li_menu"><a href="#productos">Productos</a></li>
+          <li class="li_menu"><a href="#soda">Soda</a></li>
+          <li class="li_menu"><a href="#">Qué hacemos?</a></li>
           <li class="li_menu"><a href="#">Contacto</a></li>
         </ul>
       </div>
@@ -296,9 +297,9 @@
       </svg>
     </div>
 
-    <div class="container_restaurante">
+    <div class="container_restaurante" id="soda">
       <div class="titulo_restaurante" data-aos="fade-up">
-        <h1>RESTAURANTE</h1>
+        <h1>SODA</h1>
         <h3>Nuestro Menú</h3>
       </div>
 
@@ -550,7 +551,7 @@
 <script>
   AOS.init({
     duration: 1100,
-    once: false
+    once: true
   });//ESTE METODO ES PARA LAS ANIMACIONES
   window.addEventListener("scroll", function () {
     var header = document.querySelector("header");
