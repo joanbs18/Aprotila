@@ -42,6 +42,7 @@ function Usuario(){
     .catch((err) => console.log(err));
 }
 
+//irio
 /*-----------------------muestra--la--contraseña----------------------*/
 function togglePasswordVisibility() {
   var passwordInput = document.getElementById("contraseña");
