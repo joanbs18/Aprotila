@@ -1441,12 +1441,12 @@ function clearFormData() {
   // llama todos elementos del 
   const inputElements = document.querySelectorAll('form input, form select, form textarea');
 
-  // Loop through each input element and reset its value
+  // Recorre cada elemento de entrada y restablezce su valor
   inputElements.forEach(element => {
       if (element.tagName === 'INPUT' && (element.type === 'text' || element.type === 'number' || element.type === 'date')) {
           element.value = '';
       } else if (element.tagName === 'SELECT') {
-          element.selectedIndex = 0; // Reset the selected option to the first one
+          element.selectedIndex = 0; // Restablecer la opción seleccionada a la primera visibilidad
       } else if (element.tagName === 'TEXTAREA') {
           element.value = '';
       }

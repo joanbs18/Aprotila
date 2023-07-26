@@ -80,6 +80,15 @@ video {
   color: #666666;
 }
 
+.btnverpassword{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 287px;
+  /* pointer-events: none; */
+  color: #babecc;
+  border: none
+}
 .field .input:valid ~ label {
   opacity: 0;
 }
