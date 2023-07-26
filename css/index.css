@@ -181,8 +181,9 @@ font-family: "Inconsolata";
 
 .aviso_productos i {
   color: #fff;
-  font-size: 26px;
-  margin-top: 2%;
+  font-size: 50px;
+  margin-top: 4%;
+  cursor: pointer;
 }
 
 .uiverse {
@@ -1257,6 +1258,12 @@ footer .wave#wave4 {
     font-size: 13px;
     width: 100%;
   }
+
+  .aviso_productos{
+  
+  display: none;
+  }
+
 
   .uiverse {
     padding: 5px;
