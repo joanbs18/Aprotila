@@ -159,6 +159,32 @@ header.abajo .li_menu:hover:after {
   text-shadow: 15px 15px 15px #000000;
 }
 
+.videoPrincipal{
+  display: flex;
+  justify-content: center;
+
+}
+
+.aviso_productos{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 44%;
+}
+.aviso_productos h2{
+font-size: 30px;
+color: #fff;
+font-family: "Inconsolata";
+}
+
+.aviso_productos i {
+  color: #fff;
+  font-size: 26px;
+  margin-top: 2%;
+}
+
 .uiverse {
   position: relative;
   background: #ffffff;
