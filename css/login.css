@@ -81,14 +81,24 @@ video {
 }
 
 .btnverpassword{
+  width: 40px;
+  height: 40px; 
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  left: 287px;
+  left: 275px;
   /* pointer-events: none; */
-  color: #babecc;
+  background-color: #ffffff;
   border: none
 }
+
+.btnverpassword svg {
+  width: 65%; 
+  height: 65%; 
+  cursor: pointer;
+  
+}
+
 .field .input:valid ~ label {
   opacity: 0;
 }
