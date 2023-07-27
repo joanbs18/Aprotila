@@ -15,7 +15,7 @@
   font-family: "Inconsolata";
 }
 
-html{
+html {
   scroll-behavior: smooth;
 }
 
@@ -68,7 +68,6 @@ header.abajo .logo {
 .nav-list li a {
   text-decoration: none;
   color: #ffffff;
- 
 }
 
 .li_menu {
@@ -84,7 +83,6 @@ header.abajo .logo {
   margin: 0 5px;
   background: transparent;
   text-transform: uppercase;
-
 }
 
 .li_menu:before {
@@ -159,13 +157,12 @@ header.abajo .li_menu:hover:after {
   text-shadow: 15px 15px 15px #000000;
 }
 
-.videoPrincipal{
+.videoPrincipal {
   display: flex;
   justify-content: center;
-
 }
 
-.aviso_productos{
+.aviso_productos {
   position: absolute;
   display: flex;
   justify-content: center;
@@ -173,10 +170,10 @@ header.abajo .li_menu:hover:after {
   flex-direction: column;
   margin-top: 44%;
 }
-.aviso_productos h2{
-font-size: 30px;
-color: #fff;
-font-family: "Inconsolata";
+.aviso_productos h2 {
+  font-size: 30px;
+  color: #fff;
+  font-family: "Inconsolata";
 }
 
 .aviso_productos i {
@@ -1092,6 +1089,7 @@ footer {
   justify-content: center;
   align-items: center;
   margin-top: 10%;
+  z-index: -1;
 }
 
 footer .social_icon {
@@ -1129,26 +1127,26 @@ footer .wave {
 }
 
 footer .wave#wave1 {
-  z-index: 1000;
+  z-index: 99;
   opacity: 1;
   bottom: 0;
   animation: animateWave 4s linear infinite;
 }
 
 footer .wave#wave2 {
-  z-index: 999;
+  z-index: 98;
   opacity: 0.5;
   bottom: 10px;
   animation: animateWave_2 4s linear infinite;
 }
 footer .wave#wave3 {
-  z-index: 1000;
+  z-index: 99;
   opacity: 0.2;
   bottom: 15px;
   animation: animateWave 3s linear infinite;
 }
 footer .wave#wave4 {
-  z-index: 999;
+  z-index: 98;
   opacity: 0.7;
   bottom: 20px;
   animation: animateWave_2 3s linear infinite;
@@ -1228,22 +1226,25 @@ footer .wave#wave4 {
     background-color: #ffffff;
     padding: 2rem;
     box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.5);
-    z-index: 2;
+    z-index: 100;
     min-height: 600px;
   }
 
   .nav.visible {
     opacity: 1;
     visibility: visible;
+    
   }
 
   .nav-list {
     flex-direction: column;
     align-items: end;
+    
   }
 
   .nav-list li a {
     color: #000000ec;
+
   }
 
   .container {
@@ -1259,11 +1260,9 @@ footer .wave#wave4 {
     width: 100%;
   }
 
-  .aviso_productos{
-  
-  display: none;
+  .aviso_productos {
+    display: none;
   }
-
 
   .uiverse {
     padding: 5px;
