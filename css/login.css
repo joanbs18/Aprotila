@@ -20,17 +20,29 @@ video {
   width: 330px;
   padding: 40px 30px;
   background: #fff;
-  border-radius: 10px;
-  box-shadow: -3px -3px 7px #808080, 2px 2px 5px rgba(94, 104, 121, 0.288);
-  margin-top: 12%;
+  border-radius: 10px;  
+  box-shadow: -3px -3px 7px #424242, 2px 2px 5px rgba(94, 104, 121, 0.288);
+  margin-top: 8%;
+}
+
+.content .img{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -20px;
+}
+
+.img img{
+  width: 200px;
 }
 
 .content .text {
   font-size: 33px;
   font-weight: 600;
   margin-bottom: 35px;
-  color: #808080;
+  color: #595959;
   text-align: center;
+  margin-top: 10px;
 }
 
 .field {
