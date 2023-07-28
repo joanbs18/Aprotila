@@ -1296,9 +1296,9 @@ const mostrarTrza = (data, Lote) => {
   tab += `<h3>Trazabilidad</h3>`;
   for (var i = 0; i < data.length; i++) {
     if (i == 0) {
-      tab += `<p>Pila Inicial: ${data[i].Final} Cantidad=(${data[i].Cantidad})`;
+      tab += `<p>Pila Inicial <i class="fa-solid fa-arrow-right fa-beat-fade"></i> ${data[i].Final} Cantidad=(${data[i].Cantidad})</p>`;
     } else {
-      tab += ` => Pila ${data[i].Final} Cantidad=(${data[i].Cantidad}) </p>`;
+      tab += `<p><i class="fa-solid fa-arrow-right fa-beat-fade"></i> Pila ${data[i].Final} CantidadPescados=(${data[i].Cantidad}) </p>`;
     }
   }
   document.getElementById("modalTrazabilidad").innerHTML = tab;
@@ -1330,7 +1330,7 @@ function showDiv2() {
   document.getElementById("divMuestreo").style.display = "none";
 }
 
-function Div3() {
+function ShowDiv3() {
   document.getElementById("divConcentrado").style.display = "none";
   document.getElementById("divVentas").style.display = "none";
   document.getElementById("divAlimentacion").style.display = "inline";

@@ -40,14 +40,13 @@
         <li>
             <div class="iocn-link">
                 <a href="#">
-                    <i class='bx bx-grid-alt'></i>
-                    <span class="link_name">Inventario</span>
+                    <i class='bx bx-grid-alt' onclick="showDiv7()"></i>
+                    <span class="link_name" onclick="showDiv7()">Inventario</span>
                 </a>
-                <i class='bx bxs-chevron-down arrow'></i>
             </div>
             <ul class="sub-menu">
-                <li><a class="link_name" href="#">Inventario</a></li>
-                <li><a href="#" onclick="showDiv7()">Concentrado</a></li>
+                <li><a class="link_name" href="#" onclick="showDiv7()">Inventario</a></li>
+               
 
             </ul>
         </li>
@@ -200,7 +199,7 @@
         </div>
 
         <div class="container concentrado" id="divConcentrado">
-            <h1 id="title">Modulo Concentrado</h1>
+            <h1 id="title">Modulo Ingresos</h1>
             <div class="crud">
                 <button class="download-button" value="Export to Excel"
                     onclick="tableToExcel('table_concentrado', 'Datos Concentrado')">
@@ -236,7 +235,7 @@
                         <th class="last">Fecha de Vencimiento</th>
                         <th>Proveedor</th>
                         <th>Precio</th>
-                        <th>Cantidad Sacos</th>
+                        <th>Cantidad</th>
                         <th>Cantidad de Proteína</th>
                         <th>Acción</th>
                     </tr>
@@ -455,7 +454,7 @@
         </div>
 
         <div class="container inveconcentrado" id="divinveConcentrado">
-            <h1 id="title">Inventario Concentrado</h1>
+            <h1 id="title">Inventario</h1>
             <div class="crud">
                 <button class="download-button" value="Export to Excel"
                     onclick="tableToExcel('table_inveconcentrado', 'Inventario Concentrado')">

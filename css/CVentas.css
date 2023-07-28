@@ -273,10 +273,11 @@ body {
 .boton-modal{
   padding: 40px;
   background-color: #fff;
+  
 }
 .boton-modal label{
   padding: 10px 15px;
-  background-color: #5488a3;
+  background-color: #0073c4;
   color: #fff;
   border-radius: 4px;
   cursor: pointer;
@@ -296,7 +297,7 @@ body {
   height: 100vh;
   position: fixed;
   top: 0; left: 0;
-  background-color: rgba(144, 148, 150, 0.8);
+  background-color: #69696988;
   display: none;
   justify-content: center;
   align-items: center;
@@ -307,7 +308,7 @@ body {
 }
 .content-modal{
   width: 100%;
-  max-width: 400px;
+  width: 700px;
   padding: 20px;
   background-color: #fff;
   border-radius: 4px;
@@ -319,6 +320,7 @@ body {
   padding: 15px 0px;
   border-top: 1px solid #dbdbdb;
   border-bottom: 1px solid #dbdbdb;
+  font-size: 20px;
 }
 .content-modal .btn-cerrar{
   width: 100%;
