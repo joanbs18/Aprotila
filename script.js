@@ -54,6 +54,12 @@ function obtenerFecha() {
   fecha = fechaConFormato.format("YYYY-MM-DD");
   return fecha;
 }
+function mostrarFecha(fecha) {
+  var fechaConFormato = moment(fecha);
+  fechaArreglada = fechaConFormato.format("YYYY-MM-DD");
+  return fechaArreglada;
+}
+
 ver();
 function ver() {
   fetch("http://localhost:3000/controlventa", {
@@ -240,8 +246,6 @@ const mostrarPilas = (data) => {
   }
   document.getElementById("menupila").innerHTML = tab;
   document.getElementById("menupila_alimentacion").innerHTML = tab;
-  document.getElementById("menupila_mortabilidad").innerHTML = tab;
-  document.getElementById("menupila_alevines").innerHTML = tab;
   document.getElementById("menupila_trazabilidadInicial").innerHTML = tab;
   document.getElementById("menupila_trazabilidadFinal").innerHTML = tab;
   document.getElementById("menupila_muestreo").innerHTML = tab;
@@ -268,7 +272,7 @@ const mostrarAlimetacion = (data) => {
     tab += `<tr>
       <td data-label="Encargado">${data[i].Encargado}</td>
       <td class="last" data-label="Fecha">${fechaa}</td>
-      <td class="last" data-label="Tipo Concentrado">${data[i].Tipo_Concentrado}</td>
+      <td class="last" data-label="Tipo Concentrado">${data[i].Ingreso}</td>
       <td data-label="Pila">${data[i].Pila}</td>
       <td data-label="Cantidad Kilos">${data[i].Kilos}</td>
       <td>
@@ -342,9 +346,9 @@ function selectInveConcentrado() {
 
 const mostrarSelectInveConcentrado = (data) => {
   let tab = "";
-  tab += `<option disabled selected="">Tipo Concentrado</option>`;
+  tab += `<option disabled selected="">Tipo Alimento</option>`;
   for (var i = 0; i < data.length; i++) {
-    tab += `<option>${data[i].TipoConcentrado}</option>`;
+    tab += `<option>${data[i].Ingreso}</option>`;
   }
   document.getElementById("select_tipConcentrado").innerHTML = tab;
 };
@@ -399,6 +403,8 @@ btnAdd.addEventListener("click", function () {
     .then((datos) => console.log(datos))
     .catch((err) => console.log(err));
   ver();
+  clearFormData();
+  document.getElementById("formu-modal").style.display = "none";
 });
 
 function addVenta(url) {}
@@ -442,17 +448,58 @@ optionPila5.addEventListener("change", function () {
   validarPila = true;
 });
 
-var pilaSeleccionada6;
-var optionPila6 = document.getElementById("menupila_trazabilidadInicial");
-optionPila6.addEventListener("change", function () {
-  pilaSeleccionada6 = optionPila6.options[optionPila6.selectedIndex].text;
-});
-
 var pilaSeleccionada7;
 var optionPila7 = document.getElementById("menupila_trazabilidadFinal");
 optionPila7.addEventListener("change", function () {
   pilaSeleccionada7 = optionPila7.options[optionPila7.selectedIndex].text;
+  tableMortabilidad();
+  loteMort = document.getElementById("lote_trazabilidad").value;
+  fechaTrazabilidad(loteMort);
 });
+
+// function peces(FechaTrazabilidad, pilaSeleccionada) {
+//   const totalMuertos = 0;
+//   for (var i = 0; i < VMortabilidad.length; i++) {
+//     if (
+//       VMortabilidad[i].IdPila == pilaSeleccionada &&
+//       FechaTrazabilidad <= mostrarFecha(VMortabilidad[i].Fecha)
+//     ) {
+//       totalMuertos += VMortabilidad[i].Cantidad;
+//     } else {
+//       console.log(VMortabilidad[i].IdPila, " ", pilaSeleccionada);
+//     }
+//   }
+//   document.getElementById("Cantidad_trazabilidad").value = totalMuertos;
+// }
+
+function fechaTrazabilidad(Lote) {
+  fetch(`http://localhost:3000/ultimoTrazabi?Lote=${Lote}`, {
+    method: "get",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((resp) => resp.json())
+    .then((datos) => peces(datos.results))
+    .catch((err) => seeLoad());
+}
+
+const peces = (data) => {
+  console.log(mostrarFecha(data[0].Fecha));
+  let totalMuertos = 0;
+  for (var i = 0; i < VMortabilidad.length; i++) {
+    if (
+      VMortabilidad[i].IdPila == data[0].IdPila_fk_Final &&
+      mostrarFecha(data[0].Fecha) >= mostrarFecha(VMortabilidad[i].Fecha)
+    ) {
+      totalMuertos += VMortabilidad[i].Cantidad;
+    } else {
+      console.log(VMortabilidad[i].IdPila, " ", pilaSeleccionada);
+    }
+  }
+  document.getElementById("Cantidad_trazabilidad").value = data[0].Cantidad-totalMuertos;
+};
+
 var pilaSeleccionada8;
 var optionPila8 = document.getElementById("menupila_muestreo");
 optionPila8.addEventListener("change", function () {
@@ -674,14 +721,21 @@ const mostrarMortabilidad = (data) => {
 };
 
 function addMortabilidad() {
-  cantidad = document.getElementById("cantidad").value;
-  Observaciones = document.getElementById("observaciones_mortabilidad").value;
+  cantidad_mortabilidad = document.getElementById(
+    "cantidad_mortabilidad"
+  ).value;
+  observaciones_mortabilidad = document.getElementById(
+    "observaciones_mortabilidad"
+  ).value;
 
-  if (cantidad.toString == 0 || Observaciones.toString == 0) {
+  if (
+    cantidad_mortabilidad.toString == 0 ||
+    observaciones_mortabilidad.toString == 0
+  ) {
     alert("Error campos incompletos");
     return;
   }
-  url = `http://localhost:3000/insertMortabilidad?Id=${"null"}&IdPila=${pilaSeleccionada3}&Cantidad=${cantidad}&IdEncargado=${1}&Observaciones=${Observaciones}`;
+  url = `http://localhost:3000/insertMortabilidad?Id=${"null"}&IdPila=${pilaSeleccionada3}&Cantidad=${cantidad_mortabilidad}&IdEncargado=${1}&Observaciones=${observaciones_mortabilidad}`;
 
   fetch(url, {
     method: "get",
@@ -749,11 +803,14 @@ const mostrarAlevines = (data) => {
   for (var i = 0; i < data.length; i++) {
     tab += `<tr>
       <td data-label="Proveedor">${data[i].NombreProveedor}</td>
-      <td data-label="Lote">${data[i].Lote_Provedor}</td>
+      <td data-label="Lote Proveedor">${data[i].Lote_Provedor}</td>
+      <td data-label="Pila Proveedor">${data[i].Nombre_Encargado}</td>
+      <td data-label="Lote Aprotila">${data[i].LoteAprotila}</td>
+      <td data-label="Pila">${data[i].PilaAprotila}</td>
       <td data-label="Encargado">${data[i].Nombre_Encargado}</td>
-      <td data-label="Pila">${data[i].Pila}</td>
       <td data-label="Especie">${data[i].EspeciePescado}</td>
       <td data-label="Cantidad">${data[i].Cantidad}</td>
+      <td data-label="Fecha">${mostrarFecha(data[i].Fecha)}</td>
       <td>
       <button class="btnUpdate" id="btnUpdate_Alevines"><i class="fa-solid fa-pen-to-square"></i></button>   
       <button class="btnTrash" id="btnTrash_Alevines" ><i class="fa-solid fa-trash-can"></i></button>
@@ -777,6 +834,50 @@ const mostrarAlevines = (data) => {
       UpdateAlevine(VAlevines, i);
     });
   }
+};
+
+function mostrarPilaDisponibles() {
+  fetch("http://localhost:3000/pilasActivas", {
+    method: "get",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((resp) => resp.json())
+    .then((datos) => mostrarPilasDisponibles(datos.results))
+    .catch((err) => seeLoad());
+}
+
+const mostrarPilasDisponibles = (data) => {
+  let tab = "";
+  tab += `<option disabled selected="">Pilas Disponibles</option>`;
+  for (var i = 0; i < data.length; i++) {
+    tab += `<option>${data[i].IdPila}</option>`;
+  }
+  document.getElementById("menupila_alevines").innerHTML = tab;
+  document.getElementById("menupila_trazabilidadFinal").innerHTML = tab;
+};
+
+function mostrarPilaInactivas() {
+  fetch("http://localhost:3000/pilasInactivas", {
+    method: "get",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((resp) => resp.json())
+    .then((datos) => mostrarPilasInactivas(datos.results))
+    .catch((err) => seeLoad());
+}
+
+const mostrarPilasInactivas = (data) => {
+  let tab = "";
+  tab += `<option disabled selected="">Pilas</option>`;
+  for (var i = 0; i < data.length; i++) {
+    tab += `<option>${data[i].IdPila}</option>`;
+  }
+  document.getElementById("menupila_muestreo").innerHTML = tab;
+  document.getElementById("menupila_mortabilidad").innerHTML = tab;
 };
 
 var IdAlevines;
@@ -819,18 +920,20 @@ function UpdateAlevine2() {
 }
 
 function addAlevine() {
-  Lote = document.getElementById("lote").value;
+  loteProvedor = document.getElementById("loteProvedor").value;
+  pilaProvedor = document.getElementById("pilaProvedor").value;
+  loteAprotila = document.getElementById("loteAprotila").value;
   Especie = document.getElementById("Especie").value;
-  Cantidad_alevine = document.getElementById("cantidad_alevine").value;
+  cantidad_Alevines = document.getElementById("cantidad_Alevines").value;
 
   if (
-    Lote.toString == 0 ||
+    loteProvedor.toString == 0 ||
     Especie.toString == 0 ||
-    Cantidad_alevine.toString == 0
+    cantidad_Alevines.toString == 0
   ) {
     alert("Error campos incompletos");
   }
-  url = `http://localhost:3000/insertAlevines?IdProvedor=${1}&Lote=${Lote}&IdEncargado=${1}&IdPila=${pilaSeleccionada5}&Especie=${Especie}&Cantidad=${Cantidad_alevine}`;
+  url = `http://localhost:3000/insertAlevines?IdProvedor=${1}&Lote_Provedor=${loteProvedor}&Pila_Provedor=${pilaProvedor}&LoteAprotila=${loteAprotila}&IdPila=${pilaSeleccionada5}&IdEncargado=${1}&Especie=${Especie}&Cantidad=${cantidad_Alevines}`;
 
   fetch(url, {
     method: "get",
@@ -971,12 +1074,10 @@ const mostrarTrazabilidad = (data) => {
     }
     tab += `<tr>
       <td data-label="Lote">${data[i].Lote}</td>
-      <td data-label="Pila Inicial">${data[i].IdPila_fk_Inicial}</td>
-      <td data-label="Pila Final">${data[i].IdPila_fk_Final}</td>
-      <td data-label="Peso">${data[i].Peso}</td>
-      <td data-label="Fecha">${fechaT}</td>
+      <td data-label="Pila">${data[i].IdPila_fk_Final}</td>
+      <td data-label="Tipo Pez">${data[i].TipoPez}</td>
       <td data-label="Cantidad">${data[i].Cantidad}</td>
-      <td data-label="Aprobación">${Aprobacion}</td>
+      <td data-label="Fecha">${fechaT}</td>
       <td>
       <button class="btnUpdate" id="btnUpdate_Trazabilidad"><i class="fa-solid fa-pen-to-square"></i></button>   
       <button class="btnTrash" id="btnTrash_Trazabilidad" ><i class="fa-solid fa-trash-can"></i></button>
@@ -1002,21 +1103,42 @@ const mostrarTrazabilidad = (data) => {
   // }
 };
 
+function mostrarLotes() {
+  fetch("http://localhost:3000/lotes", {
+    method: "get",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((resp) => resp.json())
+    .then((datos) => mostrarLotes2(datos.results))
+    .catch((err) => seeLoad());
+}
+
+const mostrarLotes2 = (data) => {
+  let tab = "";
+
+  for (var i = 0; i < data.length; i++) {
+    tab += ``;
+  }
+  document.getElementById("Rtrazabilidad").innerHTML = tab;
+};
+
 function addTrazabilidad() {
   lote_trazabilidad = document.getElementById("lote_trazabilidad").value;
-  Peso_trazabilidad = document.getElementById("Peso_trazabilidad").value;
+  tipoPez_Trazabilidad = document.getElementById("tipoPez_Trazabilidad").value;
   Cantidad_trazabilidad = document.getElementById(
     "Cantidad_trazabilidad"
   ).value;
 
   if (
     lote_trazabilidad.toString == 0 ||
-    Peso_trazabilidad.toString == 0 ||
+    tipoPez_Trazabilidad.toString == 0 ||
     Cantidad_trazabilidad.toString == 0
   ) {
     alert("Error campos incompletos");
   }
-  url = `http://localhost:3000/insertTrazabilidad?Lote=${lote_trazabilidad}&IdPila_fk_Inicial=${pilaSeleccionada6}&IdPila_fk_Final=${pilaSeleccionada7}&Peso=${Peso_trazabilidad}&Cantidad=${Cantidad_trazabilidad}`;
+  url = `http://localhost:3000/insertTrazabilidad?Lote=${lote_trazabilidad}&IdPila_fk_Final=${pilaSeleccionada7}&TipoPez=${tipoPez_Trazabilidad}&Cantidad=${Cantidad_trazabilidad}`;
 
   fetch(url, {
     method: "get",
@@ -1106,10 +1228,14 @@ const mostrarMuestreo = (data) => {
 };
 
 function addMuestreo() {
+  lote_muestreo = document.getElementById("lote_muestreo").value;
   cantidad_muestreo = document.getElementById("cantidad_muestreo").value;
   peso_muestreo = document.getElementById("peso_muestreo").value;
+  observaciones_muestreo = document.getElementById(
+    "observaciones_muestreo"
+  ).value;
   let aprobado;
-  if (aprobacionSeleccionado == "Si") {
+  if (aprobacionSeleccionado == "SÍ") {
     aprobado = 1;
   } else {
     aprobado = 0;
@@ -1118,7 +1244,7 @@ function addMuestreo() {
   if (cantidad_muestreo.toString == 0 || peso_muestreo.toString == 0) {
     alert("Error campos incompletos");
   }
-  url = `http://localhost:3000/insertMuestreo?Pila=${pilaSeleccionada8}&Cantidad=${cantidad_muestreo}&Peso=${peso_muestreo}&Encargado=${1}&Aprobado=${aprobado}`;
+  url = `http://localhost:3000/insertMuestreo?Pila=${pilaSeleccionada8}&Lote=${lote_muestreo}&Cantidad=${cantidad_muestreo}&Peso=${peso_muestreo}&IdEncargado=${1}&Aprobacion=${aprobado}&Observaciones=${observaciones_muestreo}`;
 
   fetch(url, {
     method: "get",
@@ -1167,11 +1293,12 @@ function mostrarTras() {
 const mostrarTrza = (data, Lote) => {
   let tab = "";
   tab = `<h2> Lote: ${Lote}</h2>`;
+  tab += `<h3>Trazabilidad</h3>`;
   for (var i = 0; i < data.length; i++) {
     if (i == 0) {
-      tab += `<p>Pila Inicial: ${data[i].Inicial} => ${data[i].Final}`;
+      tab += `<p>Pila Inicial: ${data[i].Final} Cantidad=(${data[i].Cantidad})`;
     } else {
-      tab += `=> ${data[i].Final} </p>`;
+      tab += ` => Pila ${data[i].Final} Cantidad=(${data[i].Cantidad}) </p>`;
     }
   }
   document.getElementById("modalTrazabilidad").innerHTML = tab;
@@ -1203,7 +1330,7 @@ function showDiv2() {
   document.getElementById("divMuestreo").style.display = "none";
 }
 
-function showDiv3() {
+function Div3() {
   document.getElementById("divConcentrado").style.display = "none";
   document.getElementById("divVentas").style.display = "none";
   document.getElementById("divAlimentacion").style.display = "inline";
@@ -1244,6 +1371,7 @@ function showDiv5() {
   document.getElementById("contenedor-toast").style.display = "none";
   document.getElementById("divTrazabilidad").style.display = "none";
   document.getElementById("divMuestreo").style.display = "none";
+  mostrarPilaInactivas();
 }
 
 function showDiv6() {
@@ -1256,7 +1384,7 @@ function showDiv6() {
   document.getElementById("divAlevines").style.display = "inline";
   document.getElementById("divinveConcentrado").style.display = "none";
   tableAlevines();
-  pilas();
+  mostrarPilaDisponibles();
   document.getElementById("contenedor-toast").style.display = "none";
   document.getElementById("divTrazabilidad").style.display = "none";
   document.getElementById("divMuestreo").style.display = "none";
@@ -1286,6 +1414,7 @@ function showDiv8() {
   document.getElementById("divTrazabilidad").style.display = "inline";
   document.getElementById("divMuestreo").style.display = "none";
   tableTrazabilidad();
+  mostrarPilaDisponibles();
 }
 
 function showDiv9() {
@@ -1299,6 +1428,7 @@ function showDiv9() {
   document.getElementById("divTrazabilidad").style.display = "none";
   document.getElementById("divMuestreo").style.display = "Inline";
   tableMuestreo();
+  mostrarPilaInactivas();
 }
 
 const contenedorBotones = document.getElementById("contenedor-botones");
@@ -1433,22 +1563,27 @@ const agregarToast = ({ tipo, titulo, descripcion, autoCierre }) => {
   nuevoToast.addEventListener("animationend", handleAnimacionCierre);
 };
 
-
-
 /* ------------------------------------------limpiar--formulario---------------------------------------------- */
 
 function clearFormData() {
-  // llama todos elementos del 
-  const inputElements = document.querySelectorAll('form input, form select, form textarea');
+  // llama todos elementos del
+  const inputElements = document.querySelectorAll(
+    "form input, form select, form textarea"
+  );
 
   // Recorre cada elemento de entrada y restablezce su valor
-  inputElements.forEach(element => {
-      if (element.tagName === 'INPUT' && (element.type === 'text' || element.type === 'number' || element.type === 'date')) {
-          element.value = '';
-      } else if (element.tagName === 'SELECT') {
-          element.selectedIndex = 0; // Restablecer la opción seleccionada a la primera visibilidad
-      } else if (element.tagName === 'TEXTAREA') {
-          element.value = '';
-      }
+  inputElements.forEach((element) => {
+    if (
+      element.tagName === "INPUT" &&
+      (element.type === "text" ||
+        element.type === "number" ||
+        element.type === "date")
+    ) {
+      element.value = "";
+    } else if (element.tagName === "SELECT") {
+      element.selectedIndex = 0; // Restablecer la opción seleccionada a la primera visibilidad
+    } else if (element.tagName === "TEXTAREA") {
+      element.value = "";
+    }
   });
 }

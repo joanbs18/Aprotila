@@ -432,10 +432,13 @@
                         <tr>
                             <th>Proveedor</th>
                             <th>Lote Proveedor</th>
+                            <th>Pila Proveedor</th>
+                            <th>Lote Aprotila</th>
+                            <th>Pila Aprotila</th>
                             <th>Encargado</th>
-                            <th>Pila</th>
                             <th>Especie</th>
                             <th>Cantidad</th>
+                            <th class="last">Fecha</th>
                             <th>Acción</th>
                         </tr>
                     </thead>
@@ -531,12 +534,10 @@
                 <thead>
                     <tr>
                         <th>Lote</th>
-                        <th>Pila Inicial</th>
-                        <th>Pila Final</th>
-                        <th>Peso</th>
-                        <th>Fecha</th>
+                        <th>Pila</th>
+                        <th>Tipo Pez</th>
                         <th>Cantidad</th>
-                        <th>Aprobado</th>
+                        <th>Fecha</th>
                         <th>Acción</th>
                     </tr>
                 </thead>
@@ -695,7 +696,7 @@
                     <option value="transferencia">Transferencia</option>
                 </select>
             </div>
-            <button class="btnForm" type="button" id="btnAdd" onclick="clearFormData()">AÑADIR</button>
+            <button class="btnForm" type="button" id="btnAdd">AÑADIR</button>
         </form>
 
     </div>
@@ -772,7 +773,8 @@
                 <input id="totalDiario" type="number" name="uname" required>
                 <label>Total Diario</label>
             </div>
-            <button type="button" class="btnForm" onclick="addAlimentacion(),clearFormData()" style="cursor: pointer;">AÑADIR</button>
+            <button type="button" class="btnForm" onclick="addAlimentacion(),clearFormData()"
+                style="cursor: pointer;">AÑADIR</button>
         </form>
 
     </div>
@@ -792,7 +794,7 @@
                 </select>
             </div>
             <div class="box">
-                <input id="cantidad" type="number" name="uname" required>
+                <input id="cantidad_mortabilidad" type="number" name="uname" required>
                 <label>Cantidad</label>
             </div>
             <div class="box">
@@ -822,8 +824,16 @@
                 </select>
             </div>
             <div class="box">
-                <input id="lote" type="text" name="uname" required>
+                <input id="loteProvedor" type="text" name="uname" required>
                 <label>Lote Proveedor</label>
+            </div>
+            <div class="box">
+                <input id="pilaProvedor" type="number" name="uname" required>
+                <label>Pila Proveedor</label>
+            </div>
+            <div class="box">
+                <input id="loteAprotila" type="number" name="uname" required>
+                <label>Lote Aprotila</label>
             </div>
 
             <div class="select pila">
@@ -838,12 +848,12 @@
                 <label>Especie</label>
             </div>
             <div class="box">
-                <input id="cantidad_alevine" type="number" name="uname" required>
+                <input id="cantidad_Alevines" type="number" name="uname" required>
                 <label>Cantidad Alevines</label>
             </div>
-            <button id="btnAlevineAdd" type="button" class="btnForm" onclick=" addAlevine(),clearFormData()">AÑADIR</button>
-            <button id="btnAlevineUpdate" style="display: none;" type="button" class="btnForm"
-                onclick=" UpdateAlevine2()">Actualizar</button>
+            <button id="btnAlevineAdd" type="button" class="btnForm"
+                onclick="addAlevine()">AÑADIR</button>
+           
         </form>
 
     </div>
@@ -882,12 +892,7 @@
                 <input id="lote_trazabilidad" type="number" name="uname" required>
                 <label>Lote</label>
             </div>
-            <div class="select pila">
-
-                <select id="menupila_trazabilidadInicial">
-
-                </select>
-            </div>
+           
             <div class="select pila">
 
                 <select id="menupila_trazabilidadFinal">
@@ -895,14 +900,14 @@
                 </select>
             </div>
             <div class="box">
-                <input id="Peso_trazabilidad" type="number" name="uname" required>
-                <label>Peso</label>
+                <input id="tipoPez_Trazabilidad" type="text" name="uname" required>
+                <label>Tipo Pez</label>
             </div>
             <div class="box">
                 <input id="Cantidad_trazabilidad" type="number" name="uname" required>
                 <label>Cantidad</label>
             </div>
-            <button type="button" class="btnForm" onclick="addTrazabilidad(),clearFormData()">AÑADIR</button>
+            <button type="button" class="btnForm" onclick="addTrazabilidad()">AÑADIR</button>
         </form>
 
     </div>
@@ -922,12 +927,21 @@
                 </select>
             </div>
             <div class="box">
+                <input id="lote_muestreo" type="number" name="uname" required>
+                <label>Lote</label>
+            </div>
+            <div class="box">
                 <input id="cantidad_muestreo" type="number" name="uname" required>
                 <label>Cantidad</label>
             </div>
             <div class="box">
                 <input id="peso_muestreo" type="number" name="uname" required>
                 <label>Peso</label>
+            </div>
+
+            <div class="box">
+                <input id="observaciones_muestreo" type="text" name="uname" required>
+                <label>Observaciones</label>
             </div>
 
             <div class="select aprobacion">
@@ -968,7 +982,7 @@
 
 <script>
     $(document).ready(function () {
-        $('#table_alimentacion,#table_Mortabilidad').DataTable({
+        $('').DataTable({
             language: {
                 processing: "Tratamiento en curso...",
                 search: "Buscar&nbsp;:",

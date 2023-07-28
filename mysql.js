@@ -80,10 +80,10 @@ app.listen(port, () => {
 
 // TABLA CONCENTRADOS------------------------------------------------
 
-app.get("/concentrados", (req, res) => {
+app.get("/ingresos", (req, res) => {
   try {
     let sql =
-      "SELECT IdConcentrado,tbTi.Nombre as 'Tipo',Marca,Fecha_Compra,Fecha_Vencimiento,tbP.NombreProveedor as 'Proveedor', Precio,Cantidad_Kilos,Proteina FROM `tbconcentrado` as tbC INNER JOIN tbproveedores as tbP on tbC.IdProveedor_fk=tbP.IdProveedores INNER JOIN tbtipoalimento as tbTi on tbC.IdTipo_fk= tbTi.IdTipo";
+      "SELECT tbC.IdIngreso,tbTi.Nombre as 'Tipo',Marca,Fecha_Compra,Fecha_Vencimiento,tbP.NombreProveedor as 'Proveedor', Precio,Cantidad,Descripcion FROM `tbIngreso` as tbC INNER JOIN tbproveedores as tbP on tbC.IdProveedor_fk=tbP.IdProveedores INNER JOIN tbtipoingreso as tbTi on tbC.IdTipo_fk= tbTi.IdTipo";
     connection.query(sql, function (error, results, fields) {
       if (error) {
         connection.end();
@@ -100,7 +100,7 @@ app.get("/concentrados", (req, res) => {
   }
 });
 
-app.get("/crearconcentrado", (req, res) => {
+app.get("/crearIngreso", (req, res) => {
   try {
     campos = [];
     campos.push(req.query.tipo);
@@ -149,10 +149,48 @@ app.get("/pilas", (req, res) => {
   }
 });
 
+app.get("/pilasActivas", (req, res) => {
+  try {
+    let sql = "SELECT IdPila FROM tbpila where Activo=0";
+    connection.query(sql, function (error, results, fields) {
+      if (error) {
+        connection.end();
+        throw error;
+      }
+      res.status(200).json({
+        msg: "Mensaje desde el metodo GET",
+        results,
+      });
+    });
+  } catch (err) {
+    console.log(err);
+    throw new Error("Error en el metodo GET");
+  }
+});
+
+app.get("/pilasInactivas", (req, res) => {
+  try {
+    let sql = "SELECT IdPila FROM tbpila where Activo=1";
+    connection.query(sql, function (error, results, fields) {
+      if (error) {
+        connection.end();
+        throw error;
+      }
+      res.status(200).json({
+        msg: "Mensaje desde el metodo GET",
+        results,
+      });
+    });
+  } catch (err) {
+    console.log(err);
+    throw new Error("Error en el metodo GET");
+  }
+});
+
 app.get("/alimentacion", (req, res) => {
   try {
     let sql =
-      "SELECT tbA.idAlimentacion,tbE.Nombre_Encargado as 'Encargado', tbA.Fecha,tbA.Tipo_Concentrado, tbA.IdPila_fk as 'Pila',tbA.Total_Kilos as 'Kilos' FROM `tbalimentacion` as tbA INNER JOIN tbencargado as tbE WHERE tbA.IdEncargado_fk=tbE.IdEncargado";
+      "SELECT tbA.idAlimentacion,tbE.Nombre_Encargado as 'Encargado', tbA.Fecha,tbTipo.Nombre as 'Ingreso', tbA.IdPila_fk as 'Pila',tbA.Total_Kilos as 'Kilos' FROM `tbalimentacion` as tbA INNER JOIN tbencargado as tbE ON tbA.IdEncargado_fk=tbE.IdEncargado INNER JOIN tbtipoingreso as tbTipo on tbA.IdTipoIngreso_fk=tbTipo.IdTipo";
     connection.query(sql, function (error, results, fields) {
       if (error) {
         connection.end();
@@ -178,7 +216,7 @@ app.get("/insertAlimentacion", (req, res) => {
   campos.push(req.query.IdPila);
   campos.push(req.query.TotalDiario);
 
-  const insertar = `INSERT INTO tbalimentacion (IdEncargado_fk, Fecha,Tipo_Concentrado, IdPila_fk,Total_Kilos) VALUES (${campos[1]}, '${campos[2]}', '${campos[3]}', ${campos[4]},${campos[5]})`;
+  const insertar = `INSERT INTO tbalimentacion (IdEncargado_fk, Fecha,IdTipoIngreso_fk, IdPila_fk,Total_Kilos) VALUES (${campos[1]}, '${campos[2]}', '${campos[3]}', ${campos[4]},${campos[5]})`;
 
   connection.query(insertar, (err, fields) => {
     if (err) throw err;
@@ -197,7 +235,26 @@ app.get("/deleteAlimentacion", (req, res) => {
 app.get("/mortabilidad", (req, res) => {
   try {
     let sql =
-      "SELECT IdMortabilidad, IdPila_fk as 'IdPila', Cantidad, tbE.Nombre_Encargado, Observaciones FROM `tbmortabilidad` INNER JOIN tbencargado as tbE WHERE tbmortabilidad.IdEncargado_fk=tbE.IdEncargado";
+      "SELECT IdMortabilidad, IdPila_fk as 'IdPila', Cantidad, tbE.Nombre_Encargado,Fecha, Observaciones FROM `tbmortabilidad` INNER JOIN tbencargado as tbE WHERE tbmortabilidad.IdEncargado_fk=tbE.IdEncargado";
+    connection.query(sql, function (error, results, fields) {
+      if (error) {
+        connection.end();
+        throw error;
+      }
+      res.status(200).json({
+        msg: "Mensaje desde el metodo GET",
+        results,
+      });
+    });
+  } catch (err) {
+    console.log(err);
+    throw new Error("Error en el metodo GET");
+  }
+});
+
+app.get("/ultimoTrazabi", (req, res) => {
+  try {
+    let sql = `SELECT Fecha,IdPila_fk_Final,Cantidad FROM tbtrazabilidad WHERE Lote= ${req.query.Lote} ORDER BY IdPila_fk_Final DESC LIMIT 1`;
     connection.query(sql, function (error, results, fields) {
       if (error) {
         connection.end();
@@ -222,12 +279,31 @@ app.get("/insertMortabilidad", (req, res) => {
   campos.push(req.query.IdEncargado);
   campos.push(req.query.Observaciones);
 
-  const insertar = `INSERT INTO tbmortabilidad (IdPila_fk, Cantidad, IdEncargado_fk,Observaciones) VALUES (${campos[1]}, ${campos[2]}, ${campos[3]}, '${campos[4]}')`;
+  const insertar = `CALL insertMortabilidad(${campos[1]},${campos[2]},${campos[3]},'${campos[4]}');`;
 
   connection.query(insertar, (err, fields) => {
     if (err) throw err;
   });
   res.send("Consulta exitosa");
+});
+
+app.get("/pilaCantidadPeces", (req, res) => {
+  try {
+    let sql = `SELECT CantidadPescados from tbpila where IdPila=${req.IdPila}`;
+    connection.query(sql, function (error, results, fields) {
+      if (error) {
+        connection.end();
+        throw error;
+      }
+      res.status(200).json({
+        msg: "Mensaje desde el metodo GET",
+        results,
+      });
+    });
+  } catch (err) {
+    console.log(err);
+    throw new Error("Error en el metodo GET");
+  }
 });
 
 app.get("/deleteMortabilidad", (req, res) => {
@@ -241,7 +317,7 @@ app.get("/deleteMortabilidad", (req, res) => {
 app.get("/alevines", (req, res) => {
   try {
     let sql =
-      "SELECT IdAlevines, tbP.NombreProveedor,tbA.Lote_Provedor,tbE.Nombre_Encargado, tbPi.Nombre as 'Pila',tbA.EspeciePescado,TbA.Cantidad from tbingreso_alevines as tbA INNER JOIN tbproveedores as tbP on tbA.IdProvedor_fk= tbP.IdProveedores INNER JOIN tbencargado as tbE on tbA.IdEncargado_fk=tbE.IdEncargado INNER JOIN tbpila as tbPi ON tbA.IdPila_fk=tbPi.IdPila;";
+      "SELECT IdAlevines, tbP.NombreProveedor,tbA.Lote_Provedor,tbA.Pila_Provedor,tbA.Lote as 'LoteAprotila',tbA.IdPila_fk as 'PilaAprotila',tbE.Nombre_Encargado,tbA.EspeciePescado,TbA.Cantidad,tbA.Fecha from tbingreso_alevines as tbA INNER JOIN tbproveedores as tbP on tbA.IdProvedor_fk= tbP.IdProveedores INNER JOIN tbencargado as tbE on tbA.IdEncargado_fk=tbE.IdEncargado INNER JOIN tbpila as tbPi ON tbA.IdPila_fk=tbPi.IdPila;";
     connection.query(sql, function (error, results, fields) {
       if (error) {
         connection.end();
@@ -261,13 +337,15 @@ app.get("/alevines", (req, res) => {
 app.get("/insertAlevines", (req, res) => {
   campos = [];
   campos.push(req.query.IdProvedor);
-  campos.push(req.query.Lote);
-  campos.push(req.query.IdEncargado);
+  campos.push(req.query.Lote_Provedor);
+  campos.push(req.query.Pila_Provedor);
+  campos.push(req.query.LoteAprotila);
   campos.push(req.query.IdPila);
+  campos.push(req.query.IdEncargado);
   campos.push(req.query.Especie);
   campos.push(req.query.Cantidad);
 
-  const insertar = `INSERT INTO tbingreso_alevines (IdProvedor_fk, Lote_Provedor, IdEncargado_fk, IdPila_fk,EspeciePescado,Cantidad) VALUES (${campos[0]},'${campos[1]}', ${campos[2]}, ${campos[3]},'${campos[4]}',${campos[5]})`;
+  const insertar = `CALL insertAlevine(${campos[0]},${campos[1]},${campos[2]},${campos[3]},${campos[4]},${campos[5]},'${campos[6]}',${campos[7]})`;
 
   connection.query(insertar, (err, fields) => {
     if (err) throw err;
@@ -303,7 +381,8 @@ app.get("/deleteAlevines", (req, res) => {
 
 app.get("/inveConcentrado", (req, res) => {
   try {
-    let sql = "SELECT * from tbinventaconcentrado";
+    let sql =
+      "Select tbi.IdInventario,tbt.Nombre as 'TipoIngres',tbi.FechaCompra,tbi.FechaModificacion,tbi.CantidadDisponible,tbi.Entradas,tbi.Salidas from tbinventario as tbi INNER JOIN tbtipoingreso as tbt on tbi.IdTipoIngreso_fk=tbt.IdTipo";
     connection.query(sql, function (error, results, fields) {
       if (error) {
         connection.end();
@@ -336,7 +415,7 @@ app.get("/insertInveConcentrado", (req, res) => {
 app.get("/trazabilidad", (req, res) => {
   try {
     let sql =
-      "SELECT tbT.IdTrazabilidad,tbT.Lote,tbT.IdPila_fk_Inicial,tbT.IdPila_fk_Final,tbT.Peso,tbT.Fecha,tbT.Cantidad,tbM.Aprobacion FROM tbtrazabilidad as tbT INNER JOIN tbmuestreo as tbM WHERE tbT.IdMuestreo_fk=tbM.IdMuestreo;";
+      "SELECT tbT.IdTrazabilidad,tbT.Lote,tbT.IdPila_fk_Final,tbT.TipoPez,tbT.Cantidad,tbT.Fecha FROM tbtrazabilidad as tbT";
     connection.query(sql, function (error, results, fields) {
       if (error) {
         connection.end();
@@ -356,14 +435,15 @@ app.get("/trazabilidad", (req, res) => {
 app.get("/insertTrazabilidad", (req, res) => {
   campos = [];
   campos.push(req.query.Lote);
-  campos.push(req.query.IdPila_fk_Inicial);
   campos.push(req.query.IdPila_fk_Final);
-  campos.push(req.query.Peso);
+  campos.push(req.query.TipoPez);
   campos.push(req.query.Cantidad);
 
-  const insertar = `CALL InsertTrazabilidad(${campos[0]},${campos[1]},${campos[2]},${campos[3]},${campos[4]})`;
+  const insertar = `CALL InsertTrazabilidad(${campos[0]},${campos[1]},'${campos[2]}',${campos[3]})`;
 
-  connection.query(insertar, (err, fields) => {
+  connection.query(insertar, (err, results) => {
+    const resultadoJSON = JSON.stringify(results[0]);
+    console.log(resultadoJSON);
     if (err) throw err;
   });
   res.send("Consulta exitosa");
@@ -377,6 +457,24 @@ app.get("/deleteTrazabilidad", (req, res) => {
   console.log("Borrado");
 });
 
+app.get("/lotes", (req, res) => {
+  try {
+    let sql = "SELECT Lote from tbTrazabilidad";
+    connection.query(sql, function (error, results, fields) {
+      if (error) {
+        connection.end();
+        throw error;
+      }
+      res.status(200).json({
+        msg: "Mensaje desde el metodo GET",
+        results,
+      });
+    });
+  } catch (err) {
+    console.log(err);
+    throw new Error("Error en el metodo GET");
+  }
+});
 
 app.get("/muestreo", (req, res) => {
   try {
@@ -401,12 +499,15 @@ app.get("/muestreo", (req, res) => {
 app.get("/insertMuestreo", (req, res) => {
   campos = [];
   campos.push(req.query.Pila);
+  campos.push(req.query.Lote);
   campos.push(req.query.Cantidad);
+  campos.push(req.query.Fecha);
   campos.push(req.query.Peso);
-  campos.push(req.query.Encargado);
-  campos.push(req.query.Aprobado);
+  campos.push(req.query.IdEncargado);
+  campos.push(req.query.Aprobacion);
+  campos.push(req.query.Observaciones);
 
-  const insertar = `INSERT INTO tbmuestreo (IdPila_fk, Cantidad, Fecha, Peso, IdEncargado_fk, Aprobacion) VALUES (${campos[0]},${campos[1]}, CURDATE(), ${campos[2]}, ${campos[3]}, ${campos[4]});`;
+  const insertar = `CALL insertMuestreo(${campos[0]},${campos[1]}, ${campos[2]}, curdate(), ${campos[4]}, ${campos[5]}, ${campos[6]}, '${campos[7]}');`;
 
   connection.query(insertar, (err, fields) => {
     if (err) throw err;
@@ -423,10 +524,9 @@ app.get("/deleteMuestreo", (req, res) => {
 });
 
 app.get("/mostrarTrazabilidad", (req, res) => {
-  var numero= req.query.Lote;
+  var numero = req.query.Lote;
   try {
-    let sql =
-      `SELECT tbt.IdPila_fk_Inicial as 'Inicial', tbt.IdPila_fk_Final as 'Final' from tbtrazabilidad as tbt where tbt.Lote=${numero}`;
+    let sql = `SELECT tbt.IdPila_fk_Final as 'Final', Cantidad from tbtrazabilidad as tbt where tbt.Lote=${numero}`;
     connection.query(sql, function (error, results, fields) {
       if (error) {
         connection.end();
@@ -444,26 +544,25 @@ app.get("/mostrarTrazabilidad", (req, res) => {
 });
 
 //LOGIN
-app.get("/usuarios", (req, res)=> {
+app.get("/usuarios", (req, res) => {
   try {
     campos = [];
     campos.push(req.query.Cedula);
     campos.push(req.query.Contraseña);
-    console.log(campos[0])
-    const queryusuario = `SELECT * FROM tbusuarios where Cedula = ${campos[0]} and Contraseña = ${campos[1]}`
-    connection.query(queryusuario, (err, resultado) =>{
-      if (resultado.length !== 0){
-        console.log(resultado)
-        res.json({mensaje: "Ingresado correctamente"})
-      }else{
-        res.json({mensaje: "Datos incorrectos"})
+    console.log(campos[0]);
+    const queryusuario = `SELECT * FROM tbusuarios where Cedula = ${campos[0]} and Contraseña = ${campos[1]}`;
+    connection.query(queryusuario, (err, resultado) => {
+      if (resultado.length !== 0) {
+        console.log(resultado);
+        res.json({ mensaje: "Ingresado correctamente" });
+      } else {
+        res.json({ mensaje: "Datos incorrectos" });
       }
     });
-  }catch (error) {
+  } catch (error) {
     console.log("Error");
   }
 });
-
 
 /*
 app.get("/actualizarconcentrado", (req, res) => {
