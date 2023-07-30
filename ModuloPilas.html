@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/CVentas.css">
+    <link rel="shortcut icon" href="img/69601130_508940209682252_4217431282197463040_n.jpg" type="image/x-icon">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://kit.fontawesome.com/bf208e9523.js" crossorigin="anonymous"></script>
+    <!-- Bootstrap-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
+    <!-- DataTable -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" />
+
+
+    <title>AproTila-System</title>
+</head>
+
+
+<div class="openSide">
+    <i class="bx bx-menu" id="menu"></i>
+</div>
+
+<div id="sidebar" class="sidebar close">
+
+    <div class="logo-details">
+        <img src="/img/69601130_508940209682252_4217431282197463040_n.jpg" alt="" style="width: 60px;">
+        <span class="logo_name" style='color:#080808'>AproTila</span>
+    </div>
+    <ul class="nav-links" id="nav-links">
+
+        <!-- <li>
+            <a href="#">
+                <i class='bx bx-grid-alt'></i>
+                <span class="link_name">Inventario</span>
+            </a>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" href="#">Inventario</a></li>
+            </ul>
+        </li> -->
+        <li>
+            <div class="iocn-link">
+                <a href="#">
+                    <i class='bx bx-grid-alt' onclick="showDiv7()"></i>
+                    <span class="link_name" onclick="showDiv7()">Inventario</span>
+                </a>
+            </div>
+            <ul class="sub-menu">
+                <li><a class="link_name" href="#" onclick="showDiv7()">Inventario</a></li>
+
+
+            </ul>
+        </li>
+        <li onclick="showDiv1()">
+            <div class="iocn-link">
+                <a href="#">
+                    <i id="this" class="fa-solid fa-money-check-dollar"></i>
+                    <span class="link_name">Modulo Ventas</span>
+                </a>
+            </div>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" href="#">Ventas</a></li>
+            </ul>
+        </li>
+        <li onclick="showDiv4()">
+            <a href="#">
+                <i class="fa-solid fa-water"></i>
+                <span class="link_name">Modulo Pilas</span>
+            </a>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" href="#">Pilas</a></li>
+            </ul>
+        </li>
+        <li>
+            <div class="iocn-link">
+                <a href="#">
+                    <i class="fa-solid fa-fish"></i>
+                    <span class="link_name">Control Peces</span>
+                </a>
+                <i class='bx bxs-chevron-down arrow'></i>
+            </div>
+            <ul class="sub-menu">
+                <li><a class="link_name" href="#">Control Peces</a></li>
+                <li><a href="#" onclick="showDiv3()">Alimentación</a></li>
+                <li><a href="#" onclick="showDiv5()">Mortabilidad</a></li>
+            </ul>
+        </li>
+        <li onclick="showDiv2()">
+            <a href="#">
+                <i class="fa-solid fa-whiskey-glass"></i>
+                <span class="link_name">Modulo Concentrado</span>
+            </a>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" href="#">Modulo Concentado</a></li>
+            </ul>
+        </li>
+        <li onclick="showDiv6()">
+            <a href="#">
+                <i class="fa-solid fa-fish-fins"></i>
+                <span class="link_name">Ingreso Alevines</span>
+            </a>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" href="#">Alevines</a></li>
+            </ul>
+        </li>
+
+        <li onclick="showDiv8()">
+            <a href="#">
+                <i class='bx bx-cog'></i>
+                <span class="link_name">Trazabilidad</span>
+            </a>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" href="#">Trazabilidad</a></li>
+            </ul>
+        </li>
+        <li onclick="showDiv9()">
+            <a href="#">
+                <i class="fa-solid fa-eye"></i>
+                <span class="link_name">Muestreo</span>
+            </a>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" href="#">Muestreo</a></li>
+            </ul>
+        </li>
+        <li>
+            <div class="profile-details">
+                <div class="profile-content">
+                    <img src="img/photo-1610088441520-4352457e7095.jfif" alt="profileImg">
+                </div>
+                <div class="name-job">
+                    <div class="profile_name">Encargado</div>
+                    <div class="job">Trabajador</div>
+                </div>
+                <i class='bx bx-log-out' style="color: aliceblue;"></i>
+            </div>
+        </li>
+    </ul>
+
+</div>
+<section class="home-section" id="main">
+
+    <div class="home-content">
+        <div class="container pilas" id="divPila">
+            <h1 id="title">Modulo Pilas</h1>
+            <div class="crud">
+                <button class="download-button" value="Export to Excel" onclick="tableToExcel('table_Pila', 'Pilas')">
+                    <div class="docs"><svg class="css-i6dzq1" stroke-linejoin="round" stroke-linecap="round" fill="none"
+                            stroke-width="2" stroke="currentColor" height="20" width="20" viewBox="0 0 24 24">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line y2="13" x2="8" y1="13" x1="16"></line>
+                            <line y2="17" x2="8" y1="17" x1="16"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>Excel</div>
+                    <div class="download">
+                        <svg class="css-i6dzq1" stroke-linejoin="round" stroke-linecap="round" fill="none"
+                            stroke-width="2" stroke="currentColor" height="24" width="24" viewBox="0 0 24 24">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line y2="3" x2="12" y1="15" x1="12"></line>
+                        </svg>
+                    </div>
+                </button>
+                <div class="icons-BD">
+                    <i class="fa-solid fa-circle-plus" id="add"></i>
+
+                </div>
+            </div>
+            <div class="table_wratter">
+                <table class="table" id="table_Pila">
+                    <thead>
+                        <tr>
+                            <th>Id Pila</th>
+                            <th>Nombre Pila</th>
+                        </tr>
+                    </thead>
+                    <div id="cloud_load" class="cloud_load"><span class="loader"></span></div>
+                    <tbody id="RPila">
+
+
+                    </tbody>
+
+                </table>
+            </div>
+
+
+        </div>
+
+        
+
+    </div>
+
+
+
+
+</section>
+
+
+
+<script src="https://momentjs.com/downloads/moment.js"></script>
+<script src="script.js"></script>
+<script src="excel.js"></script>
+<!-- Bootstrap-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"></script>
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- DataTable -->
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+
+
+
+<!-- BOOTSTRAP -->
+
+
+
+<script>
+    $(document).ready(function () {
+        $('#table_Pila').DataTable();
+    });
+
+    
+
+</script>
+
+</body>
+
+</html>

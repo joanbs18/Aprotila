@@ -6,6 +6,11 @@
 
 body {
   font-family: monospace;
+  
+}
+
+html{
+  background-color: #e0e0e0;
 }
 
 .container {
@@ -148,6 +153,7 @@ body {
 .table tr {
   background-color: #f8f8f8;
   border: 1px solid #ddd;
+
 }
 
 .table th,
@@ -155,7 +161,9 @@ body {
   font-size: 16px;
   padding: 10px;
   text-align: center;
-  width: 60px;
+
+    border: 1px solid #808080;
+  
 }
 
 .table thead th {
@@ -192,6 +200,7 @@ body {
   justify-content: center;
   animation: slide-up 1000ms forwards;
   filter: drop-shadow(0 0 10px #7e7e7e);
+  z-index: 5;
 }
 .loader {
   width: 175px;
@@ -382,7 +391,6 @@ body {
 }
 
 .table_wratter {
-  overflow-y: scroll;
   max-height: 500px;
 }
 
@@ -996,10 +1004,13 @@ span:hover {
   }
   .home-section {
     width: 100%;
+    padding: 0;
+
   }
 
   .home-section .home-content .bx-menu {
     bottom: 0;
+    
   }
 
   .openSide .bx-menu {
@@ -1012,8 +1023,14 @@ span:hover {
   .crud .icons-BD {
     margin-left: 50%;
   }
+.table_wratter{
+  overflow-y: scroll;
+}
+
+
   .table {
     border: 0px;
+
   }
   .table caption {
     font-size: 22px;
@@ -1029,20 +1046,25 @@ span:hover {
   }
   .table th,
   .table td {
-    font-size: 17px;
-    width: 300px;
+    font-size: 15px;
+    width: 280px;
+    border: 1px solid #808080;
+    left: 0;
   }
 
   .dataTables_info {
     font-size: 12px;
   }
 
+
+
+
   .previous .page-link,
   .next .page-link {
     border: 1px solid #ccc;
     background-color: #cccc;
     color: #696969;
-    padding: 10px;
+z-index: -1;
     border-radius: 10px;
   }
   .previous.active .page-link,
@@ -1052,6 +1074,7 @@ span:hover {
     color: #ffffff;
     padding: 10px;
     border-radius: 10px;
+    z-index: -1;
   }
 
   .table td {
@@ -1104,6 +1127,7 @@ span:hover {
   .select {
     width: 15em;
   }
+
 }
 
 @media screen and (min-width: 1200px) {

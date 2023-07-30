@@ -497,7 +497,8 @@ const peces = (data) => {
       console.log(VMortabilidad[i].IdPila, " ", pilaSeleccionada);
     }
   }
-  document.getElementById("Cantidad_trazabilidad").value = data[0].Cantidad-totalMuertos;
+  document.getElementById("Cantidad_trazabilidad").value =
+    data[0].Cantidad - totalMuertos;
 };
 
 var pilaSeleccionada8;
@@ -656,7 +657,7 @@ function updateConcentrado() {
     alert("Error Inesperado");
   }
 }
-
+tablePilas();
 /*MUESTRA LAS PILAS EN UNA TABLA EN MODULO CORRESPODIENTE*/
 function tablePilas() {
   fetch("http://localhost:3000/pilas", {
@@ -680,7 +681,8 @@ const mostrarPilas2 = (data) => {
   }
   document.getElementById("RPila").innerHTML = tab;
 };
-
+tablePilas();
+tableMortabilidad();
 function tableMortabilidad() {
   fetch("http://localhost:3000/mortabilidad", {
     method: "get",
@@ -1374,7 +1376,7 @@ function showDiv5() {
   mostrarPilaInactivas();
 }
 
-function showDiv6() {
+function wDiv6() {
   tableMortabilidad();
   document.getElementById("divConcentrado").style.display = "none";
   document.getElementById("divVentas").style.display = "none";

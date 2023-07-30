@@ -9,7 +9,11 @@
     <link rel="shortcut icon" href="img/69601130_508940209682252_4217431282197463040_n.jpg" type="image/x-icon">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/bf208e9523.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <!-- Bootstrap-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
+    <!-- DataTable -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" />
 
 
     <title>AproTila-System</title>
@@ -46,7 +50,7 @@
             </div>
             <ul class="sub-menu">
                 <li><a class="link_name" href="#" onclick="showDiv7()">Inventario</a></li>
-               
+
 
             </ul>
         </li>
@@ -170,32 +174,33 @@
                 </div>
 
             </div>
-            <table class="table" id="table_venta">
+            <div class="table_wratter">
+                <table class="table" id="table_venta">
 
 
 
-                <thead>
-                    <tr>
-                        <th class="last">Encargado</th>
-                        <th class="last">Fecha</th>
-                        <th>Pila</th>
-                        <th>Peso</th>
-                        <th>Tilapia</th>
-                        <th>Total</th>
-                        <th class="last">Cliente</th>
-                        <th class="last">Numero</th>
-                        <th class="last">Tipo de Pago</th>
-                        <th>Acción</th>
-                    </tr>
-                </thead>
-                <div id="cloud_load" class="cloud_load"><span class="loader"></span></div>
-                <tbody id="registers">
+                    <thead>
+                        <tr>
+                            <th class="last">Encargado</th>
+                            <th class="last">Fecha</th>
+                            <th>Pila</th>
+                            <th>Peso</th>
+                            <th>Tilapia</th>
+                            <th>Total</th>
+                            <th class="last">Cliente</th>
+                            <th class="last">Numero</th>
+                            <th class="last">Tipo de Pago</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <div id="cloud_load" class="cloud_load"><span class="loader"></span></div>
+                    <tbody id="registers">
 
 
-                </tbody>
+                    </tbody>
 
-            </table>
-
+                </table>
+            </div>
         </div>
 
         <div class="container concentrado" id="divConcentrado">
@@ -277,29 +282,29 @@
                 </div>
 
             </div>
-
-            <table class="table" id="table_alimentacion">
-
-
-
-                <thead>
-                    <tr>
-                        <th>Encargado</th>
-                        <th>Fecha</th>
-                        <th>Tipo Concentrado</th>
-                        <th>Pila</th>
-                        <th>Total Kilos</th>
-                        <th>Acción</th>
-                    </tr>
-                </thead>
-                <div id="cloud_load" class="cloud_load"><span class="loader"></span></div>
-                <tbody id="RAlimentacion">
+            <div class="table_wratter">
+                <table class="table" id="table_alimentacion">
 
 
-                </tbody>
 
-            </table>
+                    <thead>
+                        <tr>
+                            <th>Encargado</th>
+                            <th>Fecha</th>
+                            <th>Tipo Concentrado</th>
+                            <th>Pila</th>
+                            <th>Total Kilos</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <div id="cloud_load" class="cloud_load"><span class="loader"></span></div>
+                    <tbody id="RAlimentacion">
 
+
+                    </tbody>
+
+                </table>
+            </div>
         </div>
 
         <div class="container pilas" id="divPila">
@@ -850,9 +855,8 @@
                 <input id="cantidad_Alevines" type="number" name="uname" required>
                 <label>Cantidad Alevines</label>
             </div>
-            <button id="btnAlevineAdd" type="button" class="btnForm"
-                onclick="addAlevine()">AÑADIR</button>
-           
+            <button id="btnAlevineAdd" type="button" class="btnForm" onclick="addAlevine()">AÑADIR</button>
+
         </form>
 
     </div>
@@ -891,7 +895,7 @@
                 <input id="lote_trazabilidad" type="number" name="uname" required>
                 <label>Lote</label>
             </div>
-           
+
             <div class="select pila">
 
                 <select id="menupila_trazabilidadFinal">
@@ -967,47 +971,42 @@
     </div>
 </div>
 <script src="https://momentjs.com/downloads/moment.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-    crossorigin="anonymous">
-    </script>
-<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="script.js"></script>
 <script src="excel.js"></script>
-<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js">
-</script>
+<!-- Bootstrap-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"></script>
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- DataTable -->
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+
+
+
 <!-- BOOTSTRAP -->
-<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js">
-</script>
+
+
 
 <script>
     $(document).ready(function () {
-        $('').DataTable({
-            language: {
-                processing: "Tratamiento en curso...",
-                search: "Buscar&nbsp;:",
-                lengthMenu: "Agrupar de _MENU_ items",
-                info: "Mostrando del item _START_ al _END_ de un total de _TOTAL_ items",
-                infoEmpty: "No existen datos.",
-                infoFiltered: "(filtrado de _MAX_ elementos en total)",
-                infoPostFix: "",
-                loadingRecords: "Cargando...",
-                zeroRecords: "No se encontraron datos con tu busqueda",
-                emptyTable: "No hay datos disponibles en la tabla.",
-                paginate: {
-                    first: "Primero",
-                    previous: "Anterior",
-                    next: "Siguiente",
-                    last: "Ultimo"
-                },
-                aria: {
-                    sortAscending: ": active para ordenar la columna en orden ascendente",
-                    sortDescending: ": active para ordenar la columna en orden descendente"
-                }
-            },
-            scrollY: 400,
-            lengthMenu: [[10, 25, -1], [10, 25, "All"]],
-        });
+        $('#table_venta').DataTable();
     });
+    $(document).ready(function () {
+        $('#table_Mortabilidad').DataTable();
+    });
+    $(document).ready(function () {
+        $('#table_Pila').DataTable();
+    });
+    $(document).ready(function () {
+        $('#table_Alevines').DataTable();
+    });
+    $(document).ready(function () {
+        $('#table_trazabilidad').DataTable();
+    });
+    
+
 </script>
 
 </body>
