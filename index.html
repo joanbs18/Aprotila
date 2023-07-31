@@ -14,27 +14,88 @@
 </head>
 
 <body>
+
   <header>
-    <img class="logo" src="img/logo_white.png" alt="Logo" id="logo">
-    <!-- <h1 class="logo">APROTILA</h1> -->
-    <button id="abrir" class="abrir-menu"><i class="bi bi-list"></i></button>
+    <nav>
+      <a href="#"><img class="logo" id="logo" src="img/logo_white.png" alt="logo"></a>
 
+      <ul class="enlaces-menu">
+        <li class="enlace"><a href="#">Inicio</a></li>
+        <li class="enlace"><a href="#">Servicios</a></li>
+        <li class="enlace"><a href="#">Equipo</a></li>
+        <li class="enlace"><a href="#">Contacto</a></li>
+        <div class="car_shooping">
+          <i class="fa-solid fa-cart-shopping" data-btn-action="add-btn-cart" data-modal="#jsModalCarrito"></i>
+          <div class="count-products">
+            <span id="contador-productos">0</span>
+        </div>
+     
+        </div>
+      </ul>
 
-    <nav class="nav" id="nav">
-      <div class="nav2">
-        <button class="cerrar-menu" id="cerrar"><i class="bi bi-x"></i></button>
-        <ul class="nav-list">
-          <li class="li_menu"><a href="index.html">Inicio</a></li>
-          <li class="li_menu"><a href="#">Quiénes somos</a></li>
-          <li class="li_menu"><a href="#productos">Productos</a></li>
-          <li class="li_menu"><a href="#soda">Soda</a></li>
-          <li class="li_menu"><a href="#">Qué hacemos?</a></li>
-          <li class="li_menu"><a href="#">Contacto</a></li>
-        </ul>
-      </div>
+      <button class="ham" type="button">
+        <span class="br-1"></span>
+        <span class="br-2"></span>
+        <span class="br-3"></span>
+      </button>
     </nav>
-
   </header>
+  
+  <div class="mostrarModal">
+    <div class="modal" id="jsModalCarrito">
+      <div class="modal__container">
+        <button type="button" class="modal__close fa-solid fa-xmark jsModalClose "></button>
+
+        <div class="modal__info">
+          <div class="modal__header">
+            <h2><i class="fa-brands fa-opencart"></i>Carrito</h2>
+          </div>
+
+          <div class="modal__body">
+            <div class="modal__list">
+              <!-- <div class="modal__item">
+                
+                <div class="modal__thumb">
+                  <img src="img/naranja.jpg" alt="Naranja">
+                </div>
+                <div class="modal__text-product">
+                  <p>Naranja</p>
+                  <p><strong>$9.00 / kg</strong></p>
+                </div>
+              </div>
+
+
+              <div class="modal__item">
+                <div class="modal__thumb">
+                  <img src="img/manzana.jpg" alt="Naranja">
+                </div>
+                <div class="modal__text-product">
+                  <p>Manzana</p>
+                  <p><strong>$5.00 / kg</strong></p>
+                </div>
+              </div> -->
+
+            </div>
+          </div>
+
+          <div class="modal__footer">
+            <div class="modal__list-price">
+              <ul>
+                <li>Subtotal: <strong id="subtotal">$14.00</strong></li>
+                <li>Descuento: <strong>$0.00</strong></li>
+              </ul>
+              <h4 class="modal__total-cart"> Total: $14.00</h4>
+            </div>
+
+            <div class="modal__btns">
+              <a href="#" class="btn-border">Ir al carrito</a>
+              <a href="#" class="btn-primary">Comprar Ahora</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="videoPrincipal">
     <video muted autoplay loop>
       <source src="video/Video1.mp4" type="video/mp4">
@@ -130,11 +191,11 @@
       </div>
     </div>
   </div>
-  
+
   <main>
     <div class="container_productos" id="productos">
       <div class="titulo_productos">
-        <h1 data-aos="fade-down">MÁS BUSCADOS</h1>
+        <h1 data-aos="fade-down">PRODUCTOS APROTILA</h1>
       </div>
       <div class="productos">
         <div class="container_cards" data-aos="fade-down">
@@ -150,7 +211,13 @@
               <div class="precio_producto">
                 <h3>$3 c/u</h3>
               </div>
-              <div data-tooltip="Price:-$3" class="button">
+              <div class="anadirMas">
+                <i class="fa-solid fa-minus resta" id="restar"></i>
+                <input type="text" readonly id="cantidadProductos" value="1">
+                <i class="sumar fa-solid fa-plus" id="sumar"></i>
+              </div>
+
+              <div data-tooltip="Price:-$3" class="button" data-btn-action="add-btn-cart" data-modal="#jsModalCarrito">
                 <div class="button-wrapper">
                   <div class="text">Buy Now</div>
                   <span class="iconn">
@@ -179,7 +246,12 @@
               <div class="precio_producto">
                 <h3>$3 c/u</h3>
               </div>
-              <div data-tooltip="Price:-$3" class="button">
+              <div class="anadirMas">
+                <i class="fa-solid fa-minus resta" id="restar"></i>
+                <input type="text" readonly id="cantidadProductos" value="1">
+                <i class="sumar fa-solid fa-plus" id="sumar"></i>
+              </div>
+              <div data-tooltip="Price:-$3" class="button" data-modal="#jsModalCarrito">
                 <div class="button-wrapper">
                   <div class="text">Buy Now</div>
                   <span class="iconn">
@@ -208,34 +280,10 @@
               <div class="precio_producto">
                 <h3>$3 c/u</h3>
               </div>
-              <div data-tooltip="Price:-$3" class="button">
-                <div class="button-wrapper">
-                  <div class="text">Buy Now</div>
-                  <span class="iconn">
-                    <svg viewBox="0 0 16 16" class="bi bi-cart2" fill="currentColor" height="16" width="16"
-                      xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z">
-                      </path>
-                    </svg>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="container_cards" data-aos="fade-down">
-          <div class="card_producto">
-            <article><img src="img/Pancitasdetilapia_900x.png" alt="" srcset="">
-              <img src="img/venta1.webp" alt="" srcset="">
-            </article>
-
-            <div class="informacion_producto">
-              <div class="nombre_producto">
-                <h1>Filet de Tilapia Premium <br>(Bolsa 650g)</h1>
-              </div>
-              <div class="precio_producto">
-                <h3>$3 c/u</h3>
+              <div class="anadirMas">
+                <i class="fa-solid fa-minus resta" id="restar"></i>
+                <input type="text" readonly id="cantidadProductos" value="1">
+                <i class="sumar fa-solid fa-plus" id="sumar"></i>
               </div>
               <div data-tooltip="Price:-$3" class="button">
                 <div class="button-wrapper">
@@ -265,6 +313,45 @@
               </div>
               <div class="precio_producto">
                 <h3>$3 c/u</h3>
+              </div>
+              <div class="anadirMas">
+                <i class="fa-solid fa-minus resta" id="restar"></i>
+                <input type="text" readonly id="cantidadProductos" value="1">
+                <i class="sumar fa-solid fa-plus" id="sumar"></i>
+              </div>
+              <div data-tooltip="Price:-$3" class="button">
+                <div class="button-wrapper">
+                  <div class="text">Buy Now</div>
+                  <span class="iconn">
+                    <svg viewBox="0 0 16 16" class="bi bi-cart2" fill="currentColor" height="16" width="16"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z">
+                      </path>
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container_cards" data-aos="fade-down">
+          <div class="card_producto">
+            <article><img src="img/Pancitasdetilapia_900x.png" alt="" srcset="">
+              <img src="img/venta1.webp" alt="" srcset="">
+            </article>
+
+            <div class="informacion_producto">
+              <div class="nombre_producto">
+                <h1>Filet de Tilapia Premium <br>(Bolsa 650g)</h1>
+              </div>
+              <div class="precio_producto">
+                <h3>$3 c/u</h3>
+              </div>
+              <div class="anadirMas">
+                <i class="fa-solid fa-minus resta" id="restar"></i>
+                <input type="text" readonly id="cantidadProductos" value="1">
+                <i class="sumar fa-solid fa-plus" id="sumar"></i>
               </div>
               <div data-tooltip="Price:-$3" class="button">
                 <div class="button-wrapper">
@@ -300,6 +387,27 @@
           </filter>
         </defs>
       </svg>
+    </div>
+    <div class="products-preview">
+      <div class="preview" data-target="p-1">
+        <i class="fas fa-times"></i>
+        <img src="img/venta1.webp" alt="">
+        <h3>Filet de Pescado</h3>
+        <p>Montura para caballo 100% cuero, color café oscuro<br>
+          Materiales: Cuero, Hierro
+        </p>
+        <div class="price">$3 c/u</div>
+        <div class="anadirMas">
+          <i class="fa-solid fa-minus" id="restar"></i>
+          <input type="text" readonly id="cantidadProductos" value="1">
+          <i class="fa-solid fa-plus" id="sumar"></i>
+        </div>
+        <div class="price">$<span id="total">3</span></div>
+
+        <div class="buttons">
+          <a href="#" class="buy">Comprar Ahora</a>
+        </div>
+      </div>
     </div>
 
     <div class="container_restaurante" id="soda">
@@ -471,14 +579,14 @@
         </div>
       </div>
     </div>
-    <div class="quehacemos" >
+    <div class="quehacemos">
       <div class="titulo_quehacemos" data-aos="fade-up">
         <h1>¿Que hacemos?</h1>
         <h3>Te mostramos</h3>
       </div>
       <section class="hero-section">
 
-        <div class="carda-container" >
+        <div class="carda-container">
           <div class="carda" data-aos="fade-up">
             <div class="carda-background" style="background-image: url(img/quehacemos1.avif);">
               <div class="content">
@@ -530,6 +638,7 @@
     </div>
 
 
+
   </main>
   <footer>
     <div class="waves">
@@ -538,7 +647,7 @@
       <div class="wave" id="wave3"></div>
       <div class="wave" id="wave4"></div>
     </div>
-    <ul class="social_icon"> 
+    <ul class="social_icon">
       <li><a href=""><i class="fa-brands fa-instagram"></i></a></li>
       <li><a href=""><i class="fa-brands fa-facebook"></i></a></li>
       <li><a href=""><i class="fa-brands fa-whatsapp"></i></a></li>
@@ -548,6 +657,7 @@
 </body>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="index.js"></script>
 
 
 </html>
@@ -559,26 +669,53 @@
     once: true
   });//ESTE METODO ES PARA LAS ANIMACIONES
   window.addEventListener("scroll", function () {
-    var header = document.querySelector("header");
+    const nav = document.querySelector("nav");
     var imagen = document.getElementById("logo");
-    imagen.src = "img/logo.png";
-    header.classList.toggle("abajo", window.scrollY > 0);
-    if (window.scrollY <= 0){
-      imagen.src = "img/logo_white.png";
+     imagen.src = "img/logo.png";
+    nav.classList.toggle("abajo", window.scrollY > 0);
+   if (window.scrollY <= 0) {
+       imagen.src = "img/logo_white.png";
+     }
+
+  });
+
+
+
+
+  const addToCart = document.querySelectorAll('[data-btn-action="add-btn-cart"]');
+
+  const closeModal = document.querySelector('.jsModalClose');
+
+  addToCart.forEach(btn => {
+
+    btn.addEventListener('click', (event) => {
+
+      const nameModal = event.target.getAttribute('data-modal');
+
+      const modal = document.querySelector(nameModal);
+
+      //abrimos el modal
+      modal.classList.add('active');
+      document.body.classList.add("modal-activo");
+    })
+
+  });
+
+  //CERRAR EL MODAL
+  closeModal.addEventListener('click', (event) => {
+    event.target.parentNode.parentNode.classList.remove('active');
+    document.body.classList.remove("modal-activo");
+  })
+
+  window.onclick = (event) => {
+    const modal = document.querySelector('.modal.active');
+
+    if (event.target == modal) {
+      modal.classList.remove('active');
+      document.body.classList.remove("modal-activo");
     }
+  }
 
-  });
 
 
-  const nav = document.querySelector("#nav");
-  const abrir = document.querySelector("#abrir");
-  const cerrar = document.querySelector("#cerrar");
-
-  abrir.addEventListener("click", () => {
-    nav.classList.add("visible");
-  });
-
-  cerrar.addEventListener("click", () => {
-    nav.classList.remove("visible");
-  });
 </script>

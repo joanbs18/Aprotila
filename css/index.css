@@ -1,8 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Inconsolata);
-@font-face {
-  font-family: "Inconsolata";
-  src: url(../fonts/inconsolata.ttf);
-}
+
 @font-face {
   font-family: "Pattaya";
   src: url(../fonts/Pattaya-Regular.ttf);
@@ -19,12 +16,12 @@ html {
   scroll-behavior: smooth;
 }
 
-header {
+/* header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: fixed;
-  padding: 30px 20px;
+  padding: 30px 10px;
   width: 100%;
   transition: 0.7s;
   z-index: 10;
@@ -39,6 +36,97 @@ header.abajo {
 header.abajo .logo,
 header.abajo ul li a {
   color: #000;
+} */
+
+nav img {
+  max-width: 200px;
+  height: 100px;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  min-height: 8vh;
+  z-index: 1000;
+  transition: 0.7s;
+  position: fixed;
+  width: 100%;
+}
+
+nav.abajo {
+  background: #fff;
+  box-shadow: 0px 0px 30px -5px #cccc;
+}
+
+nav.abajo .enlaces-menu li a,
+nav.abajo .enlaces-menu .car_shooping {
+  color: #000;
+}
+
+.ham {
+  display: none;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ham span {
+  background-color: #f3f3f3;
+  display: block;
+  height: 3px;
+  width: 28px;
+  margin: 10px auto;
+  border-radius: 2px;
+}
+.enlaces-menu {
+  display: flex;
+  padding: 0;
+}
+.enlaces-menu li {
+  padding: 0 40px;
+  list-style-type: none;
+  transition: 0.3s;
+}
+
+.enlaces-menu li a {
+  text-decoration: none;
+  font-size: 1.8rem;
+  color: #f3f3f3;
+  font-weight: 600;
+}
+
+/* Animaciones */
+
+@keyframes muestraMenu {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.enlaces-menu.activado {
+  display: flex;
+  animation: muestraMenu 350ms ease-in-out both;
+}
+
+.br-1.animado {
+  transform: rotate(-45deg) translate(-10px, 8px);
+}
+
+.br-2.animado {
+  opacity: 0;
+}
+.br-3.animado {
+  transform: rotate(45deg) translate(-10px, -8px);
+}
+
+.ham.girar:hover {
+  transform: rotate(360deg);
 }
 
 video {
@@ -54,38 +142,7 @@ header.abajo .logo {
   width: 200px;
 }
 
-.nav-list {
-  list-style-type: none;
-  display: flex;
-  gap: 2rem;
-  font-family: "Inconsolata";
-  margin-right: 40px;
-  text-transform: uppercase;
-  font-weight: 300;
-  font-size: 20px;
-}
-
-.nav-list li a {
-  text-decoration: none;
-  color: #ffffff;
-}
-
-.li_menu {
-  width: 140px;
-  height: auto;
-  float: left;
-  transition: 0.2s linear;
-  position: relative;
-  display: block;
-  overflow: hidden;
-  padding: 15px;
-  text-align: center;
-  margin: 0 5px;
-  background: transparent;
-  text-transform: uppercase;
-}
-
-.li_menu:before {
+.enlace:before {
   position: absolute;
   content: "";
   left: 0;
@@ -99,7 +156,7 @@ header.abajo .logo {
   z-index: -1;
 }
 
-.li_menu:after {
+.enlace:after {
   position: absolute;
   content: "";
   top: 0;
@@ -113,18 +170,27 @@ header.abajo .logo {
   z-index: -1;
 }
 
-.li_menu:hover:before {
+.enlace:hover:before {
   border-color: #e6e6e6;
   height: 100%;
   transform: translateX(0);
   transition: 0.2s transform linear, 0.3s height linear 0.3s;
 }
 
-.li_menu:hover:after {
+.enlace:hover:after {
   border-color: #e6e6e6;
   height: 100%;
   transform: translateX(0);
   transition: 0.2s transform linear, 0.3s height linear 0.5s;
+}
+
+.enlaces-menu .car_shooping {
+  color: #fff;
+  margin-top: 1%;
+}
+
+header.abajo .nav-list i {
+  color: #000;
 }
 
 header.abajo .li_menu:hover:before,
@@ -135,6 +201,228 @@ header.abajo .li_menu:hover:after {
 .abrir-menu,
 .cerrar-menu {
   display: none;
+}
+
+.mostrarModal {
+  max-width: 1120px;
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.count-products {
+  position: absolute;
+  top: 32%;
+  right: 10.6%;
+  background-color: rgb(226, 43, 43);
+  color: #fff;
+  width: 15px;
+  height: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+#contador-productos {
+  font-size: 12px;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: #fff;
+  width: 100%;
+  max-width: 350px;
+  height: 100vh;
+
+  visibility: hidden;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: all 0.35s ease-in;
+
+  z-index: 20000;
+}
+
+.modal::after {
+  position: fixed;
+  top: 0;
+  right: 350px;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  opacity: 0;
+  content: "";
+  pointer-events: none;
+  transition: all 0.35s ease-in;
+}
+
+.modal.active {
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+}
+
+.modal.active::after {
+  opacity: 1;
+  pointer-events: auto;
+}
+.modal__container {
+  height: 100%;
+  padding: 30px;
+  position: relative;
+  z-index: 1000;
+}
+
+.modal__close {
+  position: absolute;
+  left: -50px;
+  top: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgb(216, 62, 62);
+  color: #fff;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.modal__info {
+  display: flex;
+  flex-flow: column;
+  height: 90%;
+  overflow: hidden;
+}
+
+.modal__header {
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #808080;
+}
+
+.modal__header h2 {
+  font-size: 24px;
+  color: #000;
+  font-weight: 600;
+}
+
+.modal__header h2 i {
+  margin-right: 10px;
+}
+
+.modal__body {
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: visible;
+  width: 100%;
+  flex-grow: 1;
+}
+
+.modal__item {
+  display: flex;
+  align-items: center;
+}
+
+.modal__item + .modal__item {
+  margin-top: 20px;
+}
+
+.modal__thumb {
+  width: 80px;
+}
+
+.modal__thumb img {
+  width: 80px;
+}
+
+.modal__text-product {
+  width: calc(100% - 80px);
+  padding-left: 20px;
+}
+
+.modal__text-product p strong {
+  color: #808080;
+  margin-top: 6px;
+}
+
+.modal__footer {
+  padding-top: 30px;
+  margin-top: 20px;
+  border-top: 1px solid #808080;
+}
+
+.modal__list-price ul li + li {
+  margin-top: 10px;
+}
+
+.modal__list-price ul li strong {
+  color: #000;
+}
+
+.modal__total-cart {
+  font-size: 20px;
+  color: #000;
+  margin: 20px 0;
+}
+
+.modal__btns {
+  padding-top: 30px;
+  border-top: 1px solid #808080;
+}
+
+.modal__btns a + a {
+  margin-top: 15px;
+}
+
+.modal-activo {
+  overflow: hidden;
+}
+
+.fa-x:hover {
+  color: red;
+  cursor: pointer;
+}
+
+.cantidad_productos {
+  font-size: 20px;
+  margin-right: 10px;
+}
+.btn-border,
+.btn-primary {
+  width: 240px;
+  height: 48px;
+  line-height: 48px;
+  outline: 0;
+  display: inline-block;
+  border-radius: 25px;
+  cursor: pointer;
+  padding: 0 20px;
+
+  text-decoration: none;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 600;
+  text-align: center;
+}
+
+.btn-border {
+  border: 2px solid #3586ff;
+  color: #3586ff;
+  background-color: transparent;
+}
+
+.btn-border:hover {
+  background-color: #3586ff;
+  border-color: #fff;
+  color: #fff;
+}
+
+.btn-primary {
+  background-color: #3586ff;
+  color: #fff;
 }
 
 .container {
@@ -468,7 +756,7 @@ svg:hover .tooltip {
 
 .card_producto {
   width: 300px;
-  height: 400px;
+  height: 450px;
   border-radius: 30px;
   background: #ffffff;
   box-shadow: 15px 15px 30px #bebebe, -15px -15px 30px #bebebe;
@@ -738,6 +1026,134 @@ article:hover img:last-child {
 
 .c-button--gooey:hover .c-button__blobs div {
   transform: scale(1.4) translateY(0) translateZ(0);
+}
+.products-preview {
+  z-index: 30;
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-height: 100vh;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.products-preview .preview {
+  display: none;
+  padding: 2rem;
+  text-align: center;
+  background: #fff;
+  position: relative;
+  margin: 2rem;
+  width: 100rem;
+}
+
+.products-preview .preview.active {
+  display: inline-block;
+}
+
+.products-preview .preview img {
+  height: 30rem;
+  float: left;
+  border: 1px solid #ccc;
+  margin-right: 30px;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.preview img:hover {
+  transform: scale(1.1);
+}
+
+.products-preview .preview .fa-times {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  cursor: pointer;
+  color: #444;
+  font-size: 2rem;
+}
+
+.preview .fa-times:hover {
+  color: red;
+}
+
+.products-preview .preview h3 {
+  color: #444;
+  padding: 0.5rem 0;
+  font-size: 2.5rem;
+}
+
+.anadirMas {
+  display: flex;
+  margin-top: 6%;
+}
+
+.anadirMas input {
+  border: none;
+  font-size: 20px;
+  text-align: center;
+  width: 20px;
+}
+
+.anadirMas i {
+  border: 1px solid #ccc;
+  padding: 3px;
+  cursor: pointer;
+  color: #3586ff;
+}
+
+.cart-empty {
+  padding: 20px;
+  text-align: center;
+  font-size: 20px;
+}
+
+input:focus {
+  outline: none;
+}
+
+.preview p {
+  line-height: 1.5;
+  padding: 1rem 0;
+  font-size: 1.6rem;
+  color: #777;
+}
+
+.preview .price {
+  padding: 1rem 0;
+  font-size: 2.5rem;
+  color: #000;
+}
+
+.products-preview .preview .buttons {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 7rem;
+}
+
+.products-preview .preview .buttons a {
+  flex: 1 1 16rem;
+  padding: 1rem;
+  font-size: 1.8rem;
+  color: #3586ff;
+  border: 0.1rem solid #3586ff;
+}
+
+.products-preview .preview .buttons a.cart {
+  background: #3586ff;
+  color: #fff;
+}
+
+.products-preview .preview .buttons a.cart:hover {
+  background: #3586ff;
+}
+
+.products-preview .preview .buttons a.buy:hover {
+  background: #3586ff;
+  color: #fff;
 }
 
 .container_restaurante {
@@ -1171,80 +1587,50 @@ footer .wave#wave4 {
 }
 
 @media screen and (max-width: 600px) {
-  .abrir-menu,
-  .cerrar-menu {
+  .ham {
     display: block;
-    border: 0;
-    font-size: 1.25rem;
-    background-color: transparent;
     cursor: pointer;
+    position: absolute;
+    top: 4px;
+    right: 25px;
+    transition: 0.2s 0.1s;
   }
 
-  .abrir-menu {
-    z-index: 1;
-    margin-right: 15px;
-    font-size: 30px;
-    color: #ffffff;
-    text-shadow: 0px 0px 30px -5px #cccc;
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    color: #000;
   }
-
-  .cerrar-menu {
-    color: #000000;
-    font-size: 30px;
-  }
-
-  header {
-    padding: 5px 0px;
-  }
-  header.abajo {
-    background: #fff;
-  }
-
-  header.abajo .abrir-menu {
-    color: black;
-    margin-right: 30px;
-  }
-
-  header.abajo .logo {
-    width: 60px;
+  .enlaces-menu li a,
+  .enlaces-menu .car_shooping {
+    color: #000;
   }
 
   .logo {
-    width: 80px;
+    padding-left: 25px;
+    max-width: 100px;
+    height: 40px;
   }
-  .nav {
+
+  .enlaces-menu {
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 92vh;
+    margin: 0;
+    padding: 0;
+    display: none;
     opacity: 0;
-    visibility: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: end;
-    gap: 1rem;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ffffff;
-    padding: 2rem;
-    box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.5);
-    z-index: 100;
-    min-height: 600px;
+    transition: opacity 5s ease-out;
+    width: 100%;
+    color: #000;
   }
-
-  .nav.visible {
-    opacity: 1;
-    visibility: visible;
-    
-  }
-
-  .nav-list {
-    flex-direction: column;
-    align-items: end;
-    
-  }
-
-  .nav-list li a {
-    color: #000000ec;
-
+  .enlaces-menu li {
+    text-align: center;
+    width: 100%;
+    padding: 20px;
   }
 
   .container {
@@ -1459,6 +1845,14 @@ footer .wave#wave4 {
     font-size: 14px;
     white-space: nowrap;
     width: 280px;
+  }
+  .count-products {
+    top: 90.6%;
+    right: 45%;
+  }
+
+  #contador-productos {
+    font-size: 12px;
   }
 
   .titulo_productos,
