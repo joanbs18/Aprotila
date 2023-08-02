@@ -28,8 +28,8 @@
           <i class="fa-solid fa-cart-shopping" data-btn-action="add-btn-cart" data-modal="#jsModalCarrito"></i>
           <div class="count-products">
             <span id="contador-productos">0</span>
-        </div>
-     
+          </div>
+
         </div>
       </ul>
 
@@ -40,7 +40,7 @@
       </button>
     </nav>
   </header>
-  
+
   <div class="mostrarModal">
     <div class="modal" id="jsModalCarrito">
       <div class="modal__container">
@@ -96,30 +96,127 @@
       </div>
     </div>
   </div>
-  <div class="videoPrincipal">
-    <video muted autoplay loop>
-      <source src="video/Video1.mp4" type="video/mp4">
-    </video>
+
+  <div class="container-slider">
+    <div class="slider" id="slider">
+      <div class="slider__section">
+        <img src="img/slider1.jpg" alt="" class="slider__img">
+        <div class="slider__content">
+          <h2 class="slider__title">APROTILA</h2>
+          <p class="slider__txt">En Aprotila, la calidad es nuestra máxima prioridad.
+            Desde la selección de los alevines hasta el proceso de alimentación y cuidado diario</p>
+          <a href="" class="btn-shop">INFO</a>
+        </div>
+      </div>
+      <div class="slider__section">
+        <img src="img/slider2.jpg" alt="" class="slider__img">
+        <div class="slider__content">
+          <h2 class="slider__title">SOMOS LOS MEJORES EN</h2>
+          <p class="slider__txt">Alimentación para Tilapias tenemos alta experiencia en este ambito</p>
+          <a href="" class="btn-shop">INFO</a>
+        </div>
+      </div>
+      <div class="slider__section">
+        <img src="img/slider3.jpg" alt="" class="slider__img">
+        <div class="slider__content">
+          <h2 class="slider__title">APROTILA</h2>
+          <p class="slider__txt">En Aprotila, la calidad es nuestra máxima prioridad.
+            Desde la selección de los alevines hasta el proceso de alimentación y cuidado diario</p>
+          <a href="" class="btn-shop">INFO</a>
+        </div>
+      </div>
+      <div class="slider__section">
+        <img src="Img/slider4.jpg" alt="" class="slider__img">
+        <div class="slider__content">
+          <h2 class="slider__title">Soda</h2>
+          <p class="slider__txt">Precios Muy Comodos y Comidas deliciosas</p>
+          <a href="" class="btn-shop">INFO</a>
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="slider__btn slider__btn--right" id="btn-right">&#62;</div>
+    <div class="slider__btn slider__btn--left" id="btn-left">&#60;</div>
+  </div>
+  <div class="social">
+    <div class="share">
+      <button class="btn1">
+        <svg fill-rule="nonzero" height="30px" width="30px" viewBox="0,0,256,256"
+          xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" class="instagram">
+          <g style="mix-blend-mode: normal" text-anchor="none" font-size="none" font-weight="none" font-family="none"
+            stroke-dashoffset="0" stroke-dasharray="" stroke-miterlimit="10" stroke-linejoin="miter"
+            stroke-linecap="butt" stroke-width="1" stroke="none" fill-rule="nonzero">
+            <g transform="scale(8,8)">
+              <path
+                d="M11.46875,5c-3.55078,0 -6.46875,2.91406 -6.46875,6.46875v9.0625c0,3.55078 2.91406,6.46875 6.46875,6.46875h9.0625c3.55078,0 6.46875,-2.91406 6.46875,-6.46875v-9.0625c0,-3.55078 -2.91406,-6.46875 -6.46875,-6.46875zM11.46875,7h9.0625c2.47266,0 4.46875,1.99609 4.46875,4.46875v9.0625c0,2.47266 -1.99609,4.46875 -4.46875,4.46875h-9.0625c-2.47266,0 -4.46875,-1.99609 -4.46875,-4.46875v-9.0625c0,-2.47266 1.99609,-4.46875 4.46875,-4.46875zM21.90625,9.1875c-0.50391,0 -0.90625,0.40234 -0.90625,0.90625c0,0.50391 0.40234,0.90625 0.90625,0.90625c0.50391,0 0.90625,-0.40234 0.90625,-0.90625c0,-0.50391 -0.40234,-0.90625 -0.90625,-0.90625zM16,10c-3.30078,0 -6,2.69922 -6,6c0,3.30078 2.69922,6 6,6c3.30078,0 6,-2.69922 6,-6c0,-3.30078 -2.69922,-6 -6,-6zM16,12c2.22266,0 4,1.77734 4,4c0,2.22266 -1.77734,4 -4,4c-2.22266,0 -4,-1.77734 -4,-4c0,-2.22266 1.77734,-4 4,-4z">
+              </path>
+            </g>
+          </g>
+        </svg>
+        <span class="tooltiptext1">
+          <div class="card">
+            <svg fill="#000000" width="24px" viewBox="0 0 24 24" height="24px" xmlns="http://www.w3.org/2000/svg"
+              class="account">
+              <path fill="none" d="M0 0h24v24H0V0z"></path>
+              <path
+                d="M12 5.9c1.16 0 2.1.94 2.1 2.1s-.94 2.1-2.1 2.1S9.9 9.16 9.9 8s.94-2.1 2.1-2.1m0 9c2.97 0 6.1 1.46 6.1 2.1v1.1H5.9V17c0-.64 3.13-2.1 6.1-2.1M12 4C9.79 4 8 5.79 8 8s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 9c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4z">
+              </path>
+            </svg>
+          </div>
+          <div class="username">@APROTILA</div>
+        </span>
+      </button>
+      <button class="btn2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-whatsapp" width="24"
+          height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2bd46a" fill="none" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" />
+          <path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" />
+        </svg>
+        <span class="tooltiptext2">
+          <div class="card">
+            <svg fill="#000000" width="24px" viewBox="0 0 24 24" height="24px" xmlns="http://www.w3.org/2000/svg"
+              class="account">
+              <path fill="none" d="M0 0h24v24H0V0z"></path>
+              <path
+                d="M12 5.9c1.16 0 2.1.94 2.1 2.1s-.94 2.1-2.1 2.1S9.9 9.16 9.9 8s.94-2.1 2.1-2.1m0 9c2.97 0 6.1 1.46 6.1 2.1v1.1H5.9V17c0-.64 3.13-2.1 6.1-2.1M12 4C9.79 4 8 5.79 8 8s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 9c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4z">
+              </path>
+            </svg>
+          </div>
+          <div class="username">+506 8728-4070</div>
+        </span>
+      </button>
+      <button class="btn3">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-facebook" width="24"
+          height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#009988" fill="none" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />
+        </svg>
+        <span class="tooltiptext3">
+          <div class="card">
+            <svg fill="#000000" width="24px" viewBox="0 0 24 24" height="24px" xmlns="http://www.w3.org/2000/svg"
+              class="account">
+              <path fill="none" d="M0 0h24v24H0V0z"></path>
+              <path
+                d="M12 5.9c1.16 0 2.1.94 2.1 2.1s-.94 2.1-2.1 2.1S9.9 9.16 9.9 8s.94-2.1 2.1-2.1m0 9c2.97 0 6.1 1.46 6.1 2.1v1.1H5.9V17c0-.64 3.13-2.1 6.1-2.1M12 4C9.79 4 8 5.79 8 8s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 9c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4z">
+              </path>
+            </svg>
+          </div>
+          <div class="username">@APROTILA</div>
+        </span>
+      </button>
+    </div>
     <div class="aviso_productos">
       <h2>PRODUCTOS</h2>
       <a href="#productos"><i class="fa-solid fa-angle-down fa-bounce"></i></a>
     </div>
   </div>
-  <div class="container">
+  <!-- <div class="container">
     <div class="informacion">
-      <div class="titulo">
-        <h1>APROTILA</h1>
-      </div>
-      <div class="encabezado">
-        <p>En Aprotila, la calidad es nuestra máxima prioridad.
-          Desde la selección de los alevines hasta el proceso de alimentación y cuidado diario</p>
-      </div>
-      <div class="uiverse">
-        <span class="tooltip">Ver más</span>
-        <span>
-          PRODUCTOS
-        </span>
-      </div>
       <div class="share">
         <button class="btn1">
           <svg fill-rule="nonzero" height="30px" width="30px" viewBox="0,0,256,256"
@@ -190,7 +287,7 @@
         </button>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <main>
     <div class="container_productos" id="productos">
@@ -671,11 +768,11 @@
   window.addEventListener("scroll", function () {
     const nav = document.querySelector("nav");
     var imagen = document.getElementById("logo");
-     imagen.src = "img/logo.png";
+    imagen.src = "img/logo.png";
     nav.classList.toggle("abajo", window.scrollY > 0);
-   if (window.scrollY <= 0) {
-       imagen.src = "img/logo_white.png";
-     }
+    if (window.scrollY <= 0) {
+      imagen.src = "img/logo_white.png";
+    }
 
   });
 

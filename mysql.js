@@ -22,7 +22,7 @@ connection.connect(function (error) {
 });
 
 app.get("/", (req, res) => {
-  res.send("Holaaaa");
+  res.send("Corriendo en el puerto "+port);
 });
 
 app.get("/controlventa", (req, res) => {

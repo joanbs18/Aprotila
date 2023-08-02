@@ -1,42 +1,16 @@
-@import url(https://fonts.googleapis.com/css?family=Inconsolata);
-
-@font-face {
-  font-family: "Pattaya";
-  src: url(../fonts/Pattaya-Regular.ttf);
-}
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@500&family=Pattaya&display=swap");
 
 * {
   margin: 0;
   padding: 0;
   text-decoration: none;
-  font-family: "Inconsolata";
+  font-family: "Inconsolata", monospace;
 }
 
 html {
   scroll-behavior: smooth;
 }
-
-/* header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: fixed;
-  padding: 30px 10px;
-  width: 100%;
-  transition: 0.7s;
-  z-index: 10;
-}
-
-header.abajo {
-  background: #fff;
-  padding: 15px 20px;
-  box-shadow: 0px 0px 30px -5px #cccc;
-}
-
-header.abajo .logo,
-header.abajo ul li a {
-  color: #000;
-} */
+/*MENU----------------------------------------*/
 
 nav img {
   max-width: 200px;
@@ -49,7 +23,7 @@ nav {
   justify-content: space-around;
   min-height: 8vh;
   z-index: 1000;
-  transition: 0.7s;
+  transition: 0.7s ease-in;
   position: fixed;
   width: 100%;
 }
@@ -96,9 +70,10 @@ nav.abajo .enlaces-menu .car_shooping {
   font-size: 1.8rem;
   color: #f3f3f3;
   font-weight: 600;
+  text-transform: uppercase;
 }
 
-/* Animaciones */
+/* Animacione PARA LA HAM */
 
 @keyframes muestraMenu {
   from {
@@ -129,13 +104,101 @@ nav.abajo .enlaces-menu .car_shooping {
   transform: rotate(360deg);
 }
 
-video {
+/*SLIDER--------------------------------------*/
+
+.container-slider {
+  margin: 0 0;
+  position: relative;
+  overflow: hidden;
+}
+.slider {
+  display: flex;
+  width: 400%;
+  height: 760px;
+  margin-left: -100%;
+  position: relative;
+}
+.slider:before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
   width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  height: 100%;
 }
 
-header.abajo .logo {
-  width: 100px;
-  transition: 0.5s ease-out;
+.slider__section {
+  width: 100%;
+  position: relative;
+}
+.slider__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.slider__btn {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.7);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 30px;
+  font-weight: bold;
+  font-family: monospace;
+  text-align: center;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 999;
+}
+.slider__btn:hover {
+  background: #fff;
+}
+.slider__btn--left {
+  left: 10px;
+}
+.slider__btn--right {
+  right: 10px;
+}
+.slider__content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: white;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  text-align: center;
+  z-index: 999;
+}
+.slider__title {
+  font-size: 4.2em;
+  margin: 0;
+}
+.slider__txt {
+  margin: 5px 0;
+  font-size: 20px;
+}
+.btn-shop {
+  display: block;
+  border: 2px solid #3586ff;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  width: 150px;
+  margin: 20px auto;
+  transition: all 0.5s;
+}
+.btn-shop:hover {
+  background: #3586ff;
+  color: white;
+}
+
+nav.abajo .logo {
+  transition: 0.9s ease-out;
 }
 
 .logo {
@@ -187,20 +250,6 @@ header.abajo .logo {
 .enlaces-menu .car_shooping {
   color: #fff;
   margin-top: 1%;
-}
-
-header.abajo .nav-list i {
-  color: #000;
-}
-
-header.abajo .li_menu:hover:before,
-header.abajo .li_menu:hover:after {
-  border-color: #3586ff;
-}
-
-.abrir-menu,
-.cerrar-menu {
-  display: none;
 }
 
 .mostrarModal {
@@ -425,38 +474,22 @@ header.abajo .li_menu:hover:after {
   color: #fff;
 }
 
-.container {
-  z-index: 2;
-  position: absolute;
-  top: 36%;
-  left: 10%;
-}
-
-.titulo {
-  font-size: 40px;
-  color: #e6e6e6;
-}
-
-.encabezado {
-  color: #e6e6e6;
-  font-size: 20px;
-  width: 800px;
-  font-family: "Pattaya";
-  text-shadow: 15px 15px 15px #000000;
-}
-
-.videoPrincipal {
+.social {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  position: absolute;
+  z-index: 100;
+  top: 0px;
+  height: 760px;
 }
 
 .aviso_productos {
-  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 44%;
 }
 .aviso_productos h2 {
   font-size: 30px;
@@ -471,77 +504,13 @@ header.abajo .li_menu:hover:after {
   cursor: pointer;
 }
 
-.uiverse {
-  position: relative;
-  background: #ffffff;
-  color: #000;
-  padding: 15px;
-  margin: 10px;
-  border-radius: 10px;
-  width: 90px;
-  height: 25px;
-  font-size: 17px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  margin-top: 10%;
-}
-
-.tooltip {
-  position: absolute;
-  top: 0;
-  font-size: 14px;
-  background: #ffffff;
-  color: #ffffff;
-  padding: 5px 8px;
-  border-radius: 5px;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-.tooltip::before {
-  position: absolute;
-  content: "";
-  height: 8px;
-  width: 8px;
-  background: #ffffff;
-  bottom: -3px;
-  left: 50%;
-  transform: translate(-50%) rotate(45deg);
-  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-.uiverse:hover .tooltip {
-  top: -45px;
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-}
-
-svg:hover span,
-svg:hover .tooltip {
-  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
-}
-
-.uiverse:hover,
-.uiverse:hover .tooltip,
-.uiverse:hover .tooltip::before {
-  background: linear-gradient(320deg, #808080, #808070);
-  color: #ffffff;
-}
-
 .share {
   display: flex;
   flex-direction: row;
   gap: 1em;
   transition: 0.4s ease-in-out;
-  margin-top: 15%;
+  margin-top: 36%;
+  margin-bottom: 1%;
 }
 
 .btn1 {
@@ -1586,6 +1555,8 @@ footer .wave#wave4 {
   }
 }
 
+
+
 @media screen and (max-width: 600px) {
   .ham {
     display: block;
@@ -1594,6 +1565,10 @@ footer .wave#wave4 {
     top: 4px;
     right: 25px;
     transition: 0.2s 0.1s;
+  }
+
+  nav.abajo .ham span {
+    background-color: #000;
   }
 
   nav {
@@ -1633,40 +1608,41 @@ footer .wave#wave4 {
     padding: 20px;
   }
 
-  .container {
-    top: 10%;
+  .slider {
+    height: 250px;
   }
 
-  .titulo {
-    font-size: 10px;
+  .slider__content {
+    top: 58%;
   }
 
-  .encabezado {
+  .slider__title {
+    font-size: 2em;
+  }
+  .slider__txt {
     font-size: 13px;
-    width: 100%;
+  }
+
+  .slider__btn {
+    width: 25px;
+    height: 25px;
+    font-size: 19px;
+  }
+  .btn-shop {
+    width: 80px;
+    padding: 5px;
+  }
+
+  .social {
+    height: 250px;
   }
 
   .aviso_productos {
     display: none;
   }
 
-  .uiverse {
-    padding: 5px;
-    margin: 5px;
-    width: 30px;
-    height: 10px;
-    font-size: 7px;
-  }
-
-  .tooltip::before {
-    height: 4px;
-    width: 4px;
-  }
-
   .share {
-    margin-top: -2%;
-    margin-right: 2%;
-    float: right;
+    margin-top: 54%;
   }
 
   .btn1 {

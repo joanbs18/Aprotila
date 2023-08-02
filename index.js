@@ -1,57 +1,72 @@
-// let preveiwContainer = document.querySelector(".products-preview");
-// let previewBox = preveiwContainer.querySelectorAll(".preview");
+//SLIDER INICIAL----------------------------------------
 
-// document
-//   .querySelectorAll(".productos .container_cards .button")
-//   .forEach((producto) => {
-//     producto.onclick = () => {
-//       preveiwContainer.style.display = "flex";
-//       let name = producto.getAttribute("data-name");
-//       previewBox.forEach((preview) => {
-//         let target = preview.getAttribute("data-target");
-//         if (name == target) {
-//           preview.classList.add("active");
-//         }
-//       });
-//     };
-//   });
+const slider = document.querySelector("#slider");
+let sliderSection = document.querySelectorAll(".slider__section");
+let sliderSectionLast = sliderSection[sliderSection.length - 1];
 
-// previewBox.forEach((close) => {
-//   close.querySelector(".fa-times").onclick = () => {
-//     close.classList.remove("active");
-//     preveiwContainer.style.display = "none";
-//   };
-// });
+const btnLeft = document.querySelector("#btn-left");
+const btnRight = document.querySelector("#btn-right");
 
+slider.insertAdjacentElement("afterbegin", sliderSectionLast);
 
+function Next() {
+  let sliderSectionFirst = document.querySelectorAll(".slider__section")[0];
+  slider.style.marginLeft = "-200%";
+  slider.style.transition = "all 0.5s";
+  setTimeout(function () {
+    slider.style.transition = "none";
+    slider.insertAdjacentElement("beforeend", sliderSectionFirst);
+    slider.style.marginLeft = "-100%";
+  }, 500);
+}
 
+function Prev() {
+  let sliderSection = document.querySelectorAll(".slider__section");
+  let sliderSectionLast = sliderSection[sliderSection.length - 1];
+  slider.style.marginLeft = "0";
+  slider.style.transition = "all 0.5s";
+  setTimeout(function () {
+    slider.style.transition = "none";
+    slider.insertAdjacentElement("afterbegin", sliderSectionLast);
+    slider.style.marginLeft = "-100%";
+  }, 500);
+}
 
-
-
-const ham = document.querySelector('.ham');
-const enlaces = document.querySelector('.enlaces-menu');
-const barras = document.querySelectorAll('.ham span');
-
-
-
-ham.addEventListener('click', () => {
-    enlaces.classList.toggle('activado');
-    barras.forEach(child => {child.classList.toggle('animado')});
-    ham.classList.toggle('girar');
-    const nav = document.querySelector("nav");
-    if (enlaces.classList.contains('activado')){
-      document.body.classList.add("modal-activo");
-      nav.style.backgroundColor="#fff";
-    }else{
-      document.body.classList.remove("modal-activo");
-      nav.style.backgroundColor="";
-    }
-    
+btnRight.addEventListener("click", function () {
+  Next();
 });
 
+btnLeft.addEventListener("click", function () {
+  Prev();
+});
 
+setInterval(function () {
+  Next();
+}, 5000);
 
+//MENU HAMBURGUESA-----------------------------------------
 
+const ham = document.querySelector(".ham");
+const enlaces = document.querySelector(".enlaces-menu");
+const barras = document.querySelectorAll(".ham span");
+
+ham.addEventListener("click", () => {
+  enlaces.classList.toggle("activado");
+  barras.forEach((child) => {
+    child.classList.toggle("animado");
+  });
+  ham.classList.toggle("girar");
+  const nav = document.querySelector("nav");
+  if (enlaces.classList.contains("activado")) {
+    document.body.classList.add("modal-activo");
+    nav.style.backgroundColor = "#fff";
+  } else {
+    document.body.classList.remove("modal-activo");
+    nav.style.backgroundColor = "";
+  }
+});
+
+//CARRITO-----------------------------------------------------------
 
 let allProducts = [];
 if (localStorage.getItem("misCompras") !== null) {
@@ -77,8 +92,7 @@ productosList.addEventListener("click", (e) => {
     console.log(product.querySelector(".anadirMas #cantidadProductos").value);
 
     const inforProduc = {
-      quantity: product.querySelector(".anadirMas #cantidadProductos")
-        .value,
+      quantity: product.querySelector(".anadirMas #cantidadProductos").value,
       title: product.querySelector("h1").textContent,
       price: product.querySelector("h3").textContent,
       img: product2.querySelector("img").src,
@@ -141,7 +155,7 @@ const showHTML = () => {
     modal__list.append(containerProduct);
 
     total += parseInt(product.quantity * product.price.match(/\d+/g));
-    totalOfProducts +=parseInt( product.quantity);
+    totalOfProducts += parseInt(product.quantity);
   });
 
   valorTotal.innerText = `Total a Pagar: $${total}`;
@@ -162,27 +176,23 @@ console.log(sumar);
 // Agregar el evento a cada botón
 sumar.forEach((boton) => {
   boton.addEventListener("click", function (e) {
+    valor = e.target.parentElement;
+    cantidad = parseInt(valor.querySelector("#cantidadProductos").value);
 
-    valor= e.target.parentElement
-    cantidad=parseInt(valor.querySelector('#cantidadProductos').value);
-
-    valor.querySelector('#cantidadProductos').value=cantidad+1;
+    valor.querySelector("#cantidadProductos").value = cantidad + 1;
   });
 });
 
 restar.forEach((boton) => {
   boton.addEventListener("click", function (e) {
-
-    valor= e.target.parentElement
-    cantidad=parseInt(valor.querySelector('#cantidadProductos').value);
+    valor = e.target.parentElement;
+    cantidad = parseInt(valor.querySelector("#cantidadProductos").value);
     if (cantidad <= 1) {
       cantidad = 1;
     } else {
       cantidad -= 1;
     }
-    valor.querySelector('#cantidadProductos').value=cantidad;
-
-   
+    valor.querySelector("#cantidadProductos").value = cantidad;
   });
 });
 
@@ -200,7 +210,6 @@ document.getElementById("total").value;
 // });
 
 restarProducto.addEventListener("click", () => {
-
   precioTotal -= precioTotal;
   document.getElementById("cantidadProductos").value = cantidad;
   document.getElementById("total").innerHTML = precioTotal;
