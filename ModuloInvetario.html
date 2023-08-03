@@ -174,9 +174,15 @@
 
                 <thead>
                     <tr>
-                        <th>Tipo Concentrado</th>
-                        <th>Kilos Disponibles</th>
-                        <th>Ultimo Ingreso</th>
+                        <th>Tipo Compra</th>
+                        <th>Fecha Compra</th>
+                        <th>Fecha Modificación</th>
+                        <th>Cantidad</th>
+                        <th>Entradas</th>
+                        <th>Salidas</th>
+                        <th>Precio Actual</th>
+                        <th>Precio Anterior</th>
+                        <th>Precio Promedio</th>
                     </tr>
                 </thead>
                 <div id="cloud_load" class="cloud_load"><span class="loader"></span></div>
@@ -207,13 +213,14 @@
 
         <h4>Añadir Inventario</h4>
         <form class="formulario" action="">
-            <div class="box">
-                <input id="Tipo_Concentrado" type="text" name="uname" required>
-                <label>Tipo_Concentrado</label>
+            <label>Tipo Ingreso</label>
+            <div class="select pila">              
+                <select id="select_tiposIngreso_inve">
+                </select>
             </div>
             <div class="box">
-                <input id="CantidadConcentrados" type="number" name="uname" required>
-                <label>Cantidad Sacos</label>
+                <input id="marca_inve" type="number" name="uname" required>
+                <label>Marca</label>
             </div>
             <button type="button" class="btnForm" onclick="addInveConcentrado(),clearFormData()">AÑADIR</button>
         </form>

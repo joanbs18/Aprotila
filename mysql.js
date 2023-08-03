@@ -22,7 +22,7 @@ connection.connect(function (error) {
 });
 
 app.get("/", (req, res) => {
-  res.send("Corriendo en el puerto "+port);
+  res.send("Corriendo en el puerto " + port);
 });
 
 app.get("/controlventa", (req, res) => {
@@ -78,7 +78,7 @@ app.listen(port, () => {
   console.log("Funciona");
 });
 
-// TABLA CONCENTRADOS------------------------------------------------
+// TABLA INGRESOS------------------------------------------------
 
 app.get("/ingresos", (req, res) => {
   try {
@@ -103,16 +103,17 @@ app.get("/ingresos", (req, res) => {
 app.get("/crearIngreso", (req, res) => {
   try {
     campos = [];
-    campos.push(req.query.tipo);
-    campos.push(req.query.marca);
-    campos.push(req.query.compra);
+    campos.push(req.query.fecha_compra);
     campos.push(req.query.vencimiento);
-    campos.push(req.query.proveedor);
+    campos.push(req.query.Idencargado);
+    campos.push(req.query.tipo);
+    campos.push(req.query.Idproveedor);
+    campos.push(req.query.marca);
+    campos.push(req.query.cantidad);
     campos.push(req.query.precio);
-    campos.push(req.query.cantidadkilos);
-    campos.push(req.query.proteina);
+    campos.push(req.query.descripcion);
 
-    const insertar = `INSERT INTO tbconcentrado (Tipo, Marca, Fecha_Compra, Fecha_Vencimiento, IdProveedor_fk, Precio,Cantidad_Kilos, Proteina) VALUES ('${campos[0]}', '${campos[1]}', '${campos[2]}', '${campos[3]}', ${campos[4]}, ${campos[5]}, ${campos[6]},'${campos[7]}')`;
+    const insertar = `CALL insertIngreso ('${campos[0]}', '${campos[1]}', ${campos[2]}, '${campos[3]}', ${campos[4]}, '${campos[5]}', ${campos[6]},${campos[7]},'${campos[8]}')`;
 
     connection.query(insertar, (err, fields) => {
       if (err) throw err;
@@ -122,8 +123,8 @@ app.get("/crearIngreso", (req, res) => {
   }
 });
 
-app.get("/borrarconcentrado", (req, res) => {
-  let sql = `DELETE FROM tbconcentrado WHERE IdConcentrado = ${req.query.IdConcentrado}`;
+app.get("/borrarIngreso", (req, res) => {
+  let sql = `DELETE FROM tbingreso WHERE IdIngreso = ${req.query.IdIngreso}`;
   connection.query(sql, function (error, results, fields) {
     if (error) throw error;
   });
@@ -171,6 +172,25 @@ app.get("/pilasActivas", (req, res) => {
 app.get("/pilasInactivas", (req, res) => {
   try {
     let sql = "SELECT IdPila FROM tbpila where Activo=1";
+    connection.query(sql, function (error, results, fields) {
+      if (error) {
+        connection.end();
+        throw error;
+      }
+      res.status(200).json({
+        msg: "Mensaje desde el metodo GET",
+        results,
+      });
+    });
+  } catch (err) {
+    console.log(err);
+    throw new Error("Error en el metodo GET");
+  }
+});
+
+app.get("/tiposIngreso", (req, res) => {
+  try {
+    let sql = "SELECT Nombre FROM tbtipoingreso";
     connection.query(sql, function (error, results, fields) {
       if (error) {
         connection.end();

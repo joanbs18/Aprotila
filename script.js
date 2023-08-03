@@ -117,17 +117,12 @@ const mostrarData = (data) => {
 //--------------------------------------------------------------
 
 //EVENTO PARA ABRIR EL MODAL
-var addIcon = document.getElementById("add");
-addIcon.addEventListener("click", function () {
-  pilas();
-  document.getElementById("formu-modal").style.display = "flex";
-});
+// var addIcon = document.getElementById("add");
+// addIcon.addEventListener("click", function () {
+//   pilas();
+//   document.getElementById("formu-modal").style.display = "flex";
+// });
 
-var add_alimento = document.getElementById("add_alimento");
-add_alimento.addEventListener("click", function () {
-  pilas();
-  document.getElementById("formualimentacion").style.display = "flex";
-});
 var add_muestreo = document.getElementById("add_muestreo");
 add_muestreo.addEventListener("click", function () {
   pilas();
@@ -173,9 +168,9 @@ closeModal_alimento.addEventListener("click", function () {
   document.getElementById("formualimentacion").style.display = "none";
 });
 
-var add_concetrado = document.getElementById("add_Concentrado");
+var add_concetrado = document.getElementById("add_Ingreso");
 add_concetrado.addEventListener("click", function () {
-  document.getElementById("formuconcentrado").style.display = "flex";
+  document.getElementById("formuingreso").style.display = "flex";
 });
 
 var add_inveConcentrado = document.getElementById("add_inveConcentrado");
@@ -532,22 +527,25 @@ optionConcentrado1.addEventListener("change", function () {
     optionConcentrado1.options[optionConcentrado1.selectedIndex].text;
 });
 
-//---------------------------------------------------------------------------
-function concentrados() {
-  fetch("http://localhost:3000/concentrados", {
+//-----------------------------Ingresos----------------------------------------------
+
+function Ingresos() {
+
+  fetch("http://localhost:3000/ingresos", {
     method: "get",
     headers: {
       "Content-Type": "application/json",
     },
   })
     .then((resp) => resp.json())
-    .then((datos) => mostrarData2(datos.results))
+    .then((datos) => mostrarIngresos(datos.results))
     .catch((err) => seeLoad());
 }
 var Vconcentrado = [];
-const mostrarData2 = (data) => {
+const mostrarIngresos = (data) => {
   let tab = "";
   Vconcentrado = data;
+  console.log(Vconcentrado);
   for (var i = 0; i < data.length; i++) {
     var fechaConFormato1 = moment(data[i].Fecha_Compra);
     var fechaConFormato2 = moment(data[i].Fecha_Vencimiento);
@@ -555,51 +553,45 @@ const mostrarData2 = (data) => {
     fecha2 = fechaConFormato2.format("YYYY-MM-DD");
     tab += `<tr>
       <td data-label="Tipo">${data[i].Tipo}</td>
-      <td class="last" data-label="Marca">${data[i].Marca}</td>
+      <td data-label="Marca">${data[i].Marca}</td>
       <td data-label="Compra">${fecha1}</td>
       <td data-label="Vencimiento">${fecha2}</td>
       <td data-label="Proveedor">${data[i].Proveedor}</td>
       <td data-label="Precio">${data[i].Precio}</td>
-      <td data-label="Cantidad Kilos">${data[i].Cantidad_Kilos}</td>
-      <td data-label="Proteína">${data[i].Proteina}</td>
+      <td data-label="Cantidad Kilos">${data[i].Cantidad}</td>
+      <td data-label="Proteína">${data[i].Descripcion}</td>
       <td>
-      <button class="btnUpdate" id="btnUpdate_Concentrado"><i class="fa-solid fa-pen-to-square"></i></button>   
-      <button class="btnTrash" id="btnTrash_Concentrado" ><i class="fa-solid fa-trash-can"></i></button>
+      <button class="btnUpdate" id="btnUpdate_ingreso"><i class="fa-solid fa-pen-to-square"></i></button>   
+      <button class="btnTrash" id="btnTrash_ingreso" ><i class="fa-solid fa-trash-can"></i></button>
       </td>
       </tr>`;
   }
-  document.getElementById("Rconcentrado").innerHTML = tab;
-  eles = document.querySelectorAll("#btnTrash_Concentrado");
+  document.getElementById("RingresoS").innerHTML = tab;
+  eles = document.querySelectorAll("#btnUpdate_ingreso");
   console.log(eles);
   for (let i = 0; i < eles.length; i++) {
     eles[i].addEventListener("click", function () {
-      deleteConcentrado(Vconcentrado[i].IdConcentrado);
+      deleteConcentrado(Vconcentrado[i].IdIngreso);
     });
   }
 };
 
-function addConcentrado() {
-  tipo = document.getElementById("tipo").value;
-  marca = document.getElementById("marca").value;
-  compra = document.getElementById("compra").value;
+function addIngreso() {
+  marca = document.getElementById("marca_ingreso").value;
+  compra = document.getElementById("fecha_compra").value;
   vencimiento = document.getElementById("vencimiento").value;
-  proveedor = document.getElementById("proveedor").value;
-  proteina = document.getElementById("proteina").value;
-  precio = document.getElementById("Cprecio").value;
-  sacos = document.getElementById("sacos").value;
+  cantidad_ingreso = document.getElementById("cantidad_ingreso").value;
+  descripcion_ingreso = document.getElementById("descripcion_ingreso").value;
+  precio = document.getElementById("precio_ingreso").value;
+
   var fechaConFormato3 = moment(compra);
   var fechaConFormato4 = moment(vencimiento);
   fecha3 = fechaConFormato3.format("YYYY-MM-DD");
   fecha4 = fechaConFormato4.format("YYYY-MM-DD");
-  if (
-    tipo.toString == 0 ||
-    marca.toString == 0 ||
-    proteina.toString == 0 ||
-    proveedor.toString == 0
-  ) {
+  if (marca.toString == 0 || descripcion_ingreso.toString == 0) {
     alert("Error campos incompletos");
   }
-  url = `http://localhost:3000/crearconcentrado?tipo=${tipo}&marca=${marca}&compra=${fecha3}&vencimiento=${fecha4}&proveedor=${1}&precio=${precio}&cantidadkilos=${sacos}&proteina=${proteina}`;
+  url = `http://localhost:3000/crearIngreso?tipo=${tipo_ingreso_ingreso}&marca=${marca}&fecha_compra=${fecha3}&vencimiento=${fecha4}&proveedor=${1}&precio=${precio}&cantidad=${cantidad_ingreso}&descripcion=${descripcion_ingreso}`;
 
   fetch(url, {
     method: "get",
@@ -610,18 +602,26 @@ function addConcentrado() {
     .then((resp) => resp.json())
     .then((datos) => console.log(datos))
     .catch((err) => console.log(err));
-  concentrados();
-  document.getElementById("formuconcentrado").style.display = "none";
+  Ingresos();
+  document.getElementById("formuingreso").style.display = "none";
 }
 
+///EVENTO PARA INGRESO DE INGRESOS DE COMPRAS
+var tipo_ingreso_ingreso;
+var optionIngreso = document.getElementById("select_tipo_ingreso");
+optionIngreso.addEventListener("change", function () {
+  tipo_ingreso_ingreso =
+    optionIngreso.options[optionIngreso.selectedIndex].text;
+});
+
 let refresh = document.getElementById("cloud_load");
-refresh.addEventListener("click", (_) => {
+refresh.addEventListener("click", () => {
   location.reload();
 });
 
-function deleteConcentrado(IdConcentrado) {
+function deleteIngreso(Id) {
   try {
-    url = `http://localhost:3000/borrarconcentrado?IdConcentrado=${IdConcentrado}`;
+    url = `http://localhost:3000/borrarIngreso?IdIngreso=${Id}`;
     fetch(url, {
       method: "get",
       headers: {
@@ -634,7 +634,7 @@ function deleteConcentrado(IdConcentrado) {
   } catch (error) {
     alert("Error Inesperado");
   }
-  concentrados();
+  Ingresos();
 }
 
 function updateConcentrado() {
@@ -773,9 +773,6 @@ function deleteMortabilidad(Id) {
 //_______________________________________________________________________________________
 
 //EVENTO PARA ABRIR EL MODAL
-function fconcentrado() {
-  document.getElementById("formuconcentrado").style.display = "flex";
-}
 
 function falevines() {
   document.getElementById("formualevines").style.display = "flex";
@@ -784,7 +781,7 @@ function falevines() {
 //EVENTO PARA CERRAR EL MODAL
 
 function close_fconcentrado() {
-  document.getElementById("formuconcentrado").style.display = "none";
+  document.getElementById("formuingreso").style.display = "none";
 }
 
 function tableAlevines() {
@@ -1306,132 +1303,132 @@ const mostrarTrza = (data, Lote) => {
   document.getElementById("modalTrazabilidad").innerHTML = tab;
 };
 
-function showDiv1() {
-  document.getElementById("divConcentrado").style.display = "none";
-  document.getElementById("divVentas").style.display = "inline";
-  document.getElementById("divAlimentacion").style.display = "none";
-  document.getElementById("divPila").style.display = "none";
-  document.getElementById("divMortabilidad").style.display = "none";
-  document.getElementById("divAlevines").style.display = "none";
-  document.getElementById("divinveConcentrado").style.display = "none";
-  document.getElementById("contenedor-toast").style.display = "none";
-  document.getElementById("divTrazabilidad").style.display = "none";
-  document.getElementById("divMuestreo").style.display = "none";
-}
-function showDiv2() {
-  document.getElementById("divConcentrado").style.display = "inline";
-  document.getElementById("divVentas").style.display = "none";
-  document.getElementById("divAlimentacion").style.display = "none";
-  document.getElementById("divPila").style.display = "none";
-  document.getElementById("divMortabilidad").style.display = "none";
-  document.getElementById("divAlevines").style.display = "none";
-  document.getElementById("divinveConcentrado").style.display = "none";
-  concentrados();
-  document.getElementById("contenedor-toast").style.display = "none";
-  document.getElementById("divTrazabilidad").style.display = "none";
-  document.getElementById("divMuestreo").style.display = "none";
-}
+// function showDiv1() {
+//   document.getElementById("divConcentrado").style.display = "none";
+//   document.getElementById("divVentas").style.display = "inline";
+//   document.getElementById("divAlimentacion").style.display = "none";
+//   document.getElementById("divPila").style.display = "none";
+//   document.getElementById("divMortabilidad").style.display = "none";
+//   document.getElementById("divAlevines").style.display = "none";
+//   document.getElementById("divinveConcentrado").style.display = "none";
+//   document.getElementById("contenedor-toast").style.display = "none";
+//   document.getElementById("divTrazabilidad").style.display = "none";
+//   document.getElementById("divMuestreo").style.display = "none";
+// }
+// function showDiv2() {
+//   document.getElementById("divConcentrado").style.display = "inline";
+//   document.getElementById("divVentas").style.display = "none";
+//   document.getElementById("divAlimentacion").style.display = "none";
+//   document.getElementById("divPila").style.display = "none";
+//   document.getElementById("divMortabilidad").style.display = "none";
+//   document.getElementById("divAlevines").style.display = "none";
+//   document.getElementById("divinveConcentrado").style.display = "none";
+//   concentrados();
+//   document.getElementById("contenedor-toast").style.display = "none";
+//   document.getElementById("divTrazabilidad").style.display = "none";
+//   document.getElementById("divMuestreo").style.display = "none";
+// }
 
-function ShowDiv3() {
-  document.getElementById("divConcentrado").style.display = "none";
-  document.getElementById("divVentas").style.display = "none";
-  document.getElementById("divAlimentacion").style.display = "inline";
-  document.getElementById("divPila").style.display = "none";
-  document.getElementById("divMortabilidad").style.display = "none";
-  document.getElementById("divAlevines").style.display = "none";
-  document.getElementById("divinveConcentrado").style.display = "none";
-  alimentacion();
-  selectInveConcentrado();
-  document.getElementById("contenedor-toast").style.display = "none";
-  document.getElementById("divTrazabilidad").style.display = "none";
-  document.getElementById("divMuestreo").style.display = "none";
-}
+// function ShowDiv3() {
+//   document.getElementById("divConcentrado").style.display = "none";
+//   document.getElementById("divVentas").style.display = "none";
+//   document.getElementById("divAlimentacion").style.display = "inline";
+//   document.getElementById("divPila").style.display = "none";
+//   document.getElementById("divMortabilidad").style.display = "none";
+//   document.getElementById("divAlevines").style.display = "none";
+//   document.getElementById("divinveConcentrado").style.display = "none";
+//   alimentacion();
+//   selectInveConcentrado();
+//   document.getElementById("contenedor-toast").style.display = "none";
+//   document.getElementById("divTrazabilidad").style.display = "none";
+//   document.getElementById("divMuestreo").style.display = "none";
+// }
 
-function showDiv4() {
-  tablePilas();
-  document.getElementById("divConcentrado").style.display = "none";
-  document.getElementById("divVentas").style.display = "none";
-  document.getElementById("divAlimentacion").style.display = "none";
-  document.getElementById("divPila").style.display = "inline";
-  document.getElementById("divMortabilidad").style.display = "none";
-  document.getElementById("divAlevines").style.display = "none";
-  document.getElementById("divinveConcentrado").style.display = "none";
-  document.getElementById("contenedor-toast").style.display = "none";
-  document.getElementById("divTrazabilidad").style.display = "none";
-  document.getElementById("divMuestreo").style.display = "none";
-}
+// function showDiv4() {
+//   tablePilas();
+//   document.getElementById("divConcentrado").style.display = "none";
+//   document.getElementById("divVentas").style.display = "none";
+//   document.getElementById("divAlimentacion").style.display = "none";
+//   document.getElementById("divPila").style.display = "inline";
+//   document.getElementById("divMortabilidad").style.display = "none";
+//   document.getElementById("divAlevines").style.display = "none";
+//   document.getElementById("divinveConcentrado").style.display = "none";
+//   document.getElementById("contenedor-toast").style.display = "none";
+//   document.getElementById("divTrazabilidad").style.display = "none";
+//   document.getElementById("divMuestreo").style.display = "none";
+// }
 
-function showDiv5() {
-  tableMortabilidad();
-  document.getElementById("divConcentrado").style.display = "none";
-  document.getElementById("divVentas").style.display = "none";
-  document.getElementById("divAlimentacion").style.display = "none";
-  document.getElementById("divPila").style.display = "none";
-  document.getElementById("divMortabilidad").style.display = "inline";
-  document.getElementById("divAlevines").style.display = "none";
-  document.getElementById("divinveConcentrado").style.display = "none";
-  document.getElementById("contenedor-toast").style.display = "none";
-  document.getElementById("divTrazabilidad").style.display = "none";
-  document.getElementById("divMuestreo").style.display = "none";
-  mostrarPilaInactivas();
-}
+// function showDiv5() {
+//   tableMortabilidad();
+//   document.getElementById("divConcentrado").style.display = "none";
+//   document.getElementById("divVentas").style.display = "none";
+//   document.getElementById("divAlimentacion").style.display = "none";
+//   document.getElementById("divPila").style.display = "none";
+//   document.getElementById("divMortabilidad").style.display = "inline";
+//   document.getElementById("divAlevines").style.display = "none";
+//   document.getElementById("divinveConcentrado").style.display = "none";
+//   document.getElementById("contenedor-toast").style.display = "none";
+//   document.getElementById("divTrazabilidad").style.display = "none";
+//   document.getElementById("divMuestreo").style.display = "none";
+//   mostrarPilaInactivas();
+// }
 
-function wDiv6() {
-  tableMortabilidad();
-  document.getElementById("divConcentrado").style.display = "none";
-  document.getElementById("divVentas").style.display = "none";
-  document.getElementById("divAlimentacion").style.display = "none";
-  document.getElementById("divPila").style.display = "none";
-  document.getElementById("divMortabilidad").style.display = "none";
-  document.getElementById("divAlevines").style.display = "inline";
-  document.getElementById("divinveConcentrado").style.display = "none";
-  tableAlevines();
-  mostrarPilaDisponibles();
-  document.getElementById("contenedor-toast").style.display = "none";
-  document.getElementById("divTrazabilidad").style.display = "none";
-  document.getElementById("divMuestreo").style.display = "none";
-}
+// function wDiv6() {
+//   tableMortabilidad();
+//   document.getElementById("divConcentrado").style.display = "none";
+//   document.getElementById("divVentas").style.display = "none";
+//   document.getElementById("divAlimentacion").style.display = "none";
+//   document.getElementById("divPila").style.display = "none";
+//   document.getElementById("divMortabilidad").style.display = "none";
+//   document.getElementById("divAlevines").style.display = "inline";
+//   document.getElementById("divinveConcentrado").style.display = "none";
+//   tableAlevines();
+//   mostrarPilaDisponibles();
+//   document.getElementById("contenedor-toast").style.display = "none";
+//   document.getElementById("divTrazabilidad").style.display = "none";
+//   document.getElementById("divMuestreo").style.display = "none";
+// }
 
-function showDiv7() {
-  document.getElementById("divConcentrado").style.display = "none";
-  document.getElementById("divVentas").style.display = "none";
-  document.getElementById("divAlimentacion").style.display = "none";
-  document.getElementById("divPila").style.display = "none";
-  document.getElementById("divMortabilidad").style.display = "none";
-  document.getElementById("divAlevines").style.display = "none";
-  document.getElementById("divinveConcentrado").style.display = "inline";
-  document.getElementById("divTrazabilidad").style.display = "none";
-  document.getElementById("divMuestreo").style.display = "none";
-  tableInveConcentrado();
-}
+// function showDiv7() {
+//   document.getElementById("divConcentrado").style.display = "none";
+//   document.getElementById("divVentas").style.display = "none";
+//   document.getElementById("divAlimentacion").style.display = "none";
+//   document.getElementById("divPila").style.display = "none";
+//   document.getElementById("divMortabilidad").style.display = "none";
+//   document.getElementById("divAlevines").style.display = "none";
+//   document.getElementById("divinveConcentrado").style.display = "inline";
+//   document.getElementById("divTrazabilidad").style.display = "none";
+//   document.getElementById("divMuestreo").style.display = "none";
+//   tableInveConcentrado();
+// }
 
-function showDiv8() {
-  document.getElementById("divConcentrado").style.display = "none";
-  document.getElementById("divVentas").style.display = "none";
-  document.getElementById("divAlimentacion").style.display = "none";
-  document.getElementById("divPila").style.display = "none";
-  document.getElementById("divMortabilidad").style.display = "none";
-  document.getElementById("divAlevines").style.display = "none";
-  document.getElementById("divinveConcentrado").style.display = "none";
-  document.getElementById("divTrazabilidad").style.display = "inline";
-  document.getElementById("divMuestreo").style.display = "none";
-  tableTrazabilidad();
-  mostrarPilaDisponibles();
-}
+// function showDiv8() {
+//   document.getElementById("divConcentrado").style.display = "none";
+//   document.getElementById("divVentas").style.display = "none";
+//   document.getElementById("divAlimentacion").style.display = "none";
+//   document.getElementById("divPila").style.display = "none";
+//   document.getElementById("divMortabilidad").style.display = "none";
+//   document.getElementById("divAlevines").style.display = "none";
+//   document.getElementById("divinveConcentrado").style.display = "none";
+//   document.getElementById("divTrazabilidad").style.display = "inline";
+//   document.getElementById("divMuestreo").style.display = "none";
+//   tableTrazabilidad();
+//   mostrarPilaDisponibles();
+// }
 
-function showDiv9() {
-  document.getElementById("divConcentrado").style.display = "none";
-  document.getElementById("divVentas").style.display = "none";
-  document.getElementById("divAlimentacion").style.display = "none";
-  document.getElementById("divPila").style.display = "none";
-  document.getElementById("divMortabilidad").style.display = "none";
-  document.getElementById("divAlevines").style.display = "none";
-  document.getElementById("divinveConcentrado").style.display = "none";
-  document.getElementById("divTrazabilidad").style.display = "none";
-  document.getElementById("divMuestreo").style.display = "Inline";
-  tableMuestreo();
-  mostrarPilaInactivas();
-}
+// function showDiv9() {
+//   document.getElementById("divConcentrado").style.display = "none";
+//   document.getElementById("divVentas").style.display = "none";
+//   document.getElementById("divAlimentacion").style.display = "none";
+//   document.getElementById("divPila").style.display = "none";
+//   document.getElementById("divMortabilidad").style.display = "none";
+//   document.getElementById("divAlevines").style.display = "none";
+//   document.getElementById("divinveConcentrado").style.display = "none";
+//   document.getElementById("divTrazabilidad").style.display = "none";
+//   document.getElementById("divMuestreo").style.display = "Inline";
+//   tableMuestreo();
+//   mostrarPilaInactivas();
+// }
 
 const contenedorBotones = document.getElementById("contenedor-botones");
 const contenedorToast = document.getElementById("contenedor-toast");
