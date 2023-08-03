@@ -1,0 +1,13 @@
+apiVersion: v1 
+kind: Pod
+metadata:
+    name: app-pod
+    labels:
+          app: app
+          type: mvc
+spec:
+  containers:  
+    - name: app-pod
+      image: toro1/aprotila:v1.0
+      ports:
+        - containerPort: 8080
