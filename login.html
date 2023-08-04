@@ -91,6 +91,34 @@
             window.location.href = "login.html";
         }
       }
+      
+      //encriptar contraseña
+      
+      function encriptarPassword() {
+            const password = document.getElementById('contraseña').value;
+
+            if (!password) {
+                alert('Por favor, ingresa una contraseña.');
+                return;
+            }
+
+            // Envía la contraseña al servidor para su encriptación
+            fetch('http://localhost:3000/encriptar-contrasena', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ password }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Muestra la contraseña encriptada en una ventana de alerta (solo para demostración)
+                alert('Contraseña encriptada: ' + data.hashedPassword);
+            })
+            .catch(error => {
+                console.error('Error al encriptar la contraseña:', error);
+            });
+        }
 
     </script>
     
@@ -102,7 +130,7 @@
       return true;
   </script>
   <script src="login.js"></script>
-  <script src="sha256.js"></script>
+  <script src="encryption.js"></script>
 </body>
 
 </html>
