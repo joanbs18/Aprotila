@@ -354,6 +354,65 @@ app.get("/ultimoTrazabi", (req, res) => {
   }
 });
 
+app.get("/ultimoVentas", (req, res) => {
+  try {
+    let sql = `SELECT Fecha,IdPila_fk,Tilapia FROM controlventa WHERE IdPila_fk= ${req.query.Pila}`;
+    connection.query(sql, function (error, results, fields) {
+      if (error) {
+        connection.end();
+        throw error;
+      }
+      res.status(200).json({
+        msg: "Mensaje desde el metodo GET",
+        results,
+      });
+    });
+  } catch (err) {
+    console.log(err);
+    throw new Error("Error en el metodo GET");
+  }
+});
+
+
+app.get("/muestreoEstados", (req, res) => {
+  try {
+    let sql = `SELECT tb.IdPila_fk,tb.Fecha,tb.Lote,tb.Aprobacion FROM tbmuestreo as tb ORDER BY tb.IdPila_fk DESC LIMIT 1;`;
+    connection.query(sql, function (error, results, fields) {
+      if (error) {
+        connection.end();
+        throw error;
+      }
+      res.status(200).json({
+        msg: "Mensaje desde el metodo GET",
+        results,
+      });
+    });
+  } catch (err) {
+    console.log(err);
+    throw new Error("Error en el metodo GET");
+  }
+});
+
+app.get("/mostrarUsuarios", (req, res) => {
+  try {
+    let sql = `SELECT Nombre,Contraseña from tbusuarios`;
+    connection.query(sql, function (error, results, fields) {
+      if (error) {
+        connection.end();
+        throw error;
+      }
+      res.status(200).json({
+        msg: "Mensaje desde el metodo GET",
+        results,
+      });
+    });
+  } catch (err) {
+    console.log(err);
+    throw new Error("Error en el metodo GET");
+  }
+});
+
+
 app.get("/insertMortabilidad", (req, res) => {
   campos = [];
   campos.push(req.query.Id);

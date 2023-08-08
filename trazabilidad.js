@@ -158,6 +158,7 @@ function fechaTrazabilidad(Pila) {
 const peces = (data) => {
   console.log(mostrarFecha(data[0].Fecha));
   let totalMuertos = 0;
+  let totalVentas=0;
   for (var i = 0; i < VMortabilidad.length; i++) {
     if (
       VMortabilidad[i].IdPila == data[0].IdPila_fk_Final &&
@@ -168,15 +169,28 @@ const peces = (data) => {
       console.log(VMortabilidad[i].IdPila, " ", pilaSeleccionada);
     }
   }
+  for (var i = 0; i < ventas.length; i++) {
+    if (
+      ventas[i].IdPila_fk == data[0].IdPila_fk_Final &&
+      mostrarFecha(data[0].Fecha) >= mostrarFecha(ventas[i].Fecha)
+    ) {
+
+      totalVentas += ventas[i].Tilapia;
+  }
+
+
+
   document.getElementById("Cantidad_trazabilidad").value =
-    data[0].Cantidad - totalMuertos;
+    data[0].Cantidad - totalMuertos-totalVentas;
 };
+}
 
 var pilaSeleccionada7;
 var optionPila7 = document.getElementById("menupila_trazabilidadInicial");
 optionPila7.addEventListener("change", function () {
   pilaSeleccionada7 = optionPila7.options[optionPila7.selectedIndex].text;
   Mortabilidad();
+  ventas();
   fechaTrazabilidad(pilaSeleccionada7);
 });
 var pilaSeleccionada8;
@@ -206,3 +220,51 @@ function mostrarFecha(fecha) {
   fechaArreglada = fechaConFormato.format("YYYY-MM-DD");
   return fechaArreglada;
 }
+
+function ventas() {
+  fetch("http://localhost:3000/ultimoVentas", {
+    method: "get",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((resp) => resp.json())
+    .then((datos) => mostrarData(datos.results))
+    .catch((err) => seeLoad());
+}
+
+function seeLoad() {
+  cloud = document.getElementById("cloud_load");
+  cloud.style.display = "flex";
+}
+
+var ventas = [];
+const mostrarData = (data) => {
+  ventas = data;
+}
+function mostrarTras() {
+  var Lote = prompt("Ingrese el Lote:", "");
+  fetch(`http://localhost:3000/mostrarTrazabilidad?Lote=${Lote}`, {
+    method: "get",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((resp) => resp.json())
+    .then((datos) => mostrarTrza(datos.results, Lote))
+    .catch((err) => seeLoad());
+}
+
+const mostrarTrza = (data, Lote) => {
+  let tab = "";
+  tab = `<h2> Lote: ${Lote}</h2>`;
+  tab += `<h3>Trazabilidad</h3>`;
+  for (var i = 0; i < data.length; i++) {
+    if (i == 0) {
+      tab += `<p>Pila Inicial <i class="fa-solid fa-arrow-right fa-beat-fade"></i> ${data[i].Final} Cantidad=(${data[i].Cantidad})</p>`;
+    } else {
+      tab += `<p><i class="fa-solid fa-arrow-right fa-beat-fade"></i> Pila ${data[i].Final} CantidadPescados=(${data[i].Cantidad}) </p>`;
+    }
+  }
+  document.getElementById("modalTrazabilidad").innerHTML = tab;
+};

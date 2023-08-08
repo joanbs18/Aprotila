@@ -32,15 +32,19 @@
     </div>
     <ul class="nav-links" id="nav-links">
 
-        <!-- <li>
-            <a href="#">
-                <i class='bx bx-grid-alt'></i>
-                <span class="link_name">Inventario</span>
-            </a>
-            <ul class="sub-menu blank">
-                <li><a class="link_name" href="#">Inventario</a></li>
+        <li>
+            <div class="iocn-link">
+                <a href="Admin.html">
+                    <i class="fa-solid fa-house-user"></i>
+                    <span class="link_name">Dashboard</span>
+                </a>
+            </div>
+            <ul class="sub-menu">
+                <li><a class="link_name" href="Admin.html">Dashboard</a></li>
+
+
             </ul>
-        </li> -->
+        </li>
         <li>
             <div class="iocn-link">
                 <a href="ModuloInvetario.html">
@@ -202,23 +206,15 @@
 
 
 </section>
-<section class="formu-modal fventas" id="formu-modal">
+<section class="formu-modal fventas" id="formuventa">
     <div class="form">
         <div class="closeForm">
-            <i class="fas fa-times" id="closeModal"></i>
+            <i class="fas fa-times" id="closeModal_venta"></i>
         </div>
 
         <h4>Añadir Venta</h4>
         <form class="formulario" action="">
-            <div class="select">
 
-                <select id="encargado">
-                    <option disabled selected="">Encargado</option>
-                    <option value="Encargado 1">Juan</option>
-                    <option value="Encargado 2">Maria</option>
-                    <option value="Encargado 3">Pedro</option>
-                </select>
-            </div>
             <div class="select pila">
 
                 <select id="menupila">
@@ -256,7 +252,7 @@
                 <label>Precio</label>
             </div>
             <div class="box">
-                <input id="total" type="number" name="uname" required>
+                <input id="total" type="number" name="uname" required disabled>
                 <label>Total</label>
             </div>
             <div class="box">
@@ -267,13 +263,17 @@
                 <input id="numero" type="text" name="uname" required>
                 <label>Número</label>
             </div>
-            <div class="select">
+            <div class="select pila">
                 <select id="pago" name="pago">
                     <option disabled selected="">Tipo Pago</option>
                     <option value="efectivo">Efectivo</option>
                     <option value="sinpe">Sinpe</option>
                     <option value="transferencia">Transferencia</option>
                 </select>
+            </div>
+            <div class="box">
+                <input id="iva" type="text" name="uname" required disabled>
+                <label>Iva</label>
             </div>
             <button class="btnForm" type="button" id="btnAdd">AÑADIR</button>
         </form>
@@ -285,7 +285,8 @@
 
 </div>
 <script src="https://momentjs.com/downloads/moment.js"></script>
-<script src="script.js"></script>
+<script src="venta.js"></script>
+<script src="slider.js"></script>
 <script src="excel.js"></script>
 <!-- Bootstrap-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
@@ -307,7 +308,17 @@
     $(document).ready(function () {
         $('#table_venta').DataTable();
     });
+    var add = document.getElementById("add");
+    add.addEventListener("click", function () {
+        document.getElementById("formuventa").style.display = "flex";
+    });
 
+    var closeModal_venta = document.getElementById(
+        "closeModal_venta"
+    );
+    closeModal_venta.addEventListener("click", function () {
+        document.getElementById("formuventa").style.display = "none";
+    });
 
 
 </script>

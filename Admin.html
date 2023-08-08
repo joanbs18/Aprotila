@@ -29,15 +29,19 @@
     </div>
     <ul class="nav-links" id="nav-links">
 
-        <!-- <li>
-            <a href="#">
-                <i class='bx bx-grid-alt'></i>
-                <span class="link_name">Inventario</span>
-            </a>
-            <ul class="sub-menu blank">
-                <li><a class="link_name" href="#">Inventario</a></li>
+        <li>
+            <div class="iocn-link">
+                <a href="Admin.html">
+                    <i class="fa-solid fa-house-user"></i>
+                    <span class="link_name">Dashboard</span>
+                </a>
+            </div>
+            <ul class="sub-menu">
+                <li><a class="link_name" href="Admin.html">Dashboard</a></li>
+
+
             </ul>
-        </li> -->
+        </li>
         <li>
             <div class="iocn-link">
                 <a href="ModuloInvetario.html">
@@ -54,7 +58,7 @@
         <li>
             <div class="iocn-link">
                 <a href="ModuloVentas.html">
-                    <i id="this" class="fa-solid fa-money-check-dollar"></i>
+                    <i class="fa-solid fa-hand-holding-dollar"></i>
                     <span class="link_name">Modulo Ventas</span>
                 </a>
             </div>
@@ -74,20 +78,20 @@
         <li>
             <div class="iocn-link">
                 <a href="#">
-                    <i class="fa-solid fa-fish"></i>
+                    <i class="fa-solid fa-fish-fins"></i>
                     <span class="link_name">Control Peces</span>
                 </a>
                 <i class='bx bxs-chevron-down arrow'></i>
             </div>
             <ul class="sub-menu">
                 <li><a class="link_name" href="#">Control Peces</a></li>
-                <li><a href="ModuloAlimentacion.html">Alimentación</a></li>
+                <li><a href="ModuloAlevines.html">Ingreso Alevines</a></li>
                 <li><a href="ModuloMortabilidad.html">Mortabilidad</a></li>
             </ul>
         </li>
         <li>
             <a href="ModuloIngreso.html">
-                <i class="fa-solid fa-whiskey-glass"></i>
+                <i class="fa-solid fa-truck-arrow-right"></i>
                 <span class="link_name">Modulo Ingreso</span>
             </a>
             <ul class="sub-menu blank">
@@ -95,12 +99,12 @@
             </ul>
         </li>
         <li>
-            <a href="ModuloAlevines.html">
-                <i class="fa-solid fa-fish-fins"></i>
-                <span class="link_name">Ingreso Alevines</span>
+            <a href="ModuloGasto.html">
+                <i class="fa-solid fa-money-bill-trend-up fa-rotate-180"></i>
+                <span class="link_name">Gastos</span>
             </a>
             <ul class="sub-menu blank">
-                <li><a class="link_name" href="ModuloAlevines.html">Alevines</a></li>
+                <li><a class="link_name" href="ModuloGasto.html">Gastos</a></li>
             </ul>
         </li>
 
@@ -162,19 +166,19 @@
                 <li>
                     <i class="fa-solid fa-money-bill-trend-up fa-bounce"></i>
                    
-                    <span class="text" id="citas">
+                    <span class="text" id="ventasTotales">
 
                     </span>
                 </li>
                 <li>
                     <i class="fa-solid fa-money-bill fa-bounce"></i>
-                    <span class="text" id="medico">
+                    <span class="text" id="DineroTotal">
 
                     </span>
                 </li>
                 <li>
-                    <i class='bx bxs-group'></i>
-                    <span class="text" id="paciente">
+                    <i class="fa-solid fa-water fa-bounce"></i>
+                    <span class="text" id="pilasActivas">
 
                     </span>
                 </li>
@@ -184,59 +188,22 @@
             <div class="table-data">
                 <div class="order">
                     <div class="head">
-                        <h3>Ultimas Citas</h3>
+                        <h3>Trazabilidad</h3>
 
                     </div>
                     <table>
                         <thead>
                             <tr>
-                                <th>Cedula</th>
-                                <th>Paciente</th>
+                                
+                                <th>Pila</th>
+                                <th>Lote</th>
                                 <th>Fecha</th>
-                                <th>Estado</th>
+                                <th>Muestreo</th>
 
                             </tr>
                         </thead>
-                        <tbody id="ultimasC">
-                            <tr>
-                                <td>
-
-                                    <p>John Doe</p>
-                                </td>
-                                <td>01-10-2021</td>
-                                <td><span class="status completed">Completed</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p>John Doe</p>
-                                </td>
-                                <td>01-10-2021</td>
-                                <td><span class="status pending">Pending</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-
-                                    <p>John Doe</p>
-                                </td>
-                                <td>01-10-2021</td>
-                                <td><span class="status process">Process</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-
-                                    <p>John Doe</p>
-                                </td>
-                                <td>01-10-2021</td>
-                                <td><span class="status pending">Pending</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-
-                                    <p>John Doe</p>
-                                </td>
-                                <td>01-10-2021</td>
-                                <td><span class="status completed">Completed</span></td>
-                            </tr>
+                        <tbody id="muestreos">
+                           
                         </tbody>
                     </table>
                 </div>
@@ -274,7 +241,8 @@
     </div>
 </section>
 <script src="https://momentjs.com/downloads/moment.js"></script>
-<script src="script.js"></script>
+<script src="admin.js"></script>
+<script src="slider.js"></script>
 <script src="excel.js"></script>
 <!-- Bootstrap-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
