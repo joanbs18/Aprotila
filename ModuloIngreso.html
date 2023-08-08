@@ -57,7 +57,7 @@
         <li>
             <div class="iocn-link">
                 <a href="ModuloVentas.html">
-                    <i id="this" class="fa-solid fa-money-check-dollar"></i>
+                    <i class="fa-solid fa-hand-holding-dollar"></i>
                     <span class="link_name">Modulo Ventas</span>
                 </a>
             </div>
@@ -77,20 +77,20 @@
         <li>
             <div class="iocn-link">
                 <a href="#">
-                    <i class="fa-solid fa-fish"></i>
+                    <i class="fa-solid fa-fish-fins"></i>
                     <span class="link_name">Control Peces</span>
                 </a>
                 <i class='bx bxs-chevron-down arrow'></i>
             </div>
             <ul class="sub-menu">
                 <li><a class="link_name" href="#">Control Peces</a></li>
-                <li><a href="ModuloAlimentacion.html">Alimentación</a></li>
+                <li><a href="ModuloAlevines.html">Ingreso Alevines</a></li>
                 <li><a href="ModuloMortabilidad.html">Mortabilidad</a></li>
             </ul>
         </li>
         <li>
             <a href="ModuloIngreso.html">
-                <i class="fa-solid fa-whiskey-glass"></i>
+                <i class="fa-solid fa-truck-arrow-right"></i>
                 <span class="link_name">Modulo Ingreso</span>
             </a>
             <ul class="sub-menu blank">
@@ -98,12 +98,12 @@
             </ul>
         </li>
         <li>
-            <a href="ModuloAlevines.html">
-                <i class="fa-solid fa-fish-fins"></i>
-                <span class="link_name">Ingreso Alevines</span>
+            <a href="ModuloGasto.html">
+                <i class="fa-solid fa-money-bill-trend-up fa-rotate-180"></i>
+                <span class="link_name">Gastos</span>
             </a>
             <ul class="sub-menu blank">
-                <li><a class="link_name" href="ModuloAlevines.html">Alevines</a></li>
+                <li><a class="link_name" href="ModuloGasto.html">Gastos</a></li>
             </ul>
         </li>
 
@@ -213,6 +213,7 @@
         <h4>Añadir Ingreso</h4>
         <form class="formulario" action="">
             <div class="select_withAdd">
+                <h5>Tipo Ingreso</h5>
                 <div class="select pila">
 
                     <select id="select_tipo_ingreso">
@@ -221,14 +222,14 @@
 
 
                 </div>
-                <ul class="wrapper">
+                <ul class="wrapper" id="add_tipo_ingreso">
                     <li class="icon black">
                         <span class="tooltip">Tipo</span>
                         <span> <i class="fa-solid fa-circle-plus"></i></span>
                     </li>
                 </ul>
             </div>
-            <div class="box">
+            <div class="box marca">
                 <input id="marca_ingreso" type="text" name="uname" required>
                 <label>Marca</label>
             </div>
@@ -240,11 +241,14 @@
                 <input id="vencimiento" type="date" name="uname" required>
                 <label>Fecha Vencimiento</label>
             </div>
-            <div class="select pila">
+            <div class="select_withAdd">
+                <h5>Proveedor</h5>
+                <div class="select pila">
 
-                <select id="select_proveedor_ingreso">
+                    <select id="select_proveedor_ingreso">
 
-                </select>
+                    </select>
+                </div>
             </div>
             <div class="box">
                 <input id="precio_ingreso" type="number" name="uname" required>
@@ -264,10 +268,39 @@
 
     </div>
 </section>
+<section class="formu-modal fingreso_tipo" id="formuingreso_tipo">
+    <div class="form tipo_ingreso">
+        <div class="closeForm">
+            <i class="fas fa-times" id="close_fingreso_tipo"></i>
+        </div>
+
+        <h4>Añadir Tipo Ingreso</h4>
+        <form class="formulario" action="">
+            
+            <div class="box">
+                <input id="tipo_ingreso_nombre" type="text" name="uname" required>
+                <label>Nuevo Tipo de Ingreso</label>
+            </div>
+            <div class="select pila">
+
+                <select id="select_unidad_medida">
+                    <option disabled selected="">Tipo de Unidad</option>
+                    <option>Kg</option>
+                    <option>Uni</option>
+                    <option>Litro</option>
+                </select>
+            </div>
+
+            <button type="button" class="btnForm" onclick="addTipoIngreso(),clearFormData()">AÑADIR</button>
+        </form>
+
+    </div>
+</section>
 
 
 <script src="https://momentjs.com/downloads/moment.js"></script>
 <script src="Ingreso.js"></script>
+
 <script src="excel.js"></script>
 <!-- Bootstrap-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
@@ -286,18 +319,49 @@
 
 
 <script>
-   
+
     //ES PARA METERLE BOOSTRAP A LA TABLA DE --------------------------
     $(document).ready(function () {
         $('#table_ingreso').DataTable();
     });
+
+///ES PARA CERRAR Y ABRIR EL MENÚ DE LA IZQUIERDA
+let arrow = document.querySelectorAll(".arrow");
+for (var i = 0; i < arrow.length; i++) {
+  arrow[i].addEventListener("click", (e) => {
+    let arrowParent = e.target.parentElement.parentElement;
+    arrowParent.classList.toggle("showMenu");
+  });
+}
+
+
+let sidebar = document.querySelector(".sidebar");
+let sidebarBtn = document.getElementById("menu");
+sidebarBtn.addEventListener("click", () => {
+  sidebar.classList.toggle("close");
+  var item = document.getElementById("sidebar");
+  var hasClase2 = item.classList.contains("close");
+});
+let nav_links = document.getElementById("nav-links");
+sidebar.addEventListener("click", function (event) {
+  if (event.target == nav_links) {
+    sidebar.classList.toggle("close");
+  }
+});
+
+let main = document.getElementById("main");
+main.addEventListener("click", function (event) {
+  if (!sidebar.classList.contains("close")) {
+    sidebar.classList.toggle("close");
+  }
+});
 
 
     //-----------------------PARA ABRIR O CERRAR EL MODAL DE INSERT INGRESO---------------------
     var open_fingreso = document.getElementById("open_Ingreso");
     open_fingreso.addEventListener("click", function () {
         document.getElementById("formuingreso").style.display = "flex";
-       
+
     });
 
     var close_fingreso = document.getElementById("close_fingreso");
@@ -305,7 +369,22 @@
         document.getElementById("formuingreso").style.display = "none";
     });
 
-    
+
+    var add_tipo_ingreso = document.getElementById("add_tipo_ingreso");
+    add_tipo_ingreso.addEventListener("click", function () {
+        document.getElementById("formuingreso").style.display = "none";
+        document.getElementById("formuingreso_tipo").style.display = "flex";
+
+    });
+
+    var close_fingreso_tipo = document.getElementById("close_fingreso_tipo");
+    close_fingreso_tipo.addEventListener("click", function () {
+        document.getElementById("formuingreso_tipo").style.display = "none";
+        document.getElementById("formuingreso").style.display = "flex";
+    });
+
+
+
 //------------------------------------------------------------------------------------------
 
 

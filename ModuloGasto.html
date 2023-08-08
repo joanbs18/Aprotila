@@ -43,86 +43,86 @@
         </li> -->
         <li>
             <div class="iocn-link">
-                <a href="#">
-                    <i class='bx bx-grid-alt' onclick="showDiv7()"></i>
-                    <span class="link_name" onclick="showDiv7()">Inventario</span>
+                <a href="ModuloInvetario.html">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="link_name">Inventario</span>
                 </a>
             </div>
             <ul class="sub-menu">
-                <li><a class="link_name" href="#" onclick="showDiv7()">Inventario</a></li>
+                <li><a class="link_name" href="ModuloInvetario.html">Inventario</a></li>
 
 
             </ul>
         </li>
-        <li onclick="showDiv1()">
+        <li>
             <div class="iocn-link">
-                <a href="#">
-                    <i id="this" class="fa-solid fa-money-check-dollar"></i>
+                <a href="ModuloVentas.html">
+                    <i class="fa-solid fa-hand-holding-dollar"></i>
                     <span class="link_name">Modulo Ventas</span>
                 </a>
             </div>
             <ul class="sub-menu blank">
-                <li><a class="link_name" href="#">Ventas</a></li>
+                <li><a class="link_name" href="ModuloVentas.html">Ventas</a></li>
             </ul>
         </li>
-        <li onclick="showDiv4()">
-            <a href="#">
+        <li>
+            <a href="ModuloPilas.html">
                 <i class="fa-solid fa-water"></i>
                 <span class="link_name">Modulo Pilas</span>
             </a>
             <ul class="sub-menu blank">
-                <li><a class="link_name" href="#">Pilas</a></li>
+                <li><a class="link_name" href="ModuloPilas.html">Pilas</a></li>
             </ul>
         </li>
         <li>
             <div class="iocn-link">
                 <a href="#">
-                    <i class="fa-solid fa-fish"></i>
+                    <i class="fa-solid fa-fish-fins"></i>
                     <span class="link_name">Control Peces</span>
                 </a>
                 <i class='bx bxs-chevron-down arrow'></i>
             </div>
             <ul class="sub-menu">
                 <li><a class="link_name" href="#">Control Peces</a></li>
-                <li><a href="ModuloAlimentacion.html">Alimentación</a></li>
-                <li><a href="#" onclick="showDiv5()">Mortabilidad</a></li>
+                <li><a href="ModuloAlevines.html">Ingreso Alevines</a></li>
+                <li><a href="ModuloMortabilidad.html">Mortabilidad</a></li>
             </ul>
         </li>
-        <li onclick="showDiv2()">
-            <a href="#">
-                <i class="fa-solid fa-whiskey-glass"></i>
-                <span class="link_name">Modulo Concentrado</span>
+        <li>
+            <a href="ModuloIngreso.html">
+                <i class="fa-solid fa-truck-arrow-right"></i>
+                <span class="link_name">Modulo Ingreso</span>
             </a>
             <ul class="sub-menu blank">
-                <li><a class="link_name" href="#">Modulo Concentado</a></li>
+                <li><a class="link_name" href="ModuloIngreso.html">Modulo Ingreso</a></li>
             </ul>
         </li>
-        <li onclick="showDiv6()">
-            <a href="#">
-                <i class="fa-solid fa-fish-fins"></i>
-                <span class="link_name">Ingreso Alevines</span>
+        <li>
+            <a href="ModuloGasto.html">
+                <i class="fa-solid fa-money-bill-trend-up fa-rotate-180"></i>
+                <span class="link_name">Gastos</span>
             </a>
             <ul class="sub-menu blank">
-                <li><a class="link_name" href="#">Alevines</a></li>
+                <li><a class="link_name" href="ModuloGasto.html">Gastos</a></li>
             </ul>
         </li>
 
-        <li onclick="showDiv8()">
-            <a href="#">
+        <li>
+            <a href="ModuloTrazabilidad.html">
                 <i class='bx bx-cog'></i>
                 <span class="link_name">Trazabilidad</span>
             </a>
             <ul class="sub-menu blank">
-                <li><a class="link_name" href="#">Trazabilidad</a></li>
+                <li><a class="link_name" href="ModuloTrazabilidad.html">Trazabilidad</a></li>
             </ul>
         </li>
-        <li onclick="showDiv9()">
-            <a href="#">
+        <li>
+            <a href="ModuloMuestreo.html">
                 <i class="fa-solid fa-eye"></i>
                 <span class="link_name">Muestreo</span>
             </a>
             <ul class="sub-menu blank">
-                <li><a class="link_name" href="#">Muestreo</a></li>
+                <li><a class="link_name" href="ModuloMuestreo.html">Muestreo</a></li>
             </ul>
         </li>
         <li>
@@ -142,12 +142,12 @@
 </div>
 <section class="home-section" id="main">
 
-    <div class="home-content">   
-        <div class="container alimentacion" id="divAlimentacion">
-            <h1 id="title">Alimentación</h1>
+    <div class="home-content">
+        <div class="container gasto" id="divGasto">
+            <h1 id="title">Gastos</h1>
             <div class="crud">
                 <button class="download-button" value="Export to Excel"
-                    onclick="tableToExcel('table_alimentacion', 'Datos Alimentación')">
+                    onclick="tableToExcel('table_gasto', 'Datos de GASTOS')">
                     <div class="docs"><svg class="css-i6dzq1" stroke-linejoin="round" stroke-linecap="round" fill="none"
                             stroke-width="2" stroke="currentColor" height="20" width="20" viewBox="0 0 24 24">
                             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
@@ -166,13 +166,13 @@
                     </div>
                 </button>
                 <div class="icons-BD">
-                    <i class="fa-solid fa-circle-plus" id="add_alimento"></i>
+                    <i class="fa-solid fa-circle-plus" id="add_gasto"></i>
 
                 </div>
 
             </div>
             <div class="table_wratter">
-                <table class="table" id="table_alimentacion">
+                <table class="table" id="table_gasto">
 
 
 
@@ -187,7 +187,7 @@
                         </tr>
                     </thead>
                     <div id="cloud_load" class="cloud_load"><span class="loader"></span></div>
-                    <tbody id="RAlimentacion">
+                    <tbody id="RGasto">
 
 
                     </tbody>
@@ -200,31 +200,37 @@
 
     </div>
 </section>
-<section class="formu-modal fAlimentacion" id="formualimentacion">
-    <div class="form formuAlimentacion">
+<section class="formu-modal fGasto" id="formugasto">
+    <div class="form formuGasto">
         <div class="closeForm">
-            <i class="fas fa-times" id="closeModal_alimento"></i>
+            <i class="fas fa-times" id="closeModal_gasto"></i>
         </div>
 
-        <h4>Añadir Alimentación</h4>
+        <h4>Añadir Gasto</h4>
         <form class="formulario" action="">
-            <div class="select pila">
+            <div class="select_withAdd">
+                <h5>Pila</h5>
+                <div class="select pila">
 
-                <select id="menupila_alimentacion">
+                    <select id="menupila_gasto">
 
-                </select>
+                    </select>
+                </div>
             </div>
-            <div class="select tipo_concentrado">
+            <div class="select_withAdd">
+                <h5>Tipo Gasto</h5>
+                <div class="select pila">
 
-                <select id="select_tipConcentrado">
+                    <select id="select_tipoIngreso_Gasto">
 
-                </select>
+                    </select>
+                </div>
             </div>
             <div class="box">
-                <input id="totalDiario" type="number" name="uname" required>
-                <label>Total Diario</label>
+                <input id="total_gasto" type="number" name="uname" required>
+                <label>Total</label>
             </div>
-            <button type="button" class="btnForm" onclick="addAlimentacion(),clearFormData()"
+            <button type="button" class="btnForm" onclick="addGasto(),clearFormData()"
                 style="cursor: pointer;">AÑADIR</button>
         </form>
 
@@ -232,7 +238,7 @@
 </section>
 
 <script src="https://momentjs.com/downloads/moment.js"></script>
-<script src="script.js"></script>
+<script src="gasto.js"></script>
 <script src="excel.js"></script>
 <!-- Bootstrap-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
@@ -252,16 +258,54 @@
 
 <script>
     $(document).ready(function () {
-        $('#table_alimentacion').DataTable();
+        $('#table_gasto').DataTable();
     });
-   
-   
-    var add_alimento = document.getElementById("add_alimento");
-add_alimento.addEventListener("click", function () {
-  pilas();
-  document.getElementById("formualimentacion").style.display = "flex";
-});
-    
+
+    ///ES PARA CERRAR Y ABRIR EL MENÚ DE LA IZQUIERDA
+    let arrow = document.querySelectorAll(".arrow");
+    for (var i = 0; i < arrow.length; i++) {
+        arrow[i].addEventListener("click", (e) => {
+            let arrowParent = e.target.parentElement.parentElement;
+            arrowParent.classList.toggle("showMenu");
+        });
+    }
+
+
+    let sidebar = document.querySelector(".sidebar");
+    let sidebarBtn = document.getElementById("menu");
+    sidebarBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("close");
+        var item = document.getElementById("sidebar");
+        var hasClase2 = item.classList.contains("close");
+    });
+    let nav_links = document.getElementById("nav-links");
+    sidebar.addEventListener("click", function (event) {
+        if (event.target == nav_links) {
+            sidebar.classList.toggle("close");
+        }
+    });
+
+    let main = document.getElementById("main");
+    main.addEventListener("click", function (event) {
+        if (!sidebar.classList.contains("close")) {
+            sidebar.classList.toggle("close");
+        }
+    });
+
+
+    var add_gasto = document.getElementById("add_gasto");
+    add_gasto.addEventListener("click", function () {
+        mostrarPilaDisponibles();
+        selectTipoIngreso();
+        document.getElementById("formugasto").style.display = "flex";
+    });
+
+    var closeModal_gasto = document.getElementById("closeModal_gasto");
+    closeModal_gasto.addEventListener("click", function () {
+        document.getElementById("formugasto").style.display = "none";
+    });
+
+
 
 </script>
 

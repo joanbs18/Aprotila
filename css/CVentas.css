@@ -261,6 +261,10 @@ html {
   padding: 0;
   table-layout: fixed;
 }
+
+.dataTable{
+  max-width: 1200px;
+}
 .crud {
   display: flex;
   position: relative;
@@ -298,7 +302,19 @@ html {
 
 .select_withAdd {
   display: flex;
-  justify-content: center;
+
+}
+
+.select_withAdd h5{
+  color: #0083e0;
+  position: absolute;
+  font-weight: 400;
+  left: 60px;
+  z-index: 100;
+}
+
+.select_withAdd .select{
+  margin-top: 25px;
 }
 
 .wrapper .icon {
@@ -561,15 +577,18 @@ html {
   display: none;
 }
 
-.formuAlimentacion,
-.formuMortabilidad,
-.formuinveConcentrado {
+.formuGasto,
+.formuMortabilidad {
   max-height: 460px;
 }
-.fAlimentacion,
-.fMortabilidad {
+.fGasto,
+.fMortabilidad,.fingreso_tipo {
   display: none;
   justify-content: center;
+}
+
+.tipo_ingreso{
+  max-height: 300px;
 }
 .ventas {
   animation: slide-up 1000ms forwards;
@@ -820,6 +839,10 @@ label {
 .fecha label{
   transform: translateY(-90%) scale(1.1);
   color: #0083e0;
+}
+
+.marca{
+  margin-top: -30px;
 }
 
 .btnForm {
@@ -1416,7 +1439,61 @@ span:hover {
   }
 
   .select {
-    width: 15em;
+    width: 12em;
+  }
+
+ 
+  
+  .select_withAdd h5{
+    left: 20px;
+  }
+
+  .marca{
+    margin-top: 1px;
+  }
+  
+  .wrapper .icon {
+    margin-top: 10px;
+    margin-right: 40px;
+    width: 30px;
+    height: 30px;
+    font-size: 15px;
+    position: absolute;
+
+  }
+
+  .tipo_ingreso{
+    max-height: 300px;
+  }
+
+  .formuGasto{
+    max-height: 400px;
+  }
+  
+  .wrapper .tooltip {
+    position: absolute;
+    top: 0;
+    font-size: 14px;
+    background: #fff;
+    color: #fff;
+    padding: 5px 8px;
+    border-radius: 5px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+  
+  .wrapper .tooltip::before {
+    position: absolute;
+    content: "";
+    height: 8px;
+    width: 8px;
+    background: #fff;
+    bottom: -3px;
+    left: 50%;
+    transform: translate(-50%) rotate(45deg);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   }
 
   #content nav form .form-input input {

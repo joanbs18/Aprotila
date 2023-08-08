@@ -190,7 +190,7 @@ app.get("/pilasInactivas", (req, res) => {
 
 app.get("/tiposIngreso", (req, res) => {
   try {
-    let sql = "SELECT Nombre FROM tbtipoingreso";
+    let sql = "SELECT Nombre,Unidad_Medida FROM tbtipoingreso";
     connection.query(sql, function (error, results, fields) {
       if (error) {
         connection.end();
@@ -207,10 +207,74 @@ app.get("/tiposIngreso", (req, res) => {
   }
 });
 
-app.get("/alimentacion", (req, res) => {
+app.get("/crearTipoIngreso", (req, res) => {
+  try {
+    campos = [];
+    campos.push(req.query.Nombre);
+    campos.push(req.query.Unidad);
+    const insertar = `Insert Into tbtipoingreso (Nombre,Unidad_Medida) VALUES ('${campos[0]}','${campos[1]}')`;
+
+    connection.query(insertar, (err, fields) => {
+      if (err) throw err;
+    });
+  } catch (error) {
+    console.log("Error");
+  }
+});
+
+
+
+
+
+
+
+
+app.get("/nombreProveedores", (req, res) => {
+
+  try {
+    let sql = "SELECT NombreProveedor,TipoProveedor FROM tbproveedores";
+    connection.query(sql, function (error, results, fields) {
+      if (error) {
+        connection.end();
+        throw error;
+      }
+      res.status(200).json({
+        msg: "Mensaje desde el metodo GET",
+        results,
+      });
+    });
+  } catch (err) {
+    console.log(err);
+    throw new Error("Error en el metodo GET");
+  }
+});
+
+app.get("/IdProveedor", (req, res) => {
+  campos = [];
+  campos.push(req.query.Nombre);
+  campos.push(req.query.Tipo);
+  try {
+    let sql = `SELECT IdProveedores FROM tbproveedores as tb WHERE tb.NombreProveedor='${campos[0]}' AND tb.TipoProveedor='${campos[1]}'`;
+    connection.query(sql, function (error, results, fields) {
+      if (error) {
+        connection.end();
+        throw error;
+      }
+      res.status(200).json({
+        msg: "Mensaje desde el metodo GET",
+        results,
+      });
+    });
+  } catch (err) {
+    console.log(err);
+    throw new Error("Error en el metodo GET");
+  }
+});
+
+app.get("/gastos", (req, res) => {
   try {
     let sql =
-      "SELECT tbA.idAlimentacion,tbE.Nombre_Encargado as 'Encargado', tbA.Fecha,tbTipo.Nombre as 'Ingreso', tbA.IdPila_fk as 'Pila',tbA.Total_Kilos as 'Kilos' FROM `tbalimentacion` as tbA INNER JOIN tbencargado as tbE ON tbA.IdEncargado_fk=tbE.IdEncargado INNER JOIN tbtipoingreso as tbTipo on tbA.IdTipoIngreso_fk=tbTipo.IdTipo";
+      "SELECT tbA.IdGasto,tbE.Nombre_Encargado as 'Encargado', tbA.Fecha,tbTipo.Nombre as 'Ingreso', tbA.IdPila_fk as 'Pila',tbA.Total_Kilos as 'Kilos' FROM tbgasto as tbA INNER JOIN tbencargado as tbE ON tbA.IdEncargado_fk=tbE.IdEncargado INNER JOIN tbtipoingreso as tbTipo on tbA.IdTipoIngreso_fk=tbTipo.IdTipo";
     connection.query(sql, function (error, results, fields) {
       if (error) {
         connection.end();
@@ -227,25 +291,24 @@ app.get("/alimentacion", (req, res) => {
   }
 });
 
-app.get("/insertAlimentacion", (req, res) => {
+app.get("/insertGasto", (req, res) => {
   campos = [];
-  campos.push(req.query.IdAlimentacion);
+  campos.push(req.query.IdGasto);
   campos.push(req.query.IdEncargado);
-  campos.push(req.query.Fecha);
   campos.push(req.query.Tipo);
   campos.push(req.query.IdPila);
-  campos.push(req.query.TotalDiario);
+  campos.push(req.query.Total);
 
-  const insertar = `INSERT INTO tbalimentacion (IdEncargado_fk, Fecha,IdTipoIngreso_fk, IdPila_fk,Total_Kilos) VALUES (${campos[1]}, '${campos[2]}', '${campos[3]}', ${campos[4]},${campos[5]})`;
+  const insertar = `CALL insertGasto (${campos[1]}, '${campos[2]}', ${campos[3]}, ${campos[4]})`;
 
-  connection.query(insertar, (err, fields) => {
+  connection.query(insertar, (err,results, fields) => {
     if (err) throw err;
   });
-  res.send("Consulta exitosa");
+  res.json("Consulta exitosa");
 });
 
-app.get("/deleteAlimentacion", (req, res) => {
-  let sql = `DELETE FROM tbalimentacion WHERE idAlimentacion = ${req.query.id}`;
+app.get("/deleteGasto", (req, res) => {
+  let sql = `DELETE FROM tbgasto WHERE IdGasto = ${req.query.id}`;
   connection.query(sql, function (error, results, fields) {
     if (error) throw error;
   });
@@ -399,10 +462,10 @@ app.get("/deleteAlevines", (req, res) => {
   console.log("Borrado");
 });
 
-app.get("/inveConcentrado", (req, res) => {
+app.get("/inventario", (req, res) => {
   try {
     let sql =
-      "Select tbi.IdInventario,tbt.Nombre as 'TipoIngres',tbi.FechaCompra,tbi.FechaModificacion,tbi.CantidadDisponible,tbi.Entradas,tbi.Salidas from tbinventario as tbi INNER JOIN tbtipoingreso as tbt on tbi.IdTipoIngreso_fk=tbt.IdTipo";
+      "Select tbi.IdInventario,tbt.Nombre as 'TipoIngreso',tbi.FechaCompra,tbi.FechaModificacion,tbi.CantidadDisponible,tbi.Entradas,tbi.Salidas,tbi.Precio_Actual,tbi.Precio_Anterior,tbi.Precio_Promedio from tbinventario as tbi INNER JOIN tbtipoingreso as tbt on tbi.IdTipoIngreso_fk=tbt.IdTipo";
     connection.query(sql, function (error, results, fields) {
       if (error) {
         connection.end();
