@@ -337,7 +337,7 @@ app.get("/mortabilidad", (req, res) => {
 
 app.get("/ultimoTrazabi", (req, res) => {
   try {
-    let sql = `SELECT Fecha,IdPila_fk_Final,Cantidad FROM tbtrazabilidad WHERE Lote= ${req.query.Lote} ORDER BY IdPila_fk_Final DESC LIMIT 1`;
+    let sql = `SELECT Fecha,IdPila_fk_Final,Cantidad FROM tbtrazabilidad WHERE IdPila_fk_Final= ${req.query.Pila} ORDER BY IdPila_fk_Final DESC LIMIT 1`;
     connection.query(sql, function (error, results, fields) {
       if (error) {
         connection.end();
@@ -517,7 +517,7 @@ app.get("/trazabilidad", (req, res) => {
 
 app.get("/insertTrazabilidad", (req, res) => {
   campos = [];
-  campos.push(req.query.Lote);
+  campos.push(req.query.PilaInicial);
   campos.push(req.query.IdPila_fk_Final);
   campos.push(req.query.TipoPez);
   campos.push(req.query.Cantidad);
@@ -582,7 +582,6 @@ app.get("/muestreo", (req, res) => {
 app.get("/insertMuestreo", (req, res) => {
   campos = [];
   campos.push(req.query.Pila);
-  campos.push(req.query.Lote);
   campos.push(req.query.Cantidad);
   campos.push(req.query.Fecha);
   campos.push(req.query.Peso);
@@ -590,7 +589,7 @@ app.get("/insertMuestreo", (req, res) => {
   campos.push(req.query.Aprobacion);
   campos.push(req.query.Observaciones);
 
-  const insertar = `CALL insertMuestreo(${campos[0]},${campos[1]}, ${campos[2]}, curdate(), ${campos[4]}, ${campos[5]}, ${campos[6]}, '${campos[7]}');`;
+  const insertar = `CALL insertMuestreo(${campos[0]},${campos[1]}, curdate(), ${campos[4]}, ${campos[5]}, '${campos[6]}','${campos[7]}' );`;
 
   connection.query(insertar, (err, fields) => {
     if (err) throw err;

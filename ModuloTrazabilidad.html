@@ -209,68 +209,87 @@
             </div>
         </div>
 
-<section class="formu-modal ftrazabilidad" id="ftrazabilidad" style="display: none;">
-    <div class="form formutrazabilidad">
-        <div class="closeForm">
-            <i class="fas fa-times" id="closeModal_trazabilidad"></i>
-        </div>
 
-        <h4>Añadir Trazabilidad</h4>
-        <form class="formulario" action="">
-            <div class="box">
-                <input id="lote_trazabilidad" type="number" name="uname" required>
-                <label>Lote</label>
+        <section class="formu-modal ftrazabilidad" id="ftrazabilidad" style="display: none;">
+            <div class="form formutrazabilidad">
+                <div class="closeForm">
+                    <i class="fas fa-times" id="closeModal_trazabilidad"></i>
+                </div>
+
+                <h4>Añadir Trazabilidad</h4>
+                <form class="formulario" action="">
+                    <div class="select_withAdd">
+                        <h5>Pila Inicial</h5>
+                        <div class="select pila">
+                            <select id="menupila_trazabilidadInicial">
+
+
+                            </select>
+                        </div>
+                    </div>
+                       <div class="select_withAdd">
+                <h5>Pila Final</h5>
+                    <div class="select pila">
+
+                        <select id="menupila_trazabilidadFinal">
+
+                        </select>
+                    </div>
+                       </div>
+                    <div class="box">
+                        <input id="tipoPez_Trazabilidad" type="text" name="uname" required>
+                        <label>Tipo Pez</label>
+                    </div>
+                    <div class="box">
+                        <input id="Cantidad_trazabilidad" type="number" name="uname" required>
+                        <label>Cantidad</label>
+                    </div>
+                    <button type="button" class="btnForm" onclick="addTrazabilidad()">AÑADIR</button>
+                </form>
+
             </div>
-
-            <div class="select pila">
-
-                <select id="menupila_trazabilidadFinal">
-
-                </select>
-            </div>
-            <div class="box">
-                <input id="tipoPez_Trazabilidad" type="text" name="uname" required>
-                <label>Tipo Pez</label>
-            </div>
-            <div class="box">
-                <input id="Cantidad_trazabilidad" type="number" name="uname" required>
-                <label>Cantidad</label>
-            </div>
-            <button type="button" class="btnForm" onclick="addTrazabilidad()">AÑADIR</button>
-        </form>
-
-    </div>
-</section>
+        </section>
 
 
-<script src="https://momentjs.com/downloads/moment.js"></script>
-<script src="script.js"></script>
-<script src="excel.js"></script>
-<!-- Bootstrap-->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-    crossorigin="anonymous"></script>
-<!-- jQuery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<!-- DataTable -->
-<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+        <script src="https://momentjs.com/downloads/moment.js"></script>
+        <script src="trazabilidad.js"></script>
+        <script src="excel.js"></script>
+        <!-- Bootstrap-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+            crossorigin="anonymous"></script>
+        <!-- jQuery -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <!-- DataTable -->
+        <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
 
 
 
-<!-- BOOTSTRAP -->
+        <!-- BOOTSTRAP -->
 
 
 
-<script>
- 
-    $(document).ready(function () {
-        $('#table_trazabilidad').DataTable();
-    });
-    
+        <script>
 
-</script>
+            $(document).ready(function () {
+                $('#table_trazabilidad').DataTable();
+            });
 
-</body>
+            var add_trazabilidad = document.getElementById("add_trazabilidad");
+            add_trazabilidad.addEventListener("click", function () {
+                document.getElementById("ftrazabilidad").style.display = "flex";
+            });
+
+            var closeModal_trazabilidad = document.getElementById(
+                "closeModal_trazabilidad"
+            );
+            closeModal_trazabilidad.addEventListener("click", function () {
+                document.getElementById("ftrazabilidad").style.display = "none";
+            });
+
+        </script>
+
+        </body>
 
 </html>
