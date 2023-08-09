@@ -266,7 +266,17 @@
         $('#table_gasto').DataTable();
     });
 
+    var add_gasto = document.getElementById("add_gasto");
+    add_gasto.addEventListener("click", function () {
+        mostrarPilaDisponibles();
+        selectTipoIngreso();
+        document.getElementById("formugasto").style.display = "flex";
+    });
 
+    var closeModal_gasto = document.getElementById("closeModal_gasto");
+    closeModal_gasto.addEventListener("click", function () {
+        document.getElementById("formugasto").style.display = "none";
+    });
 
 
 

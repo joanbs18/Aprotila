@@ -152,13 +152,14 @@ function fechaTrazabilidad(Pila) {
   })
     .then((resp) => resp.json())
     .then((datos) => peces(datos.results))
-    .catch((err) => seeLoad());
+    .catch((err) => console.log(err));
 }
 
 const peces = (data) => {
   console.log(mostrarFecha(data[0].Fecha));
+  console.log(data);
   let totalMuertos = 0;
-  let totalVentas=0;
+  let totalVentas = 0;
   for (var i = 0; i < VMortabilidad.length; i++) {
     if (
       VMortabilidad[i].IdPila == data[0].IdPila_fk_Final &&
@@ -166,31 +167,28 @@ const peces = (data) => {
     ) {
       totalMuertos += VMortabilidad[i].Cantidad;
     } else {
-      console.log(VMortabilidad[i].IdPila, " ", pilaSeleccionada);
+      console.log(VMortabilidad[i].IdPila, " ", pilaSeleccionada7);
     }
   }
-  for (var i = 0; i < ventas.length; i++) {
+  for (var i = 0; i < Vventas.length; i++) {
     if (
-      ventas[i].IdPila_fk == data[0].IdPila_fk_Final &&
-      mostrarFecha(data[0].Fecha) >= mostrarFecha(ventas[i].Fecha)
+      Vventas[i].IdPila_fk == data[0].IdPila_fk_Final &&
+      mostrarFecha(data[0].Fecha) >= mostrarFecha(Vventas[i].Fecha)
     ) {
-
-      totalVentas += ventas[i].Tilapia;
+      totalVentas += Vventas[i].Tilapia;
+    }
   }
 
-
-
   document.getElementById("Cantidad_trazabilidad").value =
-    data[0].Cantidad - totalMuertos-totalVentas;
+    data[0].CantidadPescados - totalMuertos - totalVentas;
 };
-}
 
 var pilaSeleccionada7;
 var optionPila7 = document.getElementById("menupila_trazabilidadInicial");
 optionPila7.addEventListener("change", function () {
   pilaSeleccionada7 = optionPila7.options[optionPila7.selectedIndex].text;
   Mortabilidad();
-  ventas();
+  ventas(pilaSeleccionada7);
   fechaTrazabilidad(pilaSeleccionada7);
 });
 var pilaSeleccionada8;
@@ -208,7 +206,7 @@ function Mortabilidad() {
   })
     .then((resp) => resp.json())
     .then((datos) => obtenerMortabilidad(datos.results))
-    .catch((err) => seeLoad());
+    .catch((err) => console.log(err));
 }
 var VMortabilidad = [];
 const obtenerMortabilidad = (data) => {
@@ -221,8 +219,8 @@ function mostrarFecha(fecha) {
   return fechaArreglada;
 }
 
-function ventas() {
-  fetch("http://localhost:3000/ultimoVentas", {
+function ventas(Pila) {
+  fetch(`http://localhost:3000/ultimoVentas?Pila=${Pila}`, {
     method: "get",
     headers: {
       "Content-Type": "application/json",
@@ -230,7 +228,7 @@ function ventas() {
   })
     .then((resp) => resp.json())
     .then((datos) => mostrarData(datos.results))
-    .catch((err) => seeLoad());
+    .catch((err) => console.log(err));
 }
 
 function seeLoad() {
@@ -238,10 +236,10 @@ function seeLoad() {
   cloud.style.display = "flex";
 }
 
-var ventas = [];
+var Vventas = [];
 const mostrarData = (data) => {
-  ventas = data;
-}
+  Vventas = data;
+};
 function mostrarTras() {
   var Lote = prompt("Ingrese el Lote:", "");
   fetch(`http://localhost:3000/mostrarTrazabilidad?Lote=${Lote}`, {

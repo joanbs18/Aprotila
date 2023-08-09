@@ -222,15 +222,7 @@ app.get("/crearTipoIngreso", (req, res) => {
   }
 });
 
-
-
-
-
-
-
-
 app.get("/nombreProveedores", (req, res) => {
-
   try {
     let sql = "SELECT NombreProveedor,TipoProveedor FROM tbproveedores";
     connection.query(sql, function (error, results, fields) {
@@ -301,7 +293,7 @@ app.get("/insertGasto", (req, res) => {
 
   const insertar = `CALL insertGasto (${campos[1]}, '${campos[2]}', ${campos[3]}, ${campos[4]})`;
 
-  connection.query(insertar, (err,results, fields) => {
+  connection.query(insertar, (err, results, fields) => {
     if (err) throw err;
   });
   res.json("Consulta exitosa");
@@ -337,7 +329,7 @@ app.get("/mortabilidad", (req, res) => {
 
 app.get("/ultimoTrazabi", (req, res) => {
   try {
-    let sql = `SELECT Fecha,IdPila_fk_Final,Cantidad FROM tbtrazabilidad WHERE IdPila_fk_Final= ${req.query.Pila} ORDER BY IdPila_fk_Final DESC LIMIT 1`;
+    let sql = `SELECT tbT.Fecha,tbT.IdPila_fk_Final,tbP.CantidadPescados FROM tbtrazabilidad as tbT INNER JOIN tbpila AS TbP WHERE IdPila_fk_Final=${req.query.Pila} AND tbp.IdPila=tbT.IdPila_fk_Final ORDER BY IdPila_fk_Final DESC LIMIT 1`;
     connection.query(sql, function (error, results, fields) {
       if (error) {
         connection.end();
@@ -372,7 +364,6 @@ app.get("/ultimoVentas", (req, res) => {
     throw new Error("Error en el metodo GET");
   }
 });
-
 
 app.get("/muestreoEstados", (req, res) => {
   try {
@@ -411,7 +402,6 @@ app.get("/mostrarUsuarios", (req, res) => {
     throw new Error("Error en el metodo GET");
   }
 });
-
 
 app.get("/insertMortabilidad", (req, res) => {
   campos = [];
@@ -647,8 +637,9 @@ app.get("/insertMuestreo", (req, res) => {
   campos.push(req.query.IdEncargado);
   campos.push(req.query.Aprobacion);
   campos.push(req.query.Observaciones);
+  console.log(req.query.Aprobacion);
 
-  const insertar = `CALL insertMuestreo(${campos[0]},${campos[1]}, curdate(), ${campos[4]}, ${campos[5]}, '${campos[6]}','${campos[7]}' );`;
+  const insertar = `CALL insertMuestreo(${campos[0]},${campos[1]}, curdate(), ${campos[3]}, ${campos[4]}, '${campos[5]}','${campos[6]}');`;
 
   connection.query(insertar, (err, fields) => {
     if (err) throw err;
