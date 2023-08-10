@@ -50,8 +50,8 @@ function addGasto() {
     alert("Error campos incompletos");
     return;
   }
-  url = `http://localhost:3000/insertGasto?Id=${1}&IdEncargado=${1}&Tipo=${tipoSeleccionado}&IdPila=${pilaSeleccionada}&Total=${total_gasto}`;
-
+  url = `http://localhost:3000/insertGasto?IdGasto=${1}&IdEncargado=${1}&Tipo=${tipoSeleccionado}&IdPila=${pilaSeleccionada}&Total=${total_gasto}`;
+  console.log(url);
   fetch(url, {
     method: "get",
     headers: {
@@ -62,7 +62,6 @@ function addGasto() {
     .then((datos) => alert(datos))
     .catch((err) => console.log(err));
 
-    
   document.getElementById("formugasto").style.display = "none";
   tablegasto();
 }

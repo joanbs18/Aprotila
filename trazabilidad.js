@@ -33,7 +33,7 @@ const mostrarTrazabilidad = (data) => {
         <td data-label="Fecha">${fechaT}</td>
         <td>
         <button class="btnUpdate" id="btnUpdate_Trazabilidad"><i class="fa-solid fa-pen-to-square"></i></button>   
-        <button class="btnTrash" id="btnTrash_Trazabilidad" ><i class="fa-solid fa-trash-can"></i></button>
+        <button type="submit" class="btnTrash" id="btnTrash_Trazabilidad" ><i class="fa-solid fa-trash-can"></i></button>
     </td>
   
         </tr>`;
@@ -163,7 +163,8 @@ const peces = (data) => {
   for (var i = 0; i < VMortabilidad.length; i++) {
     if (
       VMortabilidad[i].IdPila == data[0].IdPila_fk_Final &&
-      mostrarFecha(data[0].Fecha) >= mostrarFecha(VMortabilidad[i].Fecha)
+      mostrarFecha(data[0].Fecha) <= mostrarFecha(VMortabilidad[i].Fecha) &&
+      data[0].IdTrazabilidad == VMortabilidad[i].IdTrazabilidad_fk
     ) {
       totalMuertos += VMortabilidad[i].Cantidad;
     } else {
@@ -173,14 +174,15 @@ const peces = (data) => {
   for (var i = 0; i < Vventas.length; i++) {
     if (
       Vventas[i].IdPila_fk == data[0].IdPila_fk_Final &&
-      mostrarFecha(data[0].Fecha) >= mostrarFecha(Vventas[i].Fecha)
+      mostrarFecha(data[0].Fecha) <= mostrarFecha(Vventas[i].Fecha)
     ) {
       totalVentas += Vventas[i].Tilapia;
     }
   }
-
+  console.log(totalMuertos);
+  console.log(totalVentas);
   document.getElementById("Cantidad_trazabilidad").value =
-    data[0].CantidadPescados - totalMuertos - totalVentas;
+    data[0].Cantidad - totalMuertos - totalVentas;
 };
 
 var pilaSeleccionada7;

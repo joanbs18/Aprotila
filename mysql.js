@@ -294,9 +294,10 @@ app.get("/insertGasto", (req, res) => {
   const insertar = `CALL insertGasto (${campos[1]}, '${campos[2]}', ${campos[3]}, ${campos[4]})`;
 
   connection.query(insertar, (err, results, fields) => {
+    console.log(results[0])
     if (err) throw err;
   });
-  res.json("Consulta exitosa");
+  
 });
 
 app.get("/deleteGasto", (req, res) => {
@@ -310,7 +311,7 @@ app.get("/deleteGasto", (req, res) => {
 app.get("/mortabilidad", (req, res) => {
   try {
     let sql =
-      "SELECT IdMortabilidad, IdPila_fk as 'IdPila', Cantidad, tbE.Nombre_Encargado,Fecha, Observaciones FROM `tbmortabilidad` INNER JOIN tbencargado as tbE WHERE tbmortabilidad.IdEncargado_fk=tbE.IdEncargado";
+      "SELECT IdMortabilidad,IdTrazabilidad_fk, IdPila_fk as 'IdPila', Cantidad, tbE.Nombre_Encargado,Fecha, Observaciones FROM `tbmortabilidad` INNER JOIN tbencargado as tbE WHERE tbmortabilidad.IdEncargado_fk=tbE.IdEncargado";
     connection.query(sql, function (error, results, fields) {
       if (error) {
         connection.end();
@@ -329,7 +330,7 @@ app.get("/mortabilidad", (req, res) => {
 
 app.get("/ultimoTrazabi", (req, res) => {
   try {
-    let sql = `SELECT tbT.Fecha,tbT.IdPila_fk_Final,tbP.CantidadPescados FROM tbtrazabilidad as tbT INNER JOIN tbpila AS TbP WHERE IdPila_fk_Final=${req.query.Pila} AND tbp.IdPila=tbT.IdPila_fk_Final ORDER BY IdPila_fk_Final DESC LIMIT 1`;
+    let sql = `SELECT tbT.IdTrazabilidad, tbT.Fecha,tbT.IdPila_fk_Final,tbT.Cantidad FROM tbtrazabilidad as tbT INNER JOIN tbpila AS TbP WHERE IdPila_fk_Final=${req.query.Pila}  ORDER BY IdTrazabilidad DESC LIMIT 1`;
     connection.query(sql, function (error, results, fields) {
       if (error) {
         connection.end();
@@ -574,8 +575,7 @@ app.get("/insertTrazabilidad", (req, res) => {
   const insertar = `CALL InsertTrazabilidad(${campos[0]},${campos[1]},'${campos[2]}',${campos[3]})`;
 
   connection.query(insertar, (err, results) => {
-    const resultadoJSON = JSON.stringify(results[0]);
-    console.log(resultadoJSON);
+    console.log(results[0])
     if (err) throw err;
   });
   res.send("Consulta exitosa");
