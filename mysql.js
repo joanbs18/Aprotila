@@ -686,10 +686,6 @@ app.get("/usuarios", (req, res) => {
       if (resultado.length !== 0) {
         console.log(resultado);
         res.json({ mensaje: "Ingresado correctamente" });
-        res.status(200).json({
-          msg: "Mensaje desde el metodo GET",
-          resultado,
-        });
       } else {
         res.json({ mensaje: "Datos incorrectos" });
       }
