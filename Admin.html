@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,303 +16,314 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" />
     <title>AproTila-System</title>
 </head>
+
 <body>
-    
-<div class="openSide">
-    <i class="bx bx-menu" id="menu"></i>
-</div>
 
-<div id="sidebar" class="sidebar close">
-
-    <div class="logo-details">
-        <img src="/img/logo.png" alt="" style="width: 60px;">
-        <span class="logo_name" style='color:#080808'>AproTila</span>
+    <div class="openSide">
+        <i class="bx bx-menu" id="menu"></i>
     </div>
-    <ul class="nav-links" id="nav-links">
 
-        <li id="dashboard">
-            <div class="iocn-link">
-                <a href="Admin.html">
-                    <i class="fa-solid fa-house-user"></i>
-                    <span class="link_name">Dashboard</span>
-                </a>
-            </div>
-            <ul class="sub-menu">
-                <li><a class="link_name" href="Admin.html">Dashboard</a></li>
+    <div id="sidebar" class="sidebar close">
 
-
-            </ul>
-        </li>
-        <li>
-            <div class="iocn-link">
-                <a href="ModuloInvetario.html">
-                    <i class='bx bx-grid-alt'></i>
-                    <span class="link_name">Inventario</span>
-                </a>
-            </div>
-            <ul class="sub-menu">
-                <li><a class="link_name" href="ModuloInvetario.html">Inventario</a></li>
-
-
-            </ul>
-        </li>
-        <li>
-            <div class="iocn-link">
-                <a href="ModuloVentas.html">
-                    <i class="fa-solid fa-hand-holding-dollar"></i>
-                    <span class="link_name">Modulo Ventas</span>
-                </a>
-            </div>
-            <ul class="sub-menu blank">
-                <li><a class="link_name" href="ModuloVentas.html">Ventas</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="ModuloPilas.html">
-                <i class="fa-solid fa-water"></i>
-                <span class="link_name">Modulo Pilas</span>
-            </a>
-            <ul class="sub-menu blank">
-                <li><a class="link_name" href="ModuloPilas.html">Pilas</a></li>
-            </ul>
-        </li>
-        <li>
-            <div class="iocn-link">
-                <a href="#">
-                    <i class="fa-solid fa-fish-fins"></i>
-                    <span class="link_name">Control Peces</span>
-                </a>
-                <i class='bx bxs-chevron-down arrow'></i>
-            </div>
-            <ul class="sub-menu">
-                <li><a class="link_name" href="#">Control Peces</a></li>
-                <li><a href="ModuloAlevines.html">Ingreso Alevines</a></li>
-                <li><a href="ModuloMortabilidad.html">Mortabilidad</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="ModuloIngreso.html">
-                <i class="fa-solid fa-truck-arrow-right"></i>
-                <span class="link_name">Modulo Ingreso</span>
-            </a>
-            <ul class="sub-menu blank">
-                <li><a class="link_name" href="ModuloIngreso.html">Modulo Ingreso</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="ModuloGasto.html">
-                <i class="fa-solid fa-money-bill-trend-up fa-rotate-180"></i>
-                <span class="link_name">Gastos</span>
-            </a>
-            <ul class="sub-menu blank">
-                <li><a class="link_name" href="ModuloGasto.html">Gastos</a></li>
-            </ul>
-        </li>
-
-        <li>
-            <a href="ModuloTrazabilidad.html">
-                <i class='bx bx-cog'></i>
-                <span class="link_name">Trazabilidad</span>
-            </a>
-            <ul class="sub-menu blank">
-                <li><a class="link_name" href="ModuloTrazabilidad.html">Trazabilidad</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="ModuloMuestreo.html">
-                <i class="fa-solid fa-eye"></i>
-                <span class="link_name">Muestreo</span>
-            </a>
-            <ul class="sub-menu blank">
-                <li><a class="link_name" href="ModuloMuestreo.html">Muestreo</a></li>
-            </ul>
-        </li>
-        <li>
-            <div class="profile-details">
-                <div class="profile-content">
-                    <img src="img/usuario.avif" alt="profileImg">
-                </div>
-                <div class="name-job">
-                    <div class="profile_name" id="nombreEncargado">Encargado</div>
-                    <div class="job" id="rol">Trabajador</div>
-                </div>
-                <i class='bx bx-log-out' style="color: aliceblue; margin-left: -25px;" id="exit"></i>
-            </div>
-        </li>
-    </ul>
-
-</div>
-<section class="home-section" id="main">
-
-    <div class="home-content">
-    <section id="contenido">
-        <main>
-            <div class="head-title">
-                <div class="left">
-                    <h1>Dashboard</h1>
-                    <ul class="breadcrumb">
-                        <li>
-                            <a href="#">Dashboard</a>
-                        </li>
-                        <li><i class='bx bx-chevron-right'></i></li>
-                        <li>
-                            <a class="active" href="#">Home</a>
-                        </li>
-                    </ul>
-                </div>
-
-            </div>
-
-            <ul class="dash-info">
-                <li>
-                    <i class="fa-solid fa-money-bill-trend-up fa-bounce"></i>
-                   
-                    <span class="text" id="ventasTotales">
-
-                    </span>
-                </li>
-                <li>
-                    <i class="fa-solid fa-money-bill fa-bounce"></i>
-                    <span class="text" id="DineroTotal">
-
-                    </span>
-                </li>
-                <li>
-                    <i class="fa-solid fa-water fa-bounce"></i>
-                    <span class="text" id="pilasActivas">
-
-                    </span>
-                </li>
-            </ul>
-
-
-            <div class="table-data">
-                <div class="order">
-                    <div class="head">
-                        <h3>Trazabilidad</h3>
-
-                    </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                
-                                <th>Pila</th>
-                                <th>Lote</th>
-                                <th>Fecha</th>
-                                <th>Muestreo</th>
-
-                            </tr>
-                        </thead>
-                        <tbody id="muestreos">
-                           
-                        </tbody>
-                    </table>
-                </div>
-                <div class="todo">
-                    <div class="head">
-                        <h3>Usuarios</h3>
-                        <ul class="wrapper admin_user" id="add_user">
-                            <li class="icon black">
-                                <span class="tooltip">Add</span>
-                                <span> <i class="fa-solid fa-circle-plus"></i></span>
-                            </li>
-                        </ul>
-                    </div>
-                    <ul class="todo-list" id="user">
-                        <li class="completed">
-                            <p>Todo List</p>
-                            <i class='bx bx-dots-vertical-rounded'></i>
-                        </li>
-                        <li class="completed">
-                            <p>Todo List</p>
-                            <i class='bx bx-dots-vertical-rounded'></i>
-                        </li>
-                        <li class="not-completed">
-                            <p>Todo List</p>
-                            <i class='bx bx-dots-vertical-rounded'></i>
-                        </li>
-                        <li class="completed">
-                            <p>Todo List</p>
-                            <i class='bx bx-dots-vertical-rounded'></i>
-                        </li>
-                        <li class="not-completed">
-                            <p>Todo List</p>
-                            <i class='bx bx-dots-vertical-rounded'></i>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </main>
-        <!-- MAIN -->
-    </section>
-    </div>
-</section>
-<section class="formu-modal fusuario" id="fusuario" style="display: none;">
-    <div class="form formuusuario">
-        <div class="closeForm">
-            <i class="fas fa-times" id="closeModal_usuario"></i>
+        <div class="logo-details">
+            <img src="/img/logo.png" alt="" style="width: 60px;">
+            <span class="logo_name" style='color:#080808'>AproTila</span>
         </div>
+        <ul class="nav-links" id="nav-links">
 
-        <h4>Añadir Usuario</h4>
-        <form class="formulario" action="">
-            <div class="box">
-                <input id="nombreencargado_user" type="text" name="uname" required>
-                <label>Nombre Encargado</label>
-            </div>
-            <div class="box">
-                <input id="cedula_user" type="number" name="uname" required>
-                <label>Cedula</label>
-            </div>
-            <div class="box">
-                <input id="contraseña_user" type="text" name="uname" required>
-                <label>Contraseña</label>
-            </div>
+            <li id="dashboard">
+                <div class="iocn-link">
+                    <a href="Admin.html">
+                        <i class="fa-solid fa-house-user"></i>
+                        <span class="link_name">Dashboard</span>
+                    </a>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="Admin.html">Dashboard</a></li>
 
-            <div class="box">
-                <input id="num_telefono" type="number" name="uname" required>
-                <label>Telefóno</label>
-            </div>
 
-            <div class="select pila">
+                </ul>
+            </li>
+            <li>
+                <div class="iocn-link">
+                    <a href="ModuloInvetario.html">
+                        <i class='bx bx-grid-alt'></i>
+                        <span class="link_name">Inventario</span>
+                    </a>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="ModuloInvetario.html">Inventario</a></li>
 
-                <select id="rol_elegido">
-                    <option disabled selected="">Rol</option>
-                    <option>Administrador</option>
-                    <option>Trabajador</option>
-                </select>
-            </div>
 
-            <button type="submit" class="btnForm" onclick="addUser()">AÑADIR</button>
-        </form>
+                </ul>
+            </li>
+            <li>
+                <div class="iocn-link">
+                    <a href="ModuloVentas.html">
+                        <i class="fa-solid fa-hand-holding-dollar"></i>
+                        <span class="link_name">Modulo Ventas</span>
+                    </a>
+                </div>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="ModuloVentas.html">Ventas</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="ModuloPilas.html">
+                    <i class="fa-solid fa-water"></i>
+                    <span class="link_name">Modulo Pilas</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="ModuloPilas.html">Pilas</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="iocn-link">
+                    <a href="#">
+                        <i class="fa-solid fa-fish-fins"></i>
+                        <span class="link_name">Control Peces</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="#">Control Peces</a></li>
+                    <li><a href="ModuloAlevines.html">Ingreso Alevines</a></li>
+                    <li><a href="ModuloMortabilidad.html">Mortabilidad</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="ModuloIngreso.html">
+                    <i class="fa-solid fa-truck-arrow-right"></i>
+                    <span class="link_name">Modulo Ingreso</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="ModuloIngreso.html">Modulo Ingreso</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="ModuloGasto.html">
+                    <i class="fa-solid fa-money-bill-trend-up fa-rotate-180"></i>
+                    <span class="link_name">Gastos</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="ModuloGasto.html">Gastos</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="ModuloTrazabilidad.html">
+                    <i class='bx bx-cog'></i>
+                    <span class="link_name">Trazabilidad</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="ModuloTrazabilidad.html">Trazabilidad</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="ModuloMuestreo.html">
+                    <i class="fa-solid fa-eye"></i>
+                    <span class="link_name">Muestreo</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="ModuloMuestreo.html">Muestreo</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="ModuloProveedor.html">
+                    <i class="fa-solid fa-person"></i>
+                    <span class="link_name">Proveedores</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="ModuloProveedor.html">Proveedor</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="profile-details">
+                    <div class="profile-content">
+                        <img src="img/usuario.avif" alt="profileImg">
+                    </div>
+                    <div class="name-job">
+                        <div class="profile_name" id="nombreEncargado">Encargado</div>
+                        <div class="job" id="rol">Trabajador</div>
+                    </div>
+                    <i class='bx bx-log-out' style="color: aliceblue; margin-left: -25px;" id="exit"></i>
+                </div>
+            </li>
+        </ul>
 
     </div>
-</section>
-<script src="https://momentjs.com/downloads/moment.js"></script>
-<script src="validacionRol.js"></script>
-<script src="admin.js"></script>
-<script src="slider.js"></script>
-<script src="excel.js"></script>
-<!-- Bootstrap-->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-    crossorigin="anonymous"></script>
-<!-- jQuery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<!-- DataTable -->
-<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-<script>
+    <section class="home-section" id="main">
 
-var add_user = document.getElementById("add_user");
-add_user.addEventListener("click", function () {
-        document.getElementById("fusuario").style.display = "flex";
-    });
+        <div class="home-content">
+            <section id="contenido">
+                <main>
+                    <div class="head-title">
+                        <div class="left">
+                            <h1>Dashboard</h1>
+                            <ul class="breadcrumb">
+                                <li>
+                                    <a href="#">Dashboard</a>
+                                </li>
+                                <li><i class='bx bx-chevron-right'></i></li>
+                                <li>
+                                    <a class="active" href="#">Home</a>
+                                </li>
+                            </ul>
+                        </div>
 
-    var closeModal_usuario = document.getElementById("closeModal_usuario");
-    closeModal_usuario.addEventListener("click", function () {
-  document.getElementById("fusuario").style.display = "none";
-});
-</script>
+                    </div>
+
+                    <ul class="dash-info">
+                        <li>
+                            <i class="fa-solid fa-money-bill-trend-up fa-bounce"></i>
+
+                            <span class="text" id="ventasTotales">
+
+                            </span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-money-bill fa-bounce"></i>
+                            <span class="text" id="DineroTotal">
+
+                            </span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-water fa-bounce"></i>
+                            <span class="text" id="pilasActivas">
+
+                            </span>
+                        </li>
+                    </ul>
+
+
+                    <div class="table-data">
+                        <div class="order">
+                            <div class="head">
+                                <h3>Trazabilidad</h3>
+
+                            </div>
+                            <table>
+                                <thead>
+                                    <tr>
+
+                                        <th>Pila</th>
+                                        <th>Lote</th>
+                                        <th>Fecha</th>
+                                        <th>Muestreo</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody id="muestreos">
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="todo">
+                            <div class="head">
+                                <h3>Usuarios</h3>
+                                <ul class="wrapper admin_user" id="add_user">
+                                    <li class="icon black">
+                                        <span class="tooltip">Add</span>
+                                        <span> <i class="fa-solid fa-circle-plus"></i></span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <ul class="todo-list" id="user">
+                                <li class="completed">
+                                    <p>Todo List</p>
+                                    <i class='bx bx-dots-vertical-rounded'></i>
+                                </li>
+                                <li class="completed">
+                                    <p>Todo List</p>
+                                    <i class='bx bx-dots-vertical-rounded'></i>
+                                </li>
+                                <li class="not-completed">
+                                    <p>Todo List</p>
+                                    <i class='bx bx-dots-vertical-rounded'></i>
+                                </li>
+                                <li class="completed">
+                                    <p>Todo List</p>
+                                    <i class='bx bx-dots-vertical-rounded'></i>
+                                </li>
+                                <li class="not-completed">
+                                    <p>Todo List</p>
+                                    <i class='bx bx-dots-vertical-rounded'></i>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </main>
+                <!-- MAIN -->
+            </section>
+        </div>
+    </section>
+    <section class="formu-modal fusuario" id="fusuario" style="display: none;">
+        <div class="form formuusuario">
+            <div class="closeForm">
+                <i class="fas fa-times" id="closeModal_usuario"></i>
+            </div>
+
+            <h4>Añadir Usuario</h4>
+            <form class="formulario" action="">
+                <div class="box">
+                    <input id="nombreencargado_user" type="text" name="uname" required>
+                    <label>Nombre Encargado</label>
+                </div>
+                <div class="box">
+                    <input id="cedula_user" type="number" name="uname" required>
+                    <label>Cedula</label>
+                </div>
+                <div class="box">
+                    <input id="contraseña_user" type="text" name="uname" required>
+                    <label>Contraseña</label>
+                </div>
+
+                <div class="box">
+                    <input id="num_telefono" type="number" name="uname" required>
+                    <label>Telefóno</label>
+                </div>
+
+                <div class="select pila">
+
+                    <select id="rol_elegido">
+                        <option disabled selected="">Rol</option>
+                        <option>Administrador</option>
+                        <option>Trabajador</option>
+                    </select>
+                </div>
+
+                <button type="button" class="btnForm" onclick="addUser()">AÑADIR</button>
+            </form>
+
+        </div>
+    </section>
+    <script src="https://momentjs.com/downloads/moment.js"></script>
+    <script src="validacionRol.js"></script>
+    <script src="admin.js"></script>
+    <script src="slider.js"></script>
+    <script src="excel.js"></script>
+    <!-- Bootstrap-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- DataTable -->
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+
+        var add_user = document.getElementById("add_user");
+        add_user.addEventListener("click", function () {
+            document.getElementById("fusuario").style.display = "flex";
+        });
+
+        var closeModal_usuario = document.getElementById("closeModal_usuario");
+        closeModal_usuario.addEventListener("click", function () {
+            document.getElementById("fusuario").style.display = "none";
+        });
+    </script>
 
 </body>
+
 </html>

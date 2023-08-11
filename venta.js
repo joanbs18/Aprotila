@@ -1,5 +1,6 @@
 ver();
 mostrarPilaInactivas();
+var encargado = JSON.parse(localStorage.getItem("user"));
 function ver() {
   fetch("http://localhost:3000/controlventa", {
     method: "get",
@@ -90,7 +91,7 @@ btnAdd.addEventListener("click", function () {
   ) {
     alert("Error campos incompletos");
   }
-  url = `http://localhost:3000/crear?Encargado=${1}&Fecha=${fecha}&Pila=${pilaSeleccionada}&Peso=${peso}&Tilapia=${tilapia}&Precio=${precio}&Total=${total}&Cliente=${nomCliente}&Telefono=${numero}&MétodoPago=${metodoSeleccionado}`;
+  url = `http://localhost:3000/crear?Encargado=${encargado.IdEncargado}&Fecha=${fecha}&Pila=${pilaSeleccionada}&Peso=${peso}&Tilapia=${tilapia}&Precio=${precio}&Total=${total}&Cliente=${nomCliente}&Telefono=${numero}&MétodoPago=${metodoSeleccionado}`;
   fetch(url, {
     method: "get",
     headers: {

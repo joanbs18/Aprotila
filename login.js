@@ -34,12 +34,12 @@ function Usuario() {
       console.log(datos);
       saveLS(datos.resultado[0]);
       if (
-        datos.mensaje === "Ingresado correctamente" &&
+        datos.msg === "Ingresado correctamente" &&
         datos.resultado[0].IdCargo_fk == 1
       ) {
         window.location.href = "Admin.html";
       } else if (
-        datos.mensaje === "Ingresado correctamente" &&
+        datos.msg === "Ingresado correctamente" &&
         datos.resultado[0].IdCargo_fk == 2
       ) {
         window.location.href = "ModuloAlevines.html";

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proveedores</title>
+</head>
+
+<body>
+    
+    <h1>PROVEEDORES</h1>
+    
+    <form id="FormIngresoProvedor">
+        <label for="typeProvider">Tipo Proveedor</label><br>
+        <input type="text" id="tipoProvider" placeholder="tipo de Proveedore" required><br>
+
+        <label for="nameProvider">Nombre Proveedor</label><br>
+        <input type="text" id="nameProvider" placeholder="Empresa" required><br>
+
+        <label for="direccion">Direccion</label><br>
+        <input type="text" id="direccion" placeholder="" required><br>
+
+        <label for="typeProvider">Provincia</label><br>
+        <select id="provincia" onchange="habilitarCantones()">
+            <option disabled selected>Elija una provincia</option>
+            <option value="San José">San José</option>
+            <option value="Alajuela">Alajuela</option>
+            <option value="Cartago">Cartago</option>
+            <option value="Heredia">Heredia</option>
+            <option value="Guanacaste">Guanacaste</option>
+            <option value="Puntarenas">Puntarenas</option>
+            <option value="Limón">Limón</option>
+        </select><br>
+
+        <label for="typeProvider">Cantón</label><br>
+        <select id="canton" onchange="habilitarDistritos()" disabled>
+        <option disabled selected>Elija un cantón</option>
+        </select><br>
+        
+        <label for="typeProvider">Distrito</label><br>
+        <select id="distrito" disabled>
+            <option disabled selected>Elija un distrito</option>
+        </select><br>
+    
+        <label for="fullName">Nombre Contacto</label><br>
+        <input type="text" id="fullName" required><br>
+
+        <label for="typeIdentification">Tipo de Cedula</label><br>
+        <select class="formulario__campo">
+            <option disabled selected>Seleccione el tipo de Cedula</option>
+            <option>Juridico</option>
+            <option>Fisica</option>
+        </select><br>
+
+        <label for="identification">Cedula</label><br>
+        <input type="text" id="identification" placeholder="Cedula" required><br>
+
+        <label for="telephone">Telefono</label><br>
+        <input type="text" id="telephone" placeholder="22222222" required><br>
+
+        <label for="email">Email</label><br>
+        <input type="email" id="email" placeholder="ejemplo@email.com" required><br>
+
+        <input type="submit" value="Guardar">
+    </form>
+    
+    <Script src="selectDistritos.js"></Script:src>
+
+</body>
+</html>

@@ -1,7 +1,8 @@
 //INICIALIZADOR
-
+Inventario();
 tablegasto();
-
+mostrarPilaDisponibles();
+var encargado = JSON.parse(localStorage.getItem("user"));
 function tablegasto() {
   fetch("http://localhost:3000/gastos", {
     method: "get",
@@ -50,7 +51,9 @@ function addGasto() {
     alert("Error campos incompletos");
     return;
   }
-  url = `http://localhost:3000/insertGasto?IdGasto=${1}&IdEncargado=${1}&Tipo=${tipoSeleccionado}&IdPila=${pilaSeleccionada}&Total=${total_gasto}`;
+  url = `http://localhost:3000/insertGasto?IdGasto=${1}&IdEncargado=${
+    encargado.IdEncargado
+  }&Tipo=${tipoSeleccionado}&IdPila=${pilaSeleccionada}&Total=${total_gasto}`;
   console.log(url);
   fetch(url, {
     method: "get",
@@ -126,6 +129,22 @@ const mostrarselectTipoIngreso = (data) => {
   document.getElementById("select_tipoIngreso_Gasto").innerHTML = tab;
 };
 
+function Inventario() {
+  fetch("http://localhost:3000/inventario", {
+    method: "get",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((resp) => resp.json())
+    .then((datos) => mostrarInve(datos.results))
+    .catch((err) => console.log(err));
+}
+var Vinve = [];
+const mostrarInve = (data) => {
+  Vinve = data;
+};
+
 var validarPila = false;
 var pilaSeleccionada;
 let optionPila = document.getElementById("menupila_gasto");
@@ -137,7 +156,11 @@ var validarTipo = false;
 var tipoSeleccionado;
 let optionTipo = document.getElementById("select_tipoIngreso_Gasto");
 optionTipo.addEventListener("change", function () {
+  let unidad = "";
   tipoSeleccionado = optionTipo.options[optionTipo.selectedIndex].text;
+  unidad = encontrarMedida(tipoSeleccionado);
+  encontrarMaximo(tipoSeleccionado);
+  document.getElementById("cantidad_gasto").innerText = `Total en ${unidad}`;
   validarTipo = true;
 });
 
@@ -145,3 +168,32 @@ function seeLoad() {
   cloud = document.getElementById("cloud_load");
   cloud.style.display = "flex";
 }
+
+function encontrarMedida(tipo) {
+  for (let i = 0; i < Vtipo_Ingreso.length; i++) {
+    if (Vtipo_Ingreso[i].Nombre == tipo) {
+      return Vtipo_Ingreso[i].Unidad_Medida;
+    }
+  }
+}
+var valorMaximoInve;
+function encontrarMaximo(tipo) {
+  for (let i = 0; i < Vinve.length; i++) {
+    if (Vinve[i].TipoIngreso == tipo) {
+      valorMaximoInve = Vinve[i].CantidadDisponible;
+      return;
+    }
+  }
+}
+
+document
+  .getElementById("total_gasto")
+  .addEventListener("input", function () {
+    var numeroIngresado = parseInt(this.value);
+
+    if (numeroIngresado > valorMaximoInve) {
+      alert("Cantidad maxíma es " + valorMaximoInve);
+      document.getElementById("Cantidad_trazabilidad").value = valorMaximoInve;
+    } else {
+    }
+  });

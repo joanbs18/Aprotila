@@ -156,11 +156,11 @@
 <section class="home-section" id="main">
 
     <div class="home-content">
-        <div class="container mortabilidad" id="divMortabilidad">
-            <h1 id="title">Modulo Mortabilidad</h1>
+        <div class="container proveedor" id="divProveedor">
+            <h1 id="title">Proveedores</h1>
             <div class="crud">
                 <button class="download-button" value="Export to Excel"
-                    onclick="tableToExcel('table_Mortabilidad', 'Datos Mortabilidad')">
+                    onclick="tableToExcel('table_Proveedor', 'Alevines')">
                     <div class="docs"><svg class="css-i6dzq1" stroke-linejoin="round" stroke-linecap="round" fill="none"
                             stroke-width="2" stroke="currentColor" height="20" width="20" viewBox="0 0 24 24">
                             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
@@ -179,72 +179,187 @@
                     </div>
                 </button>
                 <div class="icons-BD">
-                    <i class="fa-solid fa-circle-plus" id="add_Mortabilidad"></i>
+                    <i class="fa-solid fa-circle-plus" id="add_Proveedor"></i>
 
                 </div>
             </div>
             <div class="table_wratter">
-                <table class="table" id="table_Mortabilidad">
+                <table class="table" id="table_Proveedor">
                     <thead>
                         <tr>
-                            <th>Pila</th>
-                            <th>Cantidad</th>
-                            <th>Encargado</th>
-                            <th>Observaciones</th>
-                            <th>Acciones</th>
-
+                            <th>Tipo</th>
+                            <th>Nombre</th>
+                            <th>Dirección</th>
+                            <th>Ubicación</th>
+                            <th>Nombre Contacto</th>
+                            <th>Cédula</th>
+                            <th>Teléfono</th>
+                            <th>Email</th>
+                            <th>Acción</th>
+                       
                         </tr>
                     </thead>
                     <div id="cloud_load" class="cloud_load"><span class="loader"></span></div>
-                    <tbody id="RMortabilidad">
+                    <tbody id="RProveedor">
 
 
                     </tbody>
 
                 </table>
             </div>
+
+
         </div>
+
+
+
+
+
+
+
 
     </div>
 
+
+
+
 </section>
 
-<section class="formu-modal fMortabilidad" id="formumortabilidad">
-    <div class="form formuMortabilidad">
+
+
+
+
+<section class="formu-modal fProveedor" id="formuproveedor" style="display: none;">
+    <div class="form formuProveedor">
         <div class="closeForm">
-            <i class="fas fa-times" id="closeModal_mortabilidad"></i>
+            <i class="fas fa-times" id="closeModal_proveedor"></i>
         </div>
 
-        <h4>Añadir Mortabilidad</h4>
+        <h4>Añadir Proveedor</h4>
         <form class="formulario" action="">
+            <div class="select_withAdd">
+                <h5>Tipo</h5>
             <div class="select pila">
-
-                <select id="menupila_mortabilidad">
-
+                <select id="Proveedor_Tipo"> 
+                    <option value="">Concentrado</option>              
+                    <option value="">Bolsas</option>
+                    <option value="">Alevines</option>              
                 </select>
             </div>
-            <div class="box">
-                <input id="cantidad_mortabilidad" type="number" name="uname" required>
-                <label>Cantidad</label>
             </div>
             <div class="box">
-                <input id="observaciones_mortabilidad" type="text" name="uname" required>
-                <label>Observaciones</label>
+                <input id="Nombre_proveedor" type="text" name="uname" required>
+                <label>Nombre</label>
             </div>
-            <button type="button" class="btnForm" onclick="addMortabilidad()">AÑADIR</button>
+            <div class="box">
+                <input id="Dirección" type="text" name="uname" required>
+                <label>Dirección</label>
+            </div>
+            <div class="select_withAdd">
+                <h5>Provincia</h5>
+            <div class="select pila">
+                <select id="provincia" onchange="habilitarCantones()">
+                    <option disabled selected>Elija una provincia</option>
+                    <option value="San José">San José</option>
+                    <option value="Alajuela">Alajuela</option>
+                    <option value="Cartago">Cartago</option>
+                    <option value="Heredia">Heredia</option>
+                    <option value="Guanacaste">Guanacaste</option>
+                    <option value="Puntarenas">Puntarenas</option>
+                    <option value="Limón">Limón</option>
+                </select><br>
+            </div>
+            </div>
+            <div class="select_withAdd">
+                <h5>Distrito</h5>
+            <div class="select pila">
+                <select id="canton" onchange="habilitarDistritos()" disabled>
+                    <option disabled selected>Elija un cantón</option>
+                </select>
+            </div>
+            </div>
+            <div class="select_withAdd">
+                <h5>Cantón</h5>
+            <div class="select pila">
+                <select id="distrito" disabled>
+                    <option disabled selected>Elija un distrito</option>
+                </select>
+            </div>
+            </div>
+            <div class="box">
+                <input id="nombreContacto" type="text" name="uname" required>
+                <label>Nombre Contacto</label>
+            </div>
+            <div class="box">
+                <input id="cedula_contacto" type="number" name="uname" required>
+                <label>Cedula Contacto</label>
+            </div>
+            <div class="box">
+                <input id="Telefono" type="number" name="uname" required>
+                <label>Teléfono</label>
+            </div>
+            <div class="box">
+                <input id="Email_proveedor" type="email" name="uname" required>
+                <label>Email</label>
+            </div>
+           
+            
+            <button id="btnProveedorAdd" type="button" class="btnForm" onclick="addProveedor()">AÑADIR</button>
+
         </form>
 
     </div>
 </section>
 
 
+<section class="formu-modal fProveedorUpdate" id="formuproveedorUpdate" style="display: none;">
+    <div class="form formuProveedor">
+        <div class="closeForm">
+            <i class="fas fa-times" id="closeModal_proveedorUpdate"></i>
+        </div>
 
+        <h4>Actualizar Proveedor</h4>
+        <form class="formulario" action="">
+         
+            <div class="box">
+                <input id="Nombre_proveedorU" type="text" name="uname" required>
+                <label>Nombre</label>
+            </div>
+            <div class="box">
+                <input id="DirecciónU" type="text" name="uname" required>
+                <label>Dirección</label>
+            </div>
+           
+            <div class="box">
+                <input id="nombreContactoU" type="text" name="uname" required>
+                <label>Nombre Contacto</label>
+            </div>
+            <div class="box">
+                <input id="cedula_contactoU" type="number" name="uname" required>
+                <label>Cedula Contacto</label>
+            </div>
+            <div class="box">
+                <input id="TelefonoU" type="number" name="uname" required>
+                <label>Teléfono</label>
+            </div>
+            <div class="box">
+                <input id="Email_proveedorU" type="email" name="uname" required>
+                <label>Email</label>
+            </div>
+           
+            
+            <button id="btnProveedorAdd" type="button" class="btnForm" onclick="UpdateProveedor2()">Actualizar</button>
 
+        </form>
+
+    </div>
+</section>
 
 
 <script src="https://momentjs.com/downloads/moment.js"></script>
 <script src="validacionRol.js"></script>
-<script src="mortabilidad.js"></script>
+<script src="selectDistritos.js"></script>
+<script src="proveedor.js"></script>
 <script src="slider.js"></script>
 <script src="excel.js"></script>
 <!-- Bootstrap-->
@@ -264,25 +379,23 @@
 
 
 <script>
-
     $(document).ready(function () {
-        $('#table_Mortabilidad').DataTable();
+        $('#table_Proveedor').DataTable();
     });
 
-    var add_Mortabilidad = document.getElementById("add_Mortabilidad");
-    add_Mortabilidad.addEventListener("click", function () {
-       
-        document.getElementById("formumortabilidad").style.display = "flex";
+    var add_Alevines = document.getElementById("add_Proveedor");
+    add_Alevines.addEventListener("click", function () {
+        document.getElementById("formuproveedor").style.display = "flex";
     });
 
-    var closeModal_mortabilidad = document.getElementById(
-        "closeModal_mortabilidad"
-    );
-    closeModal_mortabilidad.addEventListener("click", function () {
-        document.getElementById("formumortabilidad").style.display = "none";
-    });
-
-
+    var closeModal_alevines = document.getElementById("closeModal_proveedor");
+closeModal_alevines.addEventListener("click", function () {
+  document.getElementById("formuproveedor").style.display = "none";
+});
+    var closeModal_proveedorUpdate = document.getElementById("closeModal_proveedorUpdate");
+    closeModal_proveedorUpdate.addEventListener("click", function () {
+  document.getElementById("formuproveedorUpdate").style.display = "none";
+});
 </script>
 
 </body>

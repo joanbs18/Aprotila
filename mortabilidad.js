@@ -1,5 +1,6 @@
 tableMortabilidad();
 mostrarPilaInactivas();
+var encargado = JSON.parse(localStorage.getItem("user"));
 function tableMortabilidad() {
   fetch("http://localhost:3000/mortabilidad", {
     method: "get",
@@ -54,7 +55,7 @@ function addMortabilidad() {
     alert("Error campos incompletos");
     return;
   }
-  url = `http://localhost:3000/insertMortabilidad?Id=${"null"}&IdPila=${pilaSeleccionada3}&Cantidad=${cantidad_mortabilidad}&IdEncargado=${1}&Observaciones=${observaciones_mortabilidad}`;
+  url = `http://localhost:3000/insertMortabilidad?Id=${"null"}&IdPila=${pilaSeleccionada3}&Cantidad=${cantidad_mortabilidad}&IdEncargado=${encargado.IdEncargado}&Observaciones=${observaciones_mortabilidad}`;
 
   fetch(url, {
     method: "get",

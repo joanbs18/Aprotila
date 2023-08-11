@@ -1,7 +1,7 @@
 mostrarPilaDisponibles();
 tableAlevines();
 selectProveedor();
-
+var encargado = JSON.parse(localStorage.getItem("user"));
 
 
 function tableAlevines() {
@@ -23,7 +23,7 @@ const mostrarAlevines = (data) => {
     tab += `<tr>
         <td data-label="Proveedor">${data[i].NombreProveedor}</td>
         <td data-label="Lote Proveedor">${data[i].Lote_Provedor}</td>
-        <td data-label="Pila Proveedor">${data[i].Nombre_Encargado}</td>
+        <td data-label="Pila Proveedor">${data[i].Pila_Provedor}</td>
         <td data-label="Lote Aprotila">${data[i].LoteAprotila}</td>
         <td data-label="Pila">${data[i].PilaAprotila}</td>
         <td data-label="Encargado">${data[i].Nombre_Encargado}</td>
@@ -69,7 +69,7 @@ function addAlevine() {
   ) {
     alert("Error campos incompletos");
   }
-  url = `http://localhost:3000/insertAlevines?IdProvedor=${idProveedor}&Lote_Provedor=${loteProvedor}&Pila_Provedor=${pilaProvedor}&LoteAprotila=${loteAprotila}&IdPila=${pilaSeleccionada}&IdEncargado=${1}&Especie=${Especie}&Cantidad=${cantidad_Alevines}`;
+  url = `http://localhost:3000/insertAlevines?IdProvedor=${idProveedor}&Lote_Provedor=${loteProvedor}&Pila_Provedor=${pilaProvedor}&LoteAprotila=${loteAprotila}&IdPila=${pilaSeleccionada}&IdEncargado=${encargado.IdEncargado}&Especie=${Especie}&Cantidad=${cantidad_Alevines}`;
 
   fetch(url, {
     method: "get",

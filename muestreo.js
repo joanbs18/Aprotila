@@ -1,5 +1,6 @@
 tableMuestreo();
 mostrarPilaInactivas();
+var encargado = JSON.parse(localStorage.getItem("user"));
 function tableMuestreo() {
   fetch("http://localhost:3000/muestreo", {
     method: "get",
@@ -75,7 +76,7 @@ function addMuestreo() {
   if (cantidad_muestreo.toString == 0 || peso_muestreo.toString == 0) {
     alert("Error campos incompletos");
   }
-  url = `http://localhost:3000/insertMuestreo?Pila=${pilaSeleccionada8}&Cantidad=${cantidad_muestreo}&Peso=${peso_muestreo}&IdEncargado=${1}&Aprobacion=${aprobado}&Observaciones=${observaciones_muestreo}`;
+  url = `http://localhost:3000/insertMuestreo?Pila=${pilaSeleccionada8}&Cantidad=${cantidad_muestreo}&Peso=${peso_muestreo}&IdEncargado=${encargado.IdEncargado}&Aprobacion=${aprobado}&Observaciones=${observaciones_muestreo}`;
 
   fetch(url, {
     method: "get",

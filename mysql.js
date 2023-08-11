@@ -58,7 +58,7 @@ app.get("/crear", (req, res) => {
   campos.push(req.query.Cliente);
   campos.push(req.query.Telefono);
   campos.push(req.query.MétodoPago);
-  const insertar = `INSERT INTO controlventa (IdEncargado_fk, Fecha, IdPila_fk, Peso, Tilapia, Precio, Total, Cliente, Telefono, MétodoPago) VALUES (${campos[1]}, '${campos[2]}', ${campos[3]}, ${campos[4]}, ${campos[5]}, ${campos[6]}, ${campos[7]}, '${campos[8]}', '${campos[9]}', '${campos[10]}')`;
+  const insertar = `CALL insertVenta (${campos[1]}, '${campos[2]}', ${campos[3]}, ${campos[4]}, ${campos[5]}, ${campos[6]}, ${campos[7]}, '${campos[8]}', '${campos[9]}', '${campos[10]}')`;
 
   connection.query(insertar, (err, fields) => {
     if (err) throw err;
@@ -575,7 +575,7 @@ app.get("/insertTrazabilidad", (req, res) => {
   const insertar = `CALL InsertTrazabilidad(${campos[0]},${campos[1]},'${campos[2]}',${campos[3]})`;
 
   connection.query(insertar, (err, results) => {
-    console.log(results[0])
+
     if (err) throw err;
   });
   res.send("Consulta exitosa");
@@ -644,6 +644,7 @@ app.get("/insertMuestreo", (req, res) => {
   connection.query(insertar, (err, fields) => {
     if (err) throw err;
   });
+ 
   res.send("Consulta exitosa");
 });
 
@@ -699,6 +700,25 @@ app.get("/usuarios", (req, res) => {
   }
 });
 
+app.get("/mostrarEncargados", (req, res) => {
+  try {
+    const queryusuario = `SELECT tbencargado.Nombre_Encargado,tbencargado.Contraseña FROM tbencargado`;
+    connection.query(queryusuario, (err, resultado) => {
+      if (resultado.length !== 0) {
+      res.status(200).json({
+        msg: "Ingresado correctamente",
+        resultado,
+      });
+       
+      } else {
+        res.json({ mensaje: "Algo Falló" });
+      }
+    });
+  } catch (error) {
+    console.log("Error");
+  }
+});
+
 app.get("/insertUser", (req, res) => {
   campos = [];
   campos.push(req.query.Nombre);
@@ -707,6 +727,61 @@ app.get("/insertUser", (req, res) => {
   campos.push(req.query.Telefono);
   campos.push(req.query.Rol);
   const insertar = `Insert INTO tbencargado ( Nombre_Encargado, Usuario, Contraseña, Teléfono, IdCargo_fk) values ('${campos[0]}','${campos[1]}','${campos[2]}',${campos[3]},${campos[4]})`;
+  connection.query(insertar, (err, fields) => {
+    if (err) throw err;
+  });
+  res.send("Consulta exitosa");
+});
+
+app.get("/proveedor", (req, res) => {
+  try {
+    const queryusuario = `SELECT * from tbproveedores`;
+    connection.query(queryusuario, (err, resultado) => {
+      if (resultado.length !== 0) {
+      res.status(200).json({
+        msg: "Return",
+        resultado,
+      });
+       
+      } else {
+        res.json({ mensaje: "Algo Falló" });
+      }
+    });
+  } catch (error) {
+    console.log("Error");
+  }
+});
+
+app.get("/insertProveedor", (req, res) => {
+  campos = [];
+  campos.push(req.query.Tipo);//0
+  campos.push(req.query.Nombre);//1
+  campos.push(req.query.Direccion);//2
+  campos.push(req.query.Provincia);//3
+  campos.push(req.query.Canton);//4
+  campos.push(req.query.Distrito);//5
+  campos.push(req.query.NContacto);//6
+  campos.push(req.query.Cedula);//7
+  campos.push(req.query.Telefono);//8
+  campos.push(req.query.Email);//9
+  const insertar = `INSERT INTO tbproveedores(TipoProveedor,NombreProveedor, Dirección, Provincia, Cantón, Distrito, NombreContacto, TipoCedula, Cedula, Telefono, Email) VALUES ('${campos[0]}','${campos[1]}','${campos[2]}','${campos[3]}','${campos[4]}','${campos[5]}','${campos[6]}','Nacional',${campos[7]},${campos[8]},'${campos[9]}')`;
+  connection.query(insertar, (err, fields) => {
+    if (err) throw err;
+  });
+  res.send("Consulta exitosa");
+});
+
+app.get("/updateProveedor", (req, res) => {
+  campos = [];
+
+  campos.push(req.query.Nombre);//0
+  campos.push(req.query.Direccion);//1
+  campos.push(req.query.NContacto);//2
+  campos.push(req.query.Cedula);//3
+  campos.push(req.query.Telefono);//4
+  campos.push(req.query.Email);//5
+  campos.push(req.query.Id);//5
+  const insertar = `UPDATE tbproveedores SET NombreProveedor='${campos[0]}',Dirección='${campos[1]}',NombreContacto='${campos[2]}',Cedula=${campos[3]},Telefono=${campos[4]},Email='${campos[5]} where IdProveedores = ${campos[6]}'`;
   connection.query(insertar, (err, fields) => {
     if (err) throw err;
   });

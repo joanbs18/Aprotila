@@ -10,12 +10,13 @@ function tableInventario() {
     })
       .then((resp) => resp.json())
       .then((datos) => mostrarInve(datos.results))
-      .catch((err) => seeLoad());
+      .catch((err) => console.log(err));
   }
   
   const mostrarInve = (data) => {
     let tab = "";
     let infor = "";
+    let infor2 = "";
     for (var i = 0; i < data.length; i++) {
         infor= encontrarMedida(data[i].TipoIngreso)
       const f = moment(data[i].FechaCompra);
@@ -37,7 +38,7 @@ function tableInventario() {
   
         </tr>`;
       if (data[i].CantidadDisponible <= 10) {
-        infor += `<div class="toast info" id="3">
+        infor2 += `<div class="toast info" id="3">
         <div class="contenido">
             <div class="icono">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
@@ -67,7 +68,7 @@ function tableInventario() {
       }
     }
     document.getElementById("Rinventario").innerHTML = tab;
-    document.getElementById("contenedor-toast").innerHTML = infor;
+    document.getElementById("contenedor-toast").innerHTML = infor2;
   };
 
 

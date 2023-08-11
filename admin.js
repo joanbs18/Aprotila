@@ -10,12 +10,7 @@ function ver() {
   })
     .then((resp) => resp.json())
     .then((datos) => mostrarData(datos.results))
-    .catch((err) => seeLoad());
-}
-
-function seeLoad() {
-  cloud = document.getElementById("cloud_load");
-  cloud.style.display = "flex";
+    .catch((err) => console.log(err));
 }
 
 var ventasDelete = [];
@@ -47,7 +42,7 @@ function mostrarPilaInactivas() {
   })
     .then((resp) => resp.json())
     .then((datos) => mostrarPilasInactivas(datos.results))
-    .catch((err) => seeLoad());
+    .catch((err) => console.log(err));
 }
 
 const mostrarPilasInactivas = (data) => {
@@ -65,7 +60,7 @@ function muestreo() {
   })
     .then((resp) => resp.json())
     .then((datos) => muestreoEstados(datos.results))
-    .catch((err) => seeLoad());
+    .catch((err) => console.log(err));
 }
 const muestreoEstados = (data) => {
   let tab = "";
@@ -100,15 +95,15 @@ function mostrarFecha(fecha) {
 }
 
 function verUsuarios() {
-  fetch("http://localhost:3000/mostrarUsuarios", {
+  fetch("http://localhost:3000/mostrarEncargados", {
     method: "get",
     headers: {
       "Content-Type": "application/json",
     },
   })
     .then((resp) => resp.json())
-    .then((datos) => mostrarUsuarios(datos.results))
-    .catch((err) => seeLoad());
+    .then((datos) => mostrarUsuarios(datos.resultado))
+    .catch((err) => console.log(err));
 }
 
 const mostrarUsuarios = (data) => {
@@ -116,7 +111,7 @@ const mostrarUsuarios = (data) => {
 
   for (var i = 0; i < data.length; i++) {
     tab += ` <li class="completed">
-    <p>${data[i].Nombre}</p>
+    <p>${data[i].Nombre_Encargado}</p>
     <p>${data[i].Contraseña}</p>
     <i class='bx bx-dots-vertical-rounded'></i>
 </li>`;
@@ -135,7 +130,8 @@ function addUser() {
     nombreencargado_user.toString == 0 ||
     cedula_user.toString == 0 ||
     num_telefono.toString == 0 ||
-    !verficarElegido || contraseña_user.toString==0
+    !verficarElegido ||
+    contraseña_user.toString == 0
   ) {
     alert("Error campos incompletos");
   }
@@ -147,7 +143,7 @@ function addUser() {
     roll = 2;
   }
 
-  url = `http://localhost:3000/inserUser?Nombre=${nombreencargado_user}&Cedula=${cedula_user}&Contraseña=${contraseña_user}&Telefono=${num_telefono}&Rol=${roll}`;
+  url = `http://localhost:3000/insertUser?Nombre=${nombreencargado_user}&Cedula=${cedula_user}&Contraseña=${contraseña_user}&Telefono=${num_telefono}&Rol=${roll}`;
 
   fetch(url, {
     method: "get",
