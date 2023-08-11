@@ -681,7 +681,7 @@ app.get("/usuarios", (req, res) => {
     campos = [];
     campos.push(req.query.usuario);
     campos.push(req.query.contraseña);
-    const queryusuario = `SELECT * FROM tbencargadro where Usuario = ${campos[0]} and Contraseña = ${campos[1]}`;
+    const queryusuario = `SELECT * FROM tbencargado where Usuario = ${campos[0]} and Contraseña = ${campos[1]}`;
     connection.query(queryusuario, (err, resultado) => {
       if (resultado.length !== 0) {
         console.log(resultado);
