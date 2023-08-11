@@ -699,6 +699,20 @@ app.get("/usuarios", (req, res) => {
   }
 });
 
+app.get("/insertUser", (req, res) => {
+  campos = [];
+  campos.push(req.query.Nombre);
+  campos.push(req.query.Cedula);
+  campos.push(req.query.Contraseña);
+  campos.push(req.query.Telefono);
+  campos.push(req.query.Rol);
+  const insertar = `Insert INTO tbencargado ( Nombre_Encargado, Usuario, Contraseña, Teléfono, IdCargo_fk) values ('${campos[0]}','${campos[1]}','${campos[2]}',${campos[3]},${campos[4]})`;
+  connection.query(insertar, (err, fields) => {
+    if (err) throw err;
+  });
+  res.send("Consulta exitosa");
+});
+
 /*
 app.get("/actualizarconcentrado", (req, res) => {
  

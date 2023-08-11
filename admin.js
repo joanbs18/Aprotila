@@ -115,7 +115,6 @@ const mostrarUsuarios = (data) => {
   let tab = "";
 
   for (var i = 0; i < data.length; i++) {
-    
     tab += ` <li class="completed">
     <p>${data[i].Nombre}</p>
     <p>${data[i].Contraseña}</p>
@@ -126,3 +125,48 @@ const mostrarUsuarios = (data) => {
   document.getElementById("user").innerHTML = tab;
 };
 
+function addUser() {
+  nombreencargado_user = document.getElementById("nombreencargado_user").value;
+  cedula_user = document.getElementById("cedula_user").value;
+  num_telefono = document.getElementById("num_telefono").value;
+  contraseña_user = document.getElementById("contraseña_user").value;
+
+  if (
+    nombreencargado_user.toString == 0 ||
+    cedula_user.toString == 0 ||
+    num_telefono.toString == 0 ||
+    !verficarElegido || contraseña_user.toString==0
+  ) {
+    alert("Error campos incompletos");
+  }
+  let roll;
+
+  if (rolElegido == "Administrador") {
+    roll = 1;
+  } else {
+    roll = 2;
+  }
+
+  url = `http://localhost:3000/inserUser?Nombre=${nombreencargado_user}&Cedula=${cedula_user}&Contraseña=${contraseña_user}&Telefono=${num_telefono}&Rol=${roll}`;
+
+  fetch(url, {
+    method: "get",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((resp) => resp.json())
+    .then((datos) => console.log(datos))
+    .catch((err) => console.log(err));
+  verUsuarios();
+
+  document.getElementById("fusuario").style.display = "none";
+}
+
+var verficarElegido = false;
+var rolElegido;
+var optionRol = document.getElementById("rol_elegido");
+optionRol.addEventListener("change", function () {
+  rolElegido = optionRol.options[optionRol.selectedIndex].text;
+  verficarElegido = true;
+});
