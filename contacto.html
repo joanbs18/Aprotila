@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <script src="https://kit.fontawesome.com/bf208e9523.js" crossorigin="anonymous"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+</head>
+<body style="background-image: url(img/slider2.jpg); background-size: cover; background-repeat: no-repeat;" >
+    <header >
+        <nav>
+          <a href="#"><img class="logo" id="logo" src="img/logo_white.png" alt="logo"></a>
+    
+          <ul class="enlaces-menu">
+            <li class="enlace"><a href="index.html">Inicio</a></li>
+            <li class="enlace"><a href="index.html">Productos</a></li>
+            <li class="enlace"><a href="index.html">Soda</a></li>
+            <li class="enlace"><a href="contacto.html">Contacto</a></li>
+            <div class="car_shooping">
+              <i class="fa-solid fa-cart-shopping" data-btn-action="add-btn-cart" data-modal="#jsModalCarrito"></i>
+              <div class="count-products">
+                <span id="contador-productos">0</span>
+              </div>
+    
+            </div>
+          </ul>
+    
+          <button class="ham" type="button">
+            <span class="br-1"></span>
+            <span class="br-2"></span>
+            <span class="br-3"></span>
+          </button>
+        </nav>
+      </header>
+<div class="contacto">
+      <section class="form_wrap">
+
+        <section class="cantact_info">
+            <section class="info_title">
+                <span class="fa fa-user-circle"></span>
+                <h2>INFORMACION<br>DE CONTACTO</h2>
+            </section>
+            <section class="info_items">
+                <p><span class="fa fa-envelope"></span>Aprotila@gmail.com </p>
+                <p><span class="fa fa-mobile"></span>8738-4323</p>
+            </section>
+        </section>
+
+        <form action="enviar.php" method="post" class="form_contact">
+            <h2>Enviar Pedido</h2>
+            <div class="user_info">
+                <label for="names">Nombres *</label>
+                <input type="text" id="names" name="nombre" required>
+
+                <label for="phone">Telefono / Celular</label>
+                <input type="text" id="phone" name="telefono">
+
+                <label for="email">Correo electronico *</label>
+                <input type="text" id="email" name="correo" required>
+
+                <label for="mensaje">Mensaje *</label>
+                <textarea id="mensaje" name="mensaje" required></textarea>
+
+                <input type="submit" value="Enviar Pedido" id="btnSend">
+            </div>
+        </form>
+
+    </section>
+  </div>
+
+      <script src="index.js"></script>
+</body>
+</html>
