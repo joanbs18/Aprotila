@@ -22,7 +22,7 @@ function Usuario(){
   console.log("hola mundo")
   cedula = document.getElementById("cedula").value;
   contraseña = document.getElementById("contraseña").value;
-  url = `http://localhost:3000/usuarios?Cedula=${cedula}&Contraseña=${contraseña}`;
+  url = `http://localhost:3000/usuarios?usuario=${cedula}&Contraseña=${contraseña}`;
 
   fetch(url, {
     method: "get",
