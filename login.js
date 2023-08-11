@@ -1,16 +1,16 @@
 function validarlogin() {
-  var username = document.getElementById('cedula').value;
-  var password = document.getElementById('contraseña').value;
+  var username = document.getElementById("cedula").value;
+  var password = document.getElementById("contraseña").value;
 
   // Validar que el usuario solo contenga números
   if (!/^\d+$/.test(username)) {
-    alert('El usuario solo debe contener números.');
+    alert("El usuario solo debe contener números.");
     return false;
   }
 
   // Validar que la contraseña tenga al menos 8 caracteres
   if (password.length < 8) {
-    alert('La contraseña debe tener al menos 8 caracteres.');
+    alert("La contraseña debe tener al menos 8 caracteres.");
     return false;
   }
 
@@ -18,8 +18,7 @@ function validarlogin() {
 }
 
 //Xavier
-function Usuario(){
-  console.log("hola mundo")
+function Usuario() {
   cedula = document.getElementById("cedula").value;
   contraseña = document.getElementById("contraseña").value;
   url = `http://localhost:3000/usuarios?usuario=${cedula}&contraseña=${contraseña}`;
@@ -32,20 +31,27 @@ function Usuario(){
   })
     .then((resp) => resp.json())
     .then((datos) => {
-      console.log(datos.resultado)
-      saveLS(datos.resultado)
-      if (datos.msg === "Ingresado correctamente"){
-        // window.location.href="ControlVentas.html"
-      }else{
-        alert("Cedula o Contraseña invalida")
+      console.log(datos);
+      saveLS(datos.resultado[0]);
+      if (
+        datos.mensaje === "Ingresado correctamente" &&
+        datos.resultado[0].IdCargo_fk == 1
+      ) {
+        window.location.href = "Admin.html";
+      } else if (
+        datos.mensaje === "Ingresado correctamente" &&
+        datos.resultado[0].IdCargo_fk == 2
+      ) {
+        window.location.href = "ModuloAlevines.html";
+      } else {
+        alert("Cedula o Contraseña invalida");
       }
     })
     .catch((err) => console.log(err));
-    
 }
 
 // guardar en el local host
-function saveLS(data){
+function saveLS(data) {
   localStorage.setItem("user", JSON.stringify(data));
 }
 
@@ -66,7 +72,7 @@ function togglePasswordVisibility() {
           d="M16.681 16.673a8.717 8.717 0 0 1 -4.681 1.327c-3.6 0 -6.6 -2 -9 -6c1.272 -2.12 2.712 -3.678 4.32 -4.674m2.86 -1.146a9.055 9.055 0 0 1 1.82 -.18c3.6 0 6.6 2 9 6c-.666 1.11 -1.379 2.067 -2.138 2.87" />
         <path d="M3 3l18 18" />
       </svg>`;
-      console.log(passwordInput);
+    console.log(passwordInput);
   } else {
     passwordInput.type = "password";
     toggleButton.innerHTML = `

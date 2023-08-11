@@ -29,12 +29,12 @@
 <div id="sidebar" class="sidebar close">
 
     <div class="logo-details">
-        <img src="/img/69601130_508940209682252_4217431282197463040_n.jpg" alt="" style="width: 60px;">
+        <img src="/img/logo.png" alt="" style="width: 60px;">
         <span class="logo_name" style='color:#080808'>AproTila</span>
     </div>
     <ul class="nav-links" id="nav-links">
 
-        <li>
+        <li id="dashboard">
             <div class="iocn-link">
                 <a href="Admin.html">
                     <i class="fa-solid fa-house-user"></i>
@@ -134,13 +134,13 @@
         <li>
             <div class="profile-details">
                 <div class="profile-content">
-                    <img src="img/photo-1610088441520-4352457e7095.jfif" alt="profileImg">
+                    <img src="img/usuario.avif" alt="profileImg">
                 </div>
                 <div class="name-job">
-                    <div class="profile_name">Encargado</div>
-                    <div class="job">Trabajador</div>
+                    <div class="profile_name" id="nombreEncargado">Encargado</div>
+                    <div class="job" id="rol">Trabajador</div>
                 </div>
-                <i class='bx bx-log-out' style="color: aliceblue;"></i>
+                <i class='bx bx-log-out' style="color: aliceblue; margin-left: -25px;" id="exit"></i>
             </div>
         </li>
     </ul>
@@ -250,6 +250,7 @@
 </section>
 
 <script src="https://momentjs.com/downloads/moment.js"></script>
+<script src="validacionRol.js"></script>
 <script src="muestreo.js"></script>
 <script src="slider.js"></script>
 <script src="excel.js"></script>

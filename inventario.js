@@ -63,10 +63,11 @@ function tableInventario() {
         </button>
     </div>`;
        
-        document.getElementById("contenedor-toast").style.display = "flex";
+       
       }
     }
     document.getElementById("Rinventario").innerHTML = tab;
+    document.getElementById("contenedor-toast").innerHTML = infor;
   };
 
 
