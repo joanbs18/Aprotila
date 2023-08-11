@@ -32,14 +32,21 @@ function Usuario(){
   })
     .then((resp) => resp.json())
     .then((datos) => {
-      console.log(datos)
-      if (datos.mensaje === "Ingresado correctamente"){
-        window.location.href="ControlVentas.html"
+      console.log(datos.resultado)
+      saveLS(datos.resultado)
+      if (datos.msg === "Ingresado correctamente"){
+        // window.location.href="ControlVentas.html"
       }else{
         alert("Cedula o Contraseña invalida")
       }
     })
     .catch((err) => console.log(err));
+    
+}
+
+// guardar en el local host
+function saveLS(data){
+  localStorage.setItem("user", JSON.stringify(data));
 }
 
 //irio
