@@ -330,7 +330,7 @@ app.get("/mortabilidad", (req, res) => {
 
 app.get("/ultimoTrazabi", (req, res) => {
   try {
-    let sql = `SELECT tbT.IdTrazabilidad, tbT.Fecha,tbT.IdPila_fk_Final,tbT.Cantidad FROM tbtrazabilidad as tbT INNER JOIN tbpila AS TbP WHERE IdPila_fk_Final=${req.query.Pila}  ORDER BY IdTrazabilidad DESC LIMIT 1`;
+    let sql = `SELECT tbT.IdTrazabilidad, tbT.Fecha,tbT.IdPila_fk_Final,tbP.CantidadPescados as "Cantidad" FROM tbtrazabilidad as tbT INNER JOIN tbpila AS TbP WHERE IdPila_fk_Final=${req.query.Pila} and IdPila_fk_Final=IdPila ORDER BY IdTrazabilidad DESC LIMIT 1`;
     connection.query(sql, function (error, results, fields) {
       if (error) {
         connection.end();
@@ -434,7 +434,7 @@ app.get("/pilaCantidadPeces", (req, res) => {
       });
     });
   } catch (err) {
-    console.log(err);
+ 
     throw new Error("Error en el metodo GET");
   }
 });
@@ -679,14 +679,17 @@ app.get("/mostrarTrazabilidad", (req, res) => {
 app.get("/usuarios", (req, res) => {
   try {
     campos = [];
-    campos.push(req.query.Cedula);
-    campos.push(req.query.Contraseña);
-    console.log(campos[0]);
-    const queryusuario = `SELECT * FROM tbusuarios where Cedula = ${campos[0]} and Contraseña = ${campos[1]}`;
+    campos.push(req.query.usuario);
+    campos.push(req.query.contraseña);
+    const queryusuario = `SELECT * FROM tbencargadro where Usuario = ${campos[0]} and Contraseña = ${campos[1]}`;
     connection.query(queryusuario, (err, resultado) => {
       if (resultado.length !== 0) {
         console.log(resultado);
         res.json({ mensaje: "Ingresado correctamente" });
+        res.status(200).json({
+          msg: "Mensaje desde el metodo GET",
+          resultado,
+        });
       } else {
         res.json({ mensaje: "Datos incorrectos" });
       }

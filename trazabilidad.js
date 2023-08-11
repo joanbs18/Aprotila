@@ -47,13 +47,6 @@ const mostrarTrazabilidad = (data) => {
       tableTrazabilidad();
     });
   }
-  // eles2 = document.querySelectorAll("#btnUpdate_Alevines");
-  // console.log(eles2);
-  // for (let i = 0; i < eles.length; i++) {
-  //   eles2[i].addEventListener("click", function () {
-  //     UpdateAlevine(VAlevines, i);
-  //   });
-  // }
 };
 
 function addTrazabilidad() {
@@ -64,9 +57,12 @@ function addTrazabilidad() {
 
   if (
     tipoPez_Trazabilidad.toString == 0 ||
-    Cantidad_trazabilidad.toString == 0
+    Cantidad_trazabilidad.toString == 0 ||
+    !validarPila7 ||
+    !validarPila8
   ) {
     alert("Error campos incompletos");
+    return;
   }
   url = `http://localhost:3000/insertTrazabilidad?PilaInicial=${pilaSeleccionada7}&IdPila_fk_Final=${pilaSeleccionada8}&TipoPez=${tipoPez_Trazabilidad}&Cantidad=${Cantidad_trazabilidad}`;
 
@@ -81,6 +77,7 @@ function addTrazabilidad() {
     .catch((err) => console.log(err));
   document.getElementById("ftrazabilidad").style.display = "none";
   tableTrazabilidad();
+  location.reload();
 }
 
 function deleteTrazabilidad(id) {
@@ -154,49 +151,54 @@ function fechaTrazabilidad(Pila) {
     .then((datos) => peces(datos.results))
     .catch((err) => console.log(err));
 }
-
+var cantidadMaxima=0;
 const peces = (data) => {
   console.log(mostrarFecha(data[0].Fecha));
   console.log(data);
-  let totalMuertos = 0;
-  let totalVentas = 0;
-  for (var i = 0; i < VMortabilidad.length; i++) {
-    if (
-      VMortabilidad[i].IdPila == data[0].IdPila_fk_Final &&
-      mostrarFecha(data[0].Fecha) <= mostrarFecha(VMortabilidad[i].Fecha) &&
-      data[0].IdTrazabilidad == VMortabilidad[i].IdTrazabilidad_fk
-    ) {
-      totalMuertos += VMortabilidad[i].Cantidad;
-    } else {
-      console.log(VMortabilidad[i].IdPila, " ", pilaSeleccionada7);
-    }
-  }
-  for (var i = 0; i < Vventas.length; i++) {
-    if (
-      Vventas[i].IdPila_fk == data[0].IdPila_fk_Final &&
-      mostrarFecha(data[0].Fecha) <= mostrarFecha(Vventas[i].Fecha)
-    ) {
-      totalVentas += Vventas[i].Tilapia;
-    }
-  }
-  console.log(totalMuertos);
-  console.log(totalVentas);
-  document.getElementById("Cantidad_trazabilidad").value =
-    data[0].Cantidad - totalMuertos - totalVentas;
-};
+  // let totalMuertos = 0;
+  // let totalVentas = 0;
+  // for (var i = 0; i < VMortabilidad.length; i++) {
+  //   if (
+  //     VMortabilidad[i].IdPila == data[0].IdPila_fk_Final &&
+  //     mostrarFecha(data[0].Fecha) <= mostrarFecha(VMortabilidad[i].Fecha) &&
+  //     data[0].IdTrazabilidad == VMortabilidad[i].IdTrazabilidad_fk
+  //   ) {
+  //     totalMuertos += VMortabilidad[i].Cantidad;
+  //   } else {
+  //     console.log(VMortabilidad[i].IdPila, " ", pilaSeleccionada7);
+  //   }
+  // }
+  // for (var i = 0; i < Vventas.length; i++) {
+  //   if (
+  //     Vventas[i].IdPila_fk == data[0].IdPila_fk_Final &&
+  //     mostrarFecha(data[0].Fecha) <= mostrarFecha(Vventas[i].Fecha)
+  //   ) {
+  //     totalVentas += Vventas[i].Tilapia;
+  //   }
+  // }
+  // console.log(totalMuertos);
+  // console.log(totalVentas);
+  document.getElementById("Cantidad_trazabilidad").value = data[0].Cantidad;
+  cantidadMaxima= data[0].Cantidad;
 
+};
+var validarPila7 = false;
 var pilaSeleccionada7;
 var optionPila7 = document.getElementById("menupila_trazabilidadInicial");
 optionPila7.addEventListener("change", function () {
   pilaSeleccionada7 = optionPila7.options[optionPila7.selectedIndex].text;
+  validarPila7 = true;
   Mortabilidad();
   ventas(pilaSeleccionada7);
   fechaTrazabilidad(pilaSeleccionada7);
 });
+
+var validarPila8 = false;
 var pilaSeleccionada8;
 var optionPila8 = document.getElementById("menupila_trazabilidadFinal");
 optionPila8.addEventListener("change", function () {
   pilaSeleccionada8 = optionPila8.options[optionPila8.selectedIndex].text;
+  validarPila8 = true;
 });
 
 function Mortabilidad() {
@@ -268,3 +270,15 @@ const mostrarTrza = (data, Lote) => {
   }
   document.getElementById("modalTrazabilidad").innerHTML = tab;
 };
+
+document
+  .getElementById("Cantidad_trazabilidad")
+  .addEventListener("input", function () {
+    var numeroIngresado = parseInt(this.value);
+
+    if (numeroIngresado > cantidadMaxima) {
+      alert("Cantidad maxíma es " + cantidadMaxima);
+      document.getElementById("Cantidad_trazabilidad").value = cantidadMaxima;
+    } else {
+    }
+  });
