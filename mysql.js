@@ -685,11 +685,9 @@ app.get("/usuarios", (req, res) => {
     connection.query(queryusuario, (err, resultado) => {
       if (resultado.length !== 0) {
         console.log(resultado);
-        res.json({ mensaje: "Ingresado correctamente" });
-        res.status(200).json({
-          msg: "Mensaje desde el metodo GET",
-          resultado,
-        });
+        res.json({ mensaje: "Ingresado correctamente",
+      resultado,}); 
+       
       } else {
         res.json({ mensaje: "Datos incorrectos" });
       }
