@@ -262,11 +262,13 @@ const mostrarTrza = (data, Lote) => {
   tab = `<h2> Lote: ${Lote}</h2>`;
   tab += `<h3>Trazabilidad</h3>`;
   for (var i = 0; i < data.length; i++) {
-    if (i == 0) {
-      tab += `<p>Pila Inicial <i class="fa-solid fa-arrow-right fa-beat-fade"></i> ${data[i].Final} Cantidad=(${data[i].Cantidad})</p>`;
-    } else {
-      tab += `<p><i class="fa-solid fa-arrow-right fa-beat-fade"></i> Pila ${data[i].Final} CantidadPescados=(${data[i].Cantidad}) </p>`;
-    }
+      if (i == 0) {
+        tab += `<p>Pila Inicial <i class="fa-solid fa-arrow-right fa-beat-fade"></i> 
+        ${data[i].Final} Cantidad=(${data[i].Cantidad})</p>`;
+      } else {
+        tab += `<p><i class="fa-solid fa-arrow-right fa-beat-fade"></i> Pila 
+        ${data[i].Final} CantidadPescados=(${data[i].Cantidad}) </p>`;
+      }
   }
   document.getElementById("modalTrazabilidad").innerHTML = tab;
 };
